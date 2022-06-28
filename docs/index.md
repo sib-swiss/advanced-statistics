@@ -1,5 +1,9 @@
 # Advanced statistics: Statistical modelling
 
+## Teachers
+Rachel Marcone
+Mauro Delorenzi
+
 ## Material
 
 * Google doc (through mail)
