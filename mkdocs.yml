@@ -1,9 +1,14 @@
-site_name: My site
+site_name: Advanced statistics
 nav:
     - Home: index.md
-    - Precourse preparations: precourse.md
+    - Precourse preparation: precourse.md
     - Course schedule: course_schedule.md
-    - Exercises: exercises.md
+    - Day 1: day1.md
+    - Day 2: day2.md
+    - Day 3: day3.md
+    - Day 4: day4.md
+    - Bonus code: bonus_code.md
+    - Useful links: links.md
 
 theme:
   name: material
@@ -11,8 +16,8 @@ theme:
   favicon: assets/images/SIB_logo.svg
 
 # Repository
-repo_name: sib-swiss/course_website_template
-repo_url: https://github.com/sib-swiss/course_website_template
+repo_name: sib-swiss/advanced-statistics
+repo_url: https://github.com/sib-swiss/advanced-statistics
 
 markdown_extensions:
   - abbr

@@ -31,3 +31,7 @@ mkdocs gh-deploy
 This will generate a webpage at:
 
 https://yourname.github.io/reponame
+
+Therefore, the advanced statistics course website can be found here:
+https://sib-swiss.github.io/advanced-statistics/
+
