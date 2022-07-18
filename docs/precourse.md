@@ -1,7 +1,7 @@
 
 
 
-### Previous knowledge / Competencies
+### Previous knowledge
 
 As is stated in the course prerequisites on the [announcement web page](https://www.sib.swiss/component/courses/20220822_ASSM?view=courses_item), this course is intended for people already familiar with basic statistics and R. Participants must be comfortable with topics such as hypothesis testing, correlation and linear models, and must have a prior knowledge of the "R" language and environment for statistical computing and graphics. Participants who have already followed the SIB course ["Introduction to statistics with R"](https://www.sib.swiss/training/course/20220207_STATR) or an equivalent course, and have used its content in practice should fit this prerequisite.
 

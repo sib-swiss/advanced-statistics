@@ -6,11 +6,6 @@ Slides of lectures:
 
 [Download slides](assets/pdf/GAM.pdf){: .md-button }
 
-Data for exercises:
-
-[Download data](assets/exercises/data.zip){: .md-button }
-
-
 Exercise 1: Mid-Atlantic Wage Data
 
 Wage and other data for a group of 3000 male workers in the Mid-Atlantic region.
@@ -40,7 +35,7 @@ head(year)
 
 Now the goal is to build a predictive model for wage based on year, age, marital status and other variables. We will do the exercise in 7 parts, which we separate in different exercises.
 
-# Step1: From linear to degree-5 polynomial regression
+## Step1: From linear to degree-5 polynomial regression
 
 The goal is to fit models ranging from linear to a degree-5 polynomial and seek to determine the simplest model which is sufficient to explain the relationship between wage and age.
 
@@ -75,7 +70,7 @@ anova(fit4, fit5)
     The p-value comparing the linear Model 1 to the quadratic Model 2 is essentially zero (<10???15), indicating that a linear fit is not sufficient. Similarly the p-value comparing the quadratic Model 2 to the cubic Model 3 is very low (0.0017), so the quadratic fit is also insufficient. The p-value comparing the cubic and degree-4 polynomials, Model 3 and Model 4, is approximately 5% while the degree-5 polynomial Model 5 seems unnecessary because its p-value is 0.37. Hence, either a cubic or a quartic polynomial appear to provide a reasonable fit to the data, but lower- or higher-order models are not justified.
     
     
-# Step2: Predict whether an individual earns more than $250'000 per year  
+## Step2: Predict whether an individual earns more than $250'000 per year  
 
 ??? Hint
     First create the appropriate response vector using I(), and then apply the glm() function using family="binomial" in order to fit a polynomial logistic regression model.
@@ -100,7 +95,7 @@ lines(age.grid, proba.fit.glm.4, lwd=2, col="blue")
 matlines(age.grid, se.bands, lwd =1, col="blue", lty =2)
 ```
 
-#Step3 : Step functions to model relationship between wage and age
+## Step3 : Step functions to model relationship between wage and age
 
 ??? Hint
     Use cut() to fit step functions.
@@ -114,7 +109,7 @@ summary(fit.step)
 plot(fit.step)
 ```
 
-#Step4: Linear and cubic splines
+## Step4: Linear and cubic splines
 
 We proceed in 3 steps here.
 
@@ -137,7 +132,7 @@ lines(age.grid, pred.fit.linearsplines$fit+2*pred.fit.linearsplines$se, lty="das
 lines(age.grid, pred.fit.linearsplines$fit-2*pred.fit.linearsplines$se, lty="dashed")
 ```
 
-#Step5 : Smoothing splines
+## Step5 : Smoothing splines
 
 Start with fitting wage to age using smoothing splines.Then assess the effect of varying "df" on the smooth. 
 In this exercise, try different df for different smoothing. df controls the "complexity" of the model employed. What do you observe ?
@@ -169,7 +164,7 @@ legend("topright", legend=c("5 DF","10 DF","15 DF","20 DF","6.8 DF"),
 ??? done "Answer""
     A substantial difference can be found when going from 2 to 10, but very little change will take place when going from 10 to 50 
     
-# Step6: Local regressions
+## Step6: Local regressions
 Fit wage to age using a local regression (loess function) with default parameters
 What does the parameter "span" refer to in the loess function? How does increasing the "span" affect the fit?
 
@@ -183,7 +178,8 @@ lines(age.grid, predict(fit.local.2,data.frame(age=age.grid)), col =" blue",lwd=
 legend("topright",legend=c("Span=0.2","Span=0.5"), col=c("red", "blue"), lty =1, lwd =2, cex =.8)
 ```
 
-#Step7 : General Additive Model 
+## Step7 : General Additive Model
+
 Load the library "gam" and try to look at the help of the gam function. Fit a GAM to predict wage using smoothing splines of year and age, treating education as a qualitative predictor
 Repeat using a GAM with a loess smoother. Try to plot the fitted gam objects.
 
@@ -195,7 +191,7 @@ gam.lo.1 = gam(wage ~ lo(year,span=0.5)+lo(age,span=0.5)+education, data=Wage)
 plot(gam.lo.1)
 ```
 
-#Step8: ANOVA tests
+## Step8: ANOVA tests
 
 Determine which of these three models is the best:
 i) a GAM that excludes year (M1),
@@ -212,7 +208,7 @@ anova(gam.m1,gam.m2,gam.m3,test="F")
 pred.gam.m2 = predict(gam.m2,newdata=Wage)
 ```
 
-#Step9: GAMs with interaction
+## Step9: GAMs with interaction
 
 Use `r lo()` function to allow for interaction between age and year in the GAM, treating education like before. We can plot the resulting two-dimensional surface using the akima package (akima::plot).
 
@@ -222,7 +218,7 @@ gam.lo.2 = gam(wage ~ lo(year,age,span=0.5)+education, data=Wage)
 plot(gam.lo.2)
 ```
 
-# STEP10: Logistic regression GAMs
+## Step10: Logistic regression GAMs
 
 Try to fit a logistic regression GAM, handling year with a linear function, age with a smoothing spline, and education with dummy variables like before. Try removing the "<HS" category. Use the `r plot()` function to visualize the logistic regression GAMs.
 

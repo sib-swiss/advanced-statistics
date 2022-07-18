@@ -4,13 +4,9 @@ In this section, you will find the R code that we will use during the course. We
 
 Slides of lectures:
 
-[Download slides](assets/pdf/EA_062022_TW_ad.pdf){: .md-button }
+[Download slides](assets/pdf/Logistic regression and GLM.pdf){: .md-button }
 
-Data for exercises:
-
-[Download data](assets/exercises/data.zip){: .md-button }
-
-# Warm up
+## Warm up
 The data records the birth weight of 1174 babies along with information on the mother and the pregnancy.
 Load and explore the dataset babies, called babies.RData in your exercise folder.
 ```r
@@ -83,7 +79,7 @@ acf(model2.residuals)
 ```
 
 
-# Challenge: baby food
+## Challenge: baby food
 
 ```r
 library(faraway)
@@ -109,7 +105,7 @@ summary(mdl)
 
 ```
 
-# Warm up 2
+## Warm up 2
 
 
 Explore the dataset gala in library faraway.
@@ -143,7 +139,7 @@ residualPlots(poisson.glm)
 
 
 
-# Exercise 1: Michelin food
+## Exercise 1: Michelin food
 
 
 Here, we will use a data set containing food ratings for a number of restaurants, 
@@ -208,7 +204,7 @@ influencePlot(glm.mich)
 ```
 
 
-# Exercise 2: moth death
+## Exercise 2: moth death
 
 
 The next data set comes from Venables and Ripley (page 190) and encodes the number of moths
@@ -267,7 +263,7 @@ lines(xnew$dose[which(xnew$sex == "female")], pred.prop[which(xnew$sex == "femal
 ```
 
 
-# Exercise 3: beetle
+## Exercise 3: beetle
 
 
 The third example of a binomial response considers an experiment where beetles were exposed
@@ -304,7 +300,7 @@ lines(predict(glm.beetles.log, new_beetle, type = "response"), col = "red")
 
 
 
-# Exercise 4: Pima
+## Exercise 4: Pima
 
 
 The national institute of Diabetes and digestive and kidney diseases conducted a study
@@ -412,7 +408,7 @@ ilogit(pred_logit$fit + 1.96 * pred_logit$se.fit)
 
 ```
 
-# Exercise 5: lung cancer
+## Exercise 5: lung cancer
 
 Here we will consider a data set from the ISwR package, which contains the number of
 lung cancer cases recorded in different age categories in four different Danish cities.

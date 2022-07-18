@@ -4,12 +4,7 @@ In this section, you will find the R code that we will use during the course. We
 
 Slides of lectures:
 
-[Download slides](assets/pdf/EA_062022_TW_ad.pdf){: .md-button }
-
-Data for exercises:
-
-[Download data](assets/exercises/data.zip){: .md-button }
-
+[Download slides](assets/pdf/Longitudinal.pdf){: .md-button }
 
 ```r
 library(lattice)
@@ -17,7 +12,7 @@ library(nlme)
 library(splines)
 ```
 
-# Tolerance data set
+## Tolerance data set
 
 ```r
 # load the "tolerance" data set: "tolerance.RData"
@@ -27,15 +22,15 @@ str(tolerance_untidy)
 str(tolerance_tidy)
 ```
 
-## Perform a graphical exploration of the data
+### Perform a graphical exploration of the data
 ```r
 # scatterplots of raw data
 xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy, as.table=F)
 ```
 
-##Analysis of individual change over time
+### Analysis of individual change over time
 
-### Non-parametric smoothing spline fit
+#### Non-parametric smoothing spline fit
 ```r
 xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy, 
        prepanel = function(x,y) prepanel.spline(x,y), 
@@ -45,7 +40,7 @@ xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy,
          panel.spline(x,y)}
 )
 ```
-### Nonparametric loess fit 
+#### Nonparametric loess fit 
 We will learn more about loess during GAM lecture
 ```r
 xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy,
@@ -57,7 +52,7 @@ xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy,
 )
 ```
 
-### Parametric/linear fit
+#### Parametric/linear fit
 ```r
 xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy,
        prepanel = function(x,y) prepanel.lmline(x,y),
@@ -67,7 +62,7 @@ xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy,
          panel.lmline(x,y)}
 )
 ```
-### Individual linear fits
+#### Individual linear fits
 extract summary from individual linear fits
 ```r
 lm.summary <- by(tolerance_tidy, tolerance_tidy$id, function(x) summary(lm(tolerance ~ time, data=x)))
@@ -94,8 +89,8 @@ my.summary
 rm(all.intercept, all.slope, all.resVar, all.r2)
 ```
 
-## Analysis of inter-individual differences
-### Average of the curves (nonparametric)
+### Analysis of inter-individual differences
+#### Average of the curves (nonparametric)
 
 ```r
 
@@ -141,7 +136,7 @@ est.nonpara
 # remove the junk
 rm(t,indiv,i,temp.data,age,tolerance,fit,est,avg.est)
 ```
-### Average of the curves (parametric)
+#### Average of the curves (parametric)
 ```r
 # start with an empty plot
 plot(1, type="n", xlab="age", ylab="tolerance", xlim=c(11,15), ylim=c(0,4), main="parametric")
@@ -186,7 +181,7 @@ est.para
 rm(t,t.cent,indiv,i,temp.data,age,age.cent,tolerance,fit,est,avg.est)
 
 ```
-### Intercepts and slopes from linear fit
+#### Intercepts and slopes from linear fit
 ```r
 # all.intercepts
 mean(my.summary["all.intercept",]) # 1.35775
@@ -200,7 +195,7 @@ sqrt( var(my.summary["all.slope",]) ) # 0.172296
 cor(my.summary["all.intercept",], my.summary["all.slope",]) # -0.4481135
 ```
 
-### Stratify based on covariates
+#### Stratify based on covariates
 Gender
 ```r
 table(tolerance_untidy$male) # 9 x females and 7 x males
@@ -261,7 +256,7 @@ rm(est.para_highExposure, est.para_lowExposure, t, avg.est)
 rm(median.exposure)
 ```
 
-# Corn Data
+## Corn Data
 
 ```r
 library(DAAG)
@@ -269,7 +264,7 @@ library(lattice)
 library(lme4)
 library(WWGbook)
 ```
-## Data Exploration of harvwt
+### Data Exploration of harvwt
 Dataframe: ant111b in the DAAG package.
 agricultural experiment on the Caribbean island of Antigua
 Corn yield measurements were taken on 4 parcels at 8 sites
@@ -286,7 +281,7 @@ dotplot(reorder(site, harvwt) ~ harvwt, ant111b, xlab = "Harvest weight of corn"
 
 The line joins the means of the harvest weight of the individual sites. The sites have been reordered by increasing mean harvwt
 
-## Data modelling with fixed and random effects
+### Data modelling with fixed and random effects
 Model the harvwt by the sites and compare to a null model. Then, add a random effect. 
 ```r
 summary( lm( ant111b$harvwt ~ ant111b$site ) )
@@ -356,7 +351,7 @@ dotplot(ranef(ant111b.lmer, condVar = TRUE), strip = FALSE)[[1]]
 
 Now, we will do the same type of modeling but this time with the ears variable as the outcome.
 
-## 1. Data exploration of ear 
+### 1. Data exploration of ear 
 Make a dotplot of the number of ears by site, sorting by mean ears as follows:
 ```r
 dotplot(reorder(site, ears) ~ ears, ant111b, xlab = "Number of ears of corn", 
@@ -367,7 +362,7 @@ Comment on your plot - do any effects seem to contribute to the variation in ear
 
 
 
-## 2. Fit a random effects model
+### 2. Fit a random effects model
 ```r
 ears.lmer <- lmer(ears ~ 1 + (1 | site), data=ant111b)
 summary(ears.lmer)
@@ -407,7 +402,7 @@ dotplot(ranef(ears.lmer, condVar = TRUE), strip = FALSE)[[1]]
 ```
 
 
-## 3. Model assumptions
+### 3. Model assumptions
 It is also a good idea to check the model assumptions with a few diagnostic plots.
 There should not be any apparent pattern in the residuals.
 You can check this by making a plot of residuals versus fitted values:
@@ -426,7 +421,7 @@ shapiro.test(resid(ears.lmer))
 ```
 What do you conclude ? 
 
-# Tolerance data set2
+## Tolerance data set2
 
 ```r
 library(lattice)
@@ -437,7 +432,7 @@ library(splines)
 
 
 
-## multi-level / mixed-effects modeling
+### multi-level / mixed-effects modeling
 
 let's begin by assessing the need for a multi-level model
 First, we will fit a baseline model (only including an intercept) using ML
@@ -446,7 +441,7 @@ Next, we will fit another model that allows intercepts to vary between clusters
 finally we compare the two models to see if the fit has improved as a result of allowing
 intercepts to vary
 
-## Fit the 1st model
+### Fit the 1st model
 ```r
 fit.01 <- gls(tolerance ~ 1, data=tolerance_tidy, method="ML")
 summary(fit.01)
@@ -458,7 +453,7 @@ abline(h=1.619375, col="red", lwd=2)
 ```
 
 
-## Fit the 2nd model
+### Fit the 2nd model
 ```r
 fit.02 <- lme(tolerance ~ 1, random = (~ 1 | id), data=tolerance_tidy, method="ML")
 summary(fit.02)
@@ -493,7 +488,7 @@ What if instead of random intercepts, we had allowed for random slopes?
 We have no reason to believe that individuals should share a baseline value
 (i.e. fixed intercept), but let's try it anyways for the sake of completeness
 
-## Fit the 3rd model
+### Fit the 3rd model
 ```r
 fit.03 <- gls(tolerance ~ time, data=tolerance_tidy, method="ML") # using centered age (i.e. time) for increased interpretability
 summary(fit.03)
@@ -504,7 +499,7 @@ fit.03$coefficients
 abline( gls(tolerance ~ age, data=tolerance_tidy, method="ML"), col="red", lwd=2)
 ```
 
-## Fit the 4th model
+### Fit the 4th model
 ```r
 fit.04 <- lme(tolerance ~ time, random = (~ -1 + time | id), data=tolerance_tidy, method="ML")
 summary(fit.04)
@@ -535,7 +530,9 @@ anova(fit.03,fit.04)
 
 What if instead we had allowed for both random intercepts and random slopes?
 the 1st model is same as fit.03
-## Fit the 5th model
+
+### Fit the 5th model
+
 ```r
 fit.05 <- lme(tolerance ~ time, random = (~ time | id), data=tolerance_tidy, method="ML")
 summary(fit.05)
@@ -555,7 +552,7 @@ anova(fit.03,fit.05)
 
 
 now let's bring in additional covariates
-## Fit the 6th model
+### Fit the 6th model
 adding gender
 ```r
 tolerance_tidy$male <- factor(tolerance_tidy$male, levels=c(0,1))
@@ -563,28 +560,28 @@ fit.06 <- lme(tolerance ~ male + time, random = (~ time | id), data=tolerance_ti
 summary(fit.06)
 anova(fit.03,fit.06)
 ```
-## Fit the 7th model
+### Fit the 7th model
 adding exposure
 ```r
 fit.07 <- lme(tolerance ~ male + exposure + time, random = (~ time | id), data=tolerance_tidy, method="ML")
 summary(fit.07)
 anova(fit.06,fit.07)
 ```
-## Fit the 8th model
+### Fit the 8th model
 adding interaction between male and exposure
 ```r
 fit.08 <- lme(tolerance ~ male * exposure + time, random = (~ time | id), data=tolerance_tidy, method="ML")
 summary(fit.08)
 anova(fit.07,fit.08)
 ```
-## Fit the 9th model
+### Fit the 9th model
 adding interaction between male and time
 ```r
 fit.09 <- lme(tolerance ~ exposure + male * time, random = (~ time | id), data=tolerance_tidy, method="ML")
 summary(fit.09)
 anova(fit.07,fit.09) # this agrees with our observation from exploratory analysis
 ```
-## Fit the 10th model
+### Fit the 10th model
 adding interaction between exposure and time
 ```r
 fit.10 <- lme(tolerance ~ male + exposure * time, random = (~ time | id), data=tolerance_tidy, method="ML")
@@ -595,7 +592,7 @@ This agrees with our observation from exploratory analysis
 Based on above, we will choose fit.07 as our model.
 
 
-# BtheB data set
+## BtheB data set
 
 Load the needed packages
 ```r
@@ -640,7 +637,7 @@ rm(temp)
 ```
 
 
-## Exploratory analysis
+### Exploratory analysis
 ```r
 # raw data
 xyplot(bdi ~ timepoint | indiv, data=BtheB.tidy, as.table=F,
@@ -649,7 +646,7 @@ xyplot(bdi ~ timepoint | indiv, data=BtheB.tidy, as.table=F,
 ```
 
 
-## Model fitting/selection
+### Model fitting/selection
 ```r
 fit.01 <- gls(bdi ~ timepoint, data=BtheB.tidy, method="ML", na.action=na.omit)
 fit.02 <- lme(bdi ~ timepoint, random = (~ 1 | indiv), data=BtheB.tidy, method="ML", na.action=na.omit)
@@ -735,7 +732,7 @@ summary(fit.10)
 ``` 
 While baseline and time both significantly affect bdi, there is no evidence for a treatment effect  
 
-# Bone data set
+## Bone data set
 Load packages
 ```r
 library(lattice)
@@ -762,14 +759,14 @@ str(bone)
 ```
 
 
-## Exploratory analysis
+### Exploratory analysis
 
 ```r
 # raw data
 xyplot(spnbmd ~ age | idnum, data=bone, subset=(idnum %in% sample(bone$idnum, size=50, replace=F)), 
        as.table=F, xlab = "age", ylab = "spnbmd")
 ```
-## Parametric/linear fit
+### Parametric/linear fit
 ```r
 xyplot(spnbmd ~ age | idnum, data=bone, subset=(idnum %in% sample(bone$idnum, size=50, replace=F)),
        prepanel = function(x,y) prepanel.lmline(x,y),
@@ -780,7 +777,7 @@ xyplot(spnbmd ~ age | idnum, data=bone, subset=(idnum %in% sample(bone$idnum, si
 )
 ```
 
-## Compare the trends for male and females 
+### Compare the trends for male and females 
 We will ignore the repeated measures
 ```r
 plot( bone$age, bone$spnbmd, xlab="age", ylab="spnbmd")
@@ -792,7 +789,7 @@ legend(20,0.20, legend=c("male", "Female"), col=c("blue", "red2"), lwd=2)
 ```
 
 
-## Using cubic splines
+### Using cubic splines
 ```r
 0.5*(bone.spline.female$df + bone.spline.male$df) # 6.6
 plot(spnbmd~age,data=bone)
@@ -805,7 +802,7 @@ lines(seq(10,25,by=.5), predict.female, col="red", lwd=3)
 ```
 
 
-## Model fitting/selection
+### Model fitting/selection
 ```r
 fit.01 <- gls(spnbmd ~ gender * bs(age, df=6), data=bone, method="ML")
 summary(fit.01)
@@ -823,7 +820,7 @@ anova(fit.02,fit.03)
 
 Therefore we conclude that change in relative spinal bone mineral density versus age is different between males and females.
 
-# Rat Brain Data
+## Rat Brain Data
 
 ```r
 library(DAAG)
@@ -843,7 +840,7 @@ activate: Nucleotide activation (the dependent variable)
 
 
 
-## 1. Exploration of the data
+### 1. Exploration of the data
 ```r
 attach(rat.brain)
 str(rat.brain)
@@ -913,7 +910,7 @@ Do there appear to be rat-specific effects ?
 
 
 
-## 2. Model fitting
+### 2. Model fitting
 We will start with fitting a model including all fixed effects (main effects and
 interactions for the treatment and region variables - make sure to use the factor versions)
 and a random effect for animal.
@@ -926,7 +923,7 @@ Make sure that you know how to interpret the coefficients (the interpretation wi
 
 
 
-## 3. Add random effects
+### 3. Add random effects
 From the plot above, we saw that between-animal variation was greater for the
 carbachol treatment than for the basal treatment. To accommodate this difference in
 variation, we can add a random animal-specific effect of treatment to the model.
@@ -943,7 +940,7 @@ summary(rat.brain.lmer2)
 What happens to the estimated fixed effects coefficients? What about their standard errors?
 
 
-## 4. Compare using LR
+### 4. Compare using LR
 We can compare the models using a likelihood ratio (LR) test, carried out with
 the anova function. The anova method for mer objects carries out a ML (not REML) LR test,
 even if the model has been fit by REML. The results are not identical for the two methods,
@@ -953,7 +950,7 @@ but in this case the conclusions are the same.
 anova(rat.brain.lmer1, rat.brain.lmer2)
 ```
 
-## 5. Model assumptions
+### 5. Model assumptions
 As above, we check some diagnostics for the final model.
 
 Residual plot:

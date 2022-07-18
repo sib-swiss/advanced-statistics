@@ -5,23 +5,25 @@ In this section, you will find the R code that we will use during the course. We
 
 Slides of lectures:
 
-[Download slides](assets/pdf/Intro and linear models - 160821.pdf){: .md-button }
+[Download slides Morning Lecture](assets/pdf/Intro and linear models - 160821.pdf){: .md-button }
+
+[Download slides Afternoon Lecture](assets/pdf/Beyond linearity.pdf){: .md-button }
 
 Data for exercises:
 
-[Download full data for the week](assets/exercises/exercises_all.zip){: .md-button }
+[Download full data for the week](assets/exercises/exercises-all.zip){: .md-button }
 
-[Download data for this exercice](assets/exercises/class.txt){: .md-button }
+
 
 ## Source of data
 
 We created a (non-existing) class of students for which you have some information. The name of the students, their gender, the age, the height and the weight of those adolescent students are provided. 
 
-Before starting the exercises, set the working directory to where you have downloaded and unzipped the [data folder](https://sib-swiss.github.io/enrichment-analysis-training/materials/) with the files for the exercises 
+Before starting the exercises, set the working directory to where you have downloaded and unzipped the [data folder](https://sib-swiss.github.io/advanced-statistics/materials/) with the files for the exercises 
 and load the necessary packages. 
 
 !!! warning
-    When using setwd(), change the path within quotes to where you have saved the data for the exercises
+    When using setwd(), change the path within quotes to where you have saved the data for the exercises. Make sure to always be in the right folder for the exercises.
 
 
 ```r
