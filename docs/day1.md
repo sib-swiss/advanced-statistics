@@ -67,15 +67,24 @@ Now we make use of the function pairs (do not know it? look it up with the help!
 
 ```r
 pairs(class[,-1])
+```
+<figure>
+  <img src="../assets/images/day1_pairs.png" width="700"/>
+  </figure>
 
+
+```r
 model <- lm(Height ~ Age, data=class)
 summary(model)
-
 plot(class$Age, class$Height, xlim=c(0,20), ylim=c(0,200))
 abline(model, col="red", lwd=2)
 #putting the xlim to 0 we can visually see the intercept
 ```
 
+<figure>
+  <img src="../assets/images/day1_plotabline0.png" width="700"/>
+  </figure>
+  
 Are there any influencial points ? Do they have something special? What do you do with them ?
 
 ```r
@@ -84,7 +93,14 @@ plot(hat$hat)
 
 car::influencePlot(model, xlab="Hat-Values", ylab="Studentized Residuals")
 ```
-
+<figure>
+  <img src="../assets/images/day1_hat.png" width="700"/>
+  </figure>
+  
+<figure>
+  <img src="../assets/images/day1_influence.png" width="700"/>
+  </figure>
+  
 Use the predict function to calculate a confidence interval.
 
 ```r
@@ -99,7 +115,10 @@ pred_interval <- predict(model, newdata=data.frame(Age=new_age), interval="predi
 lines(new_age, pred_interval[,2], col="orange", lty=2)
 lines(new_age, pred_interval[,3], col="orange", lty=2)
 ```
-
+<figure>
+  <img src="../assets/images/day1_finalplot.png" width="700"/>
+  </figure>
+  
 Now model the Height with the weight, with a combination of age and weight as well as age and gender allowing for a possible interaction.
 ```r
 model.2 <- lm(Height ~ Weight, data=class)
@@ -128,6 +147,9 @@ Plot the diameter of the Tetrahymena cells in relationship with the concentratio
 plot(hellung$diameter, hellung$conc, 
      xlab="Diameter", ylab="Concentration")
 ```
+<figure>
+  <img src="../assets/images/day1_afternoon_plot.png" width="700"/>
+  </figure>
 
 Do a linear model between concentration and diameter, check all the assumption. Is anything violated ?
 ```r
@@ -142,6 +164,13 @@ ks.test(residuals(model), "pnorm")
 
 influencePlot(model, xlab="Hat-Values", ylab="Studentized Residuals")
 ```
+<figure>
+  <img src="../assets/images/day1_qqplot.png" width="700"/>
+  </figure>
+  
+  <figure>
+  <img src="../assets/images/day1_influence2.png" width="700"/>
+  </figure>
 We therefore need to adapt our model. In the first plot the data seemed to have a logarithmic pattern. We will try if this helps in modelling the data.
 ```r
 logconc <- log(hellung$conc)
@@ -153,6 +182,9 @@ summary(modellog)
 
 abline(modellog)
 ```
+<figure>
+  <img src="../assets/images/day1_log.png" width="700"/>
+  </figure>
 
 We also test the different assumptions.
 ```r
@@ -161,6 +193,9 @@ qqnorm(residuals(modellog))
 qqline(residuals(modellog))
 ks.test(residuals(modellog), "pnorm")
 ```
+<figure>
+  <img src="../assets/images/day1_qqplot2.png" width="700"/>
+  </figure>
 
 Now we can add glucose to the equation. What are your conclusions ?
 ```r
@@ -187,6 +222,10 @@ Plot the data using the log of the hardness.
 plot(dens,log(hardness), ylab="response", xlab="X", main="Janka data")
 ```
 
+<figure>
+  <img src="../assets/images/day1_1.png" width="700"/>
+  </figure>
+
 ### Linear fit
 Start with a linear regression, plot the estimated fit and have a look at the residuals vs. fitted values. What do you observe ?
 ```r
@@ -201,6 +240,9 @@ plot(fit.linear$fitted.values, fit.linear$residuals,
      ylim=c(-max(range(fit.linear$residuals)),max(range(fit.linear$residuals))),
      ylab="residuals", xlab="fitted values")
 ```
+<figure>
+  <img src="../assets/images/day1_2.png" width="700"/>
+  </figure>
 
 Now you realise something seems off. Can you try to show it visually ? 
 ??? Answer
@@ -217,7 +259,10 @@ Now you realise something seems off. Can you try to show it visually ?
     abline(a=0, b=0, col="blue", lwd=2)
     legend(7.6,0.22,"loess fit",lty=2, col="blue", cex=0.75)
     ```
-
+    <figure>
+    <img src="../assets/images/day1_3.png" width="700"/>
+    </figure>
+  
 ### Quadratic fit
 
 The last smooth curve showed a quadratic pattern. We will try to see if we can improve the fit using the poly function and a quadratic model y = ax^2+bx+c.
@@ -241,7 +286,10 @@ predict_fit.quad <- predict(fit.quad, newdata=data.frame(dens=dens.grid))
 plot(dens,log(hardness), ylab="response", xlab="X")
 lines(dens.grid, predict_fit.quad, col="red", lwd=2)
 ```
-
+<figure>
+  <img src="../assets/images/day1_4.png" width="700"/>
+  </figure>
+  
 Seems good, but are the assumptions met ?
 Check the residuals vs. fitted values plot
 
@@ -270,7 +318,10 @@ scatter.smooth(fit.quad$fitted.values, fit.quad$residuals,
 abline(a=0, b=0, col="blue", lwd=2)
 legend(6.2,-0.1,"loess fit",lty=2, col="blue", cex=0.75)
 ```
-
+<figure>
+  <img src="../assets/images/day1_5.png" width="700"/>
+  </figure>
+  
 Again load the data again in the SemiPar package (so load it if not yet done so) called lidar (Light detection and ranging (LIDAR) data), attach the object lidar to have an easier access to the variables and have a look at the help of the lidar data. Start to plot the range vs logratio. 
 
 ```r
@@ -282,6 +333,8 @@ attach(lidar)
 plot(range,logratio, ylab="response", xlab="X")
 ```
 
+
+  
 A linear and quadratic fit are clearly not appropriate for the lidar data, so let's start from polynomial degree 3. Try fitting polynomials of degree 3, 4, and 10 to lidar data
 
 ### Cubic fit
@@ -303,6 +356,9 @@ Now it should be "easy" to fit a polynomial of degree 3 as well as setting a gri
     plot(range,logratio, ylab="response", xlab="X")
     lines(range.grid, predict_fit.cubic, col="red", lwd=2)
     ```
+    <figure>
+    <img src="../assets/images/day1_6.png" width="700"/>
+    </figure>
 What about the residuals ? Here also for the experts we hide the answer, for those of you that are less familiar the answer is below. 
 
 ??? Answer
@@ -316,6 +372,9 @@ What about the residuals ? Here also for the experts we hide the answer, for tho
                lpars=list(col="blue", lwd=2, lty=2))
     abline(a=0, b=0, col="blue", lwd=2)
     ```
+    <figure>
+    <img src="../assets/images/day1_7.png" width="700"/>
+    </figure>
 The conclusion is that we can definitely still do better!
     
 ### Polynomial degree 4 and 10
@@ -347,6 +406,13 @@ Plot the data and fit a polynomial of degree 4. Check the prediction and assumpt
                lpars=list(col="blue", lwd=2, lty=2))
     abline(a=0, b=0, col="blue", lwd=2)
     ```
+    <figure>
+    <img src="../assets/images/day1_8.png" width="700"/>
+    </figure>
+    <figure>
+    <img src="../assets/images/day1_9.png" width="700"/>
+    </figure>
+    
 What is next ? Plot the data and fit a polynomial of degree 10. Check the prediction and assumptions. 
 
 ??? Answer
@@ -378,6 +444,12 @@ What is next ? Plot the data and fit a polynomial of degree 10. Check the predic
     # remove the junk
     rm(fit.cubic, fit.quad, fit.poly10, predict_fit.cubic, predict_fit.quad, predict_fit.poly10, range.range, range.grid)
     ```
+    <figure>
+    <img src="../assets/images/day1_10.png" width="700"/>
+    </figure>
+    <figure>
+    <img src="../assets/images/day1_11.png" width="700"/>
+    </figure>
 Seems like the polynomial of degree 10 is fitting well the assumptions on the residuals!
 
 ### Confidence and prediction intervals
@@ -421,7 +493,9 @@ predict_fit.cubic <- predict(fit.cubic, newdata=data.frame(range=range.grid), in
 lines(range.grid, predict_fit.cubic[,"lwr"], col="blue", lwd=2, lty=3)
 lines(range.grid, predict_fit.cubic[,"upr"], col="blue", lwd=2, lty=3)
 ```
-
+<figure>
+  <img src="../assets/images/day1_12.png" width="700"/>
+  </figure>
 
 ### Step functions
 
@@ -444,7 +518,9 @@ lines(range.grid, predict_fit.pwsf$fit, col="red", lwd=2)
 lines(range.grid, predict_fit.pwsf$fit + 2 * predict_fit.pwsf$se.fit, col="red", lwd=2, lty=2)
 lines(range.grid, predict_fit.pwsf$fit - 2 * predict_fit.pwsf$se.fit, col="red", lwd=2, lty=2)
 ```
-
+<figure>
+  <img src="../assets/images/day1_13.png" width="700"/>
+  </figure>
 ### Piecewise linear fits
 
 ```r
@@ -474,7 +550,10 @@ lines(range.grid.right, predict_fit.right.linear.1knot$fit - 2 * predict_fit.rig
 # indicate the breakpoint
 abline(v=575, col="blue", lwd=2, lty=2)
 ```
-
+<figure>
+  <img src="../assets/images/day1_14.png" width="700"/>
+  </figure>
+  
 ### Piecewise cubic fits
 
 ```r
@@ -504,7 +583,9 @@ lines(range.grid.right, predict_fit.right.cubic.1knot$fit - 2 * predict_fit.righ
 # indicate the breakpoint
 abline(v=575, col="blue", lwd=2, lty=2)
 ```
-
+<figure>
+  <img src="../assets/images/day1_15.png" width="700"/>
+  </figure>
 ### Linear splines
 
 ```r
@@ -543,7 +624,13 @@ lines(range.grid, predict_fit.ls.2knots$fit + 2 * predict_fit.ls.2knots$se.fit, 
 lines(range.grid, predict_fit.ls.2knots$fit - 2 * predict_fit.ls.2knots$se.fit, col="red", lwd=2, lty=2)
 abline(v=c(550,600), col="blue", lwd=2, lty=2)
 ```
-
+<figure>
+  <img src="../assets/images/day1_16.png" width="700"/>
+  </figure>
+  <figure>
+  <img src="../assets/images/day1_17.png" width="700"/>
+  </figure>
+  
 ### Cubic splines
 
 ```r
@@ -579,6 +666,14 @@ lines(range.grid, predict_fit.cs.2knots$fit + 2 * predict_fit.cs.2knots$se.fit, 
 lines(range.grid, predict_fit.cs.2knots$fit - 2 * predict_fit.cs.2knots$se.fit, col="red", lwd=2, lty=2)
 abline(v=c(550,600), col="blue", lwd=2, lty=2)
 ```
+<figure>
+  <img src="../assets/images/day1_18.png" width="700"/>
+  </figure>
+  
+  <figure>
+  <img src="../assets/images/day1_19.png" width="700"/>
+  </figure>
+  
 ### Compare the goodness of fit of each model
 
 ```r
@@ -600,6 +695,7 @@ colnames(mse_table) = c("Models", "RMSE")
 knitr::kable(mse_table, caption = "Mean squared errors for different models", digits = 3, "simple")
 ```
 
+  
 ### Smoothing/natural splines
 
 ```r
@@ -616,7 +712,13 @@ range.grid <- seq(from=range.range[1], to=range.range[2], length.out=length(rang
 ?predict.smooth.spline
 predict_fit.ss <- predict(fit.ss, newdata=list(range=range.grid))
 lines(predict_fit.ss$x, predict_fit.ss$y, col="red", lwd=2)
+```
+<figure>
+  <img src="../assets/images/day1_finalbefore.png" width="700"/>
+  </figure>
+  
 
+```r
 # bootstrap standard errors
 # helper functions borrowed from: 
 # https://stackoverflow.com/questions/23852505/how-to-get-confidence-interval-for-smooth-spline
@@ -653,3 +755,6 @@ lines(x=sp.cis$x,y=sp.cis$main.curve, col="red")
 lines(x=sp.cis$x,y=sp.cis$lower.ci, lty=2, lwd=2, col="red")
 lines(x=sp.cis$x,y=sp.cis$upper.ci, lty=2, lwd=2, col="red")
 ```
+<figure>
+  <img src="../assets/images/day1_final.png" width="700"/>
+  </figure>

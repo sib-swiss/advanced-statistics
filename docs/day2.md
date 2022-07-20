@@ -22,18 +22,19 @@ pairs(babies)
 
  Which factor can explain prematurity?
  Can we use a linear model? If so, try to make predictions.
-```
-model1 <- lm(as.numeric(as.numeric(levels(prem))[prem]) ~ bwt)
-summary(model1)
+??? done "Answer"
+    ```
+    model1 <- lm(as.numeric(as.numeric(levels(prem))[prem]) ~ bwt)
+    summary(model1)
 
-plot(bwt, as.numeric(as.numeric(levels(prem))[prem]), ylab="premature", xlab="birth weight", main="Babies",
-     xlim=c(0,200), ylim=c(-0.2,1.2))
-abline(model1, col="red", lwd=2)
-
-new_bwt = 170
-predict.model1 <- predict.lm(model1, newdata=data.frame(bwt=new_bwt))
-points(new_bwt, predict.model1, col="blue")
-```
+    plot(bwt, as.numeric(as.numeric(levels(prem))[prem]), ylab="premature", xlab="birth weight", main="Babies",
+    xlim=c(0,200), ylim=c(-0.2,1.2))
+    abline(model1, col="red", lwd=2)
+    
+    new_bwt = 170
+    predict.model1 <- predict.lm(model1, newdata=data.frame(bwt=new_bwt))
+    points(new_bwt, predict.model1, col="blue")
+    ```
 
 
  Fit a logistic regression to find parameters explaining the probability of prematurity ?
