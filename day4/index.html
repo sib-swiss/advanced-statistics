@@ -589,11 +589,13 @@
 <h2 id="step1-from-linear-to-degree-5-polynomial-regression">Step1: From linear to degree-5 polynomial regression</h2>
 <p>The goal is to fit models ranging from linear to a degree-5 polynomial and seek to determine the simplest model which is sufficient to explain the relationship between wage and age.</p>
 <p>First, we perform a linear regression, and we have a look at the summary of the fit. How do you write this ?</p>
+<details class="hint">
+<summary>Hint</summary>
+</details>
+<p>Use anova() to perform an F-test to compare nested models.</p>
 <details class="done">
 <summary>Answer</summary>
-<div class="highlight"><pre><span></span><code><span class="c1"># Hint: Use anova() to perform an F-test to compare nested       models.</span>
-
-<span class="n">fit1</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">wage</span> <span class="o">~</span> <span class="n">age</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">fit1</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">wage</span> <span class="o">~</span> <span class="n">age</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
 <span class="nf">summary</span><span class="p">(</span><span class="n">fit1</span><span class="p">)</span>
 </code></pre></div>
 </details>
