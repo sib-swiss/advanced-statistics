@@ -730,20 +730,35 @@ Is the table in a usable format ?</p>
 </details>
 <p>Now we make use of the function pairs (do not know it? look it up with the help!). We then create a simple linear model using Age to describe the height of our students, have a look at the summary of this regression, then plot it.</p>
 <div class="highlight"><pre><span></span><code><span class="nf">pairs</span><span class="p">(</span><span class="n">class</span><span class="p">[,</span><span class="m">-1</span><span class="p">])</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_pairs.png" width="700"/>
+  </figure>
 
-<span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">Height</span> <span class="o">~</span> <span class="n">Age</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">class</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">Height</span> <span class="o">~</span> <span class="n">Age</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">class</span><span class="p">)</span>
 <span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-
 <span class="nf">plot</span><span class="p">(</span><span class="n">class</span><span class="o">$</span><span class="n">Age</span><span class="p">,</span> <span class="n">class</span><span class="o">$</span><span class="n">Height</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">20</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">200</span><span class="p">))</span>
 <span class="nf">abline</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 <span class="c1">#putting the xlim to 0 we can visually see the intercept</span>
 </code></pre></div>
+<figure>
+  <img src="../assets/images/day1_plotabline0.png" width="700"/>
+  </figure>
+
 <p>Are there any influencial points ? Do they have something special? What do you do with them ?</p>
 <div class="highlight"><pre><span></span><code><span class="n">hat</span> <span class="o">&lt;-</span> <span class="nf">lm.influence</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">hat</span><span class="o">$</span><span class="n">hat</span><span class="p">)</span>
 
 <span class="n">car</span><span class="o">::</span><span class="nf">influencePlot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Hat-Values&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;Studentized Residuals&quot;</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../assets/images/day1_hat.png" width="700"/>
+  </figure>
+
+<figure>
+  <img src="../assets/images/day1_influence.png" width="700"/>
+  </figure>
+
 <p>Use the predict function to calculate a confidence interval.</p>
 <div class="highlight"><pre><span></span><code><span class="n">new_age</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">11</span><span class="p">,</span> <span class="m">16</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.25</span><span class="p">)</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">class</span><span class="o">$</span><span class="n">Age</span><span class="p">,</span> <span class="n">class</span><span class="o">$</span><span class="n">Height</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>
@@ -756,6 +771,10 @@ Is the table in a usable format ?</p>
 <span class="nf">lines</span><span class="p">(</span><span class="n">new_age</span><span class="p">,</span> <span class="n">pred_interval</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;orange&quot;</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 <span class="nf">lines</span><span class="p">(</span><span class="n">new_age</span><span class="p">,</span> <span class="n">pred_interval</span><span class="p">[,</span><span class="m">3</span><span class="p">],</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;orange&quot;</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../assets/images/day1_finalplot.png" width="700"/>
+  </figure>
+
 <p>Now model the Height with the weight, with a combination of age and weight as well as age and gender allowing for a possible interaction.
 <div class="highlight"><pre><span></span><code><span class="n">model.2</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">Height</span> <span class="o">~</span> <span class="n">Weight</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">class</span><span class="p">)</span>
 <span class="nf">summary</span><span class="p">(</span><span class="n">model.2</span><span class="p">)</span>
@@ -779,6 +798,10 @@ Plot the diameter of the Tetrahymena cells in relationship with the concentratio
 <div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="n">hellung</span><span class="o">$</span><span class="n">diameter</span><span class="p">,</span> <span class="n">hellung</span><span class="o">$</span><span class="n">conc</span><span class="p">,</span> 
      <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Diameter&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;Concentration&quot;</span><span class="p">)</span>
 </code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_afternoon_plot.png" width="700"/>
+  </figure>
+
 <p>Do a linear model between concentration and diameter, check all the assumption. Is anything violated ?
 <div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">conc</span> <span class="o">~</span> <span class="n">diameter</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">hellung</span><span class="p">)</span>
 <span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
@@ -790,8 +813,15 @@ Plot the diameter of the Tetrahymena cells in relationship with the concentratio
 <span class="nf">ks.test</span><span class="p">(</span><span class="nf">residuals</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="s">&quot;pnorm&quot;</span><span class="p">)</span>
 
 <span class="nf">influencePlot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Hat-Values&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;Studentized Residuals&quot;</span><span class="p">)</span>
-</code></pre></div>
-We therefore need to adapt our model. In the first plot the data seemed to have a logarithmic pattern. We will try if this helps in modelling the data.
+</code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_qqplot.png" width="700"/>
+  </figure>
+
+<figure>
+  <img src="../assets/images/day1_influence2.png" width="700"/>
+  </figure>
+<p>We therefore need to adapt our model. In the first plot the data seemed to have a logarithmic pattern. We will try if this helps in modelling the data.
 <div class="highlight"><pre><span></span><code><span class="n">logconc</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">hellung</span><span class="o">$</span><span class="n">conc</span><span class="p">)</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">hellung</span><span class="o">$</span><span class="n">diameter</span><span class="p">,</span> <span class="n">logconc</span><span class="p">,</span> 
      <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Diameter&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;log(concentration)&quot;</span><span class="p">)</span>
@@ -801,12 +831,20 @@ We therefore need to adapt our model. In the first plot the data seemed to have 
 
 <span class="nf">abline</span><span class="p">(</span><span class="n">modellog</span><span class="p">)</span>
 </code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_log.png" width="700"/>
+  </figure>
+
 <p>We also test the different assumptions.
 <div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="nf">fitted</span><span class="p">(</span><span class="n">modellog</span><span class="p">),</span> <span class="nf">residuals</span><span class="p">(</span><span class="n">modellog</span><span class="p">))</span>
 <span class="nf">qqnorm</span><span class="p">(</span><span class="nf">residuals</span><span class="p">(</span><span class="n">modellog</span><span class="p">))</span>
 <span class="nf">qqline</span><span class="p">(</span><span class="nf">residuals</span><span class="p">(</span><span class="n">modellog</span><span class="p">))</span>
 <span class="nf">ks.test</span><span class="p">(</span><span class="nf">residuals</span><span class="p">(</span><span class="n">modellog</span><span class="p">),</span> <span class="s">&quot;pnorm&quot;</span><span class="p">)</span>
 </code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_qqplot2.png" width="700"/>
+  </figure>
+
 <p>Now we can add glucose to the equation. What are your conclusions ?
 <div class="highlight"><pre><span></span><code><span class="n">modellog.2</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">logconc</span> <span class="o">~</span> <span class="n">diameter</span> <span class="o">+</span> <span class="n">glucose</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">hellung</span><span class="p">)</span>
 <span class="nf">summary</span><span class="p">(</span><span class="n">modellog.2</span><span class="p">)</span>
@@ -820,6 +858,10 @@ We therefore need to adapt our model. In the first plot the data seemed to have 
 <p>Plot the data using the log of the hardness.
 <div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="n">dens</span><span class="p">,</span><span class="nf">log</span><span class="p">(</span><span class="n">hardness</span><span class="p">),</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;Janka data&quot;</span><span class="p">)</span>
 </code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_1.png" width="700"/>
+  </figure>
+
 <h3 id="linear-fit">Linear fit</h3>
 <p>Start with a linear regression, plot the estimated fit and have a look at the residuals vs. fitted values. What do you observe ?
 <div class="highlight"><pre><span></span><code><span class="c1"># fit a linear model</span>
@@ -833,10 +875,14 @@ We therefore need to adapt our model. In the first plot the data seemed to have 
      <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.linear</span><span class="o">$</span><span class="n">residuals</span><span class="p">)),</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.linear</span><span class="o">$</span><span class="n">residuals</span><span class="p">))),</span>
      <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;residuals&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;fitted values&quot;</span><span class="p">)</span>
 </code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_2.png" width="700"/>
+  </figure>
+
 <p>Now you realise something seems off. Can you try to show it visually ? </p>
 <details class="answer">
 <summary>Answer</summary>
-<div class="highlight"><pre><span></span><code><span class="c1"># we want the error terms to be normally distributed around zero, so let&#39;s add that to the plot</span>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># we want the error terms to be normally distributed around zero, so let&#39;s add that to the plot</span>
 <span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 
 <span class="c1"># another way to assess the residual plot is to use a scatterplot smoother that captures the trend in residuals</span>
@@ -848,6 +894,9 @@ We therefore need to adapt our model. In the first plot the data seemed to have 
 <span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 <span class="nf">legend</span><span class="p">(</span><span class="m">7.6</span><span class="p">,</span><span class="m">0.22</span><span class="p">,</span><span class="s">&quot;loess fit&quot;</span><span class="p">,</span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.75</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+<img src="../assets/images/day1_3.png" width="700"/>
+</figure></p>
 </details>
 <h3 id="quadratic-fit">Quadratic fit</h3>
 <p>The last smooth curve showed a quadratic pattern. We will try to see if we can improve the fit using the poly function and a quadratic model y = ax^2+bx+c.</p>
@@ -868,6 +917,10 @@ We therefore need to adapt our model. In the first plot the data seemed to have 
 <span class="nf">plot</span><span class="p">(</span><span class="n">dens</span><span class="p">,</span><span class="nf">log</span><span class="p">(</span><span class="n">hardness</span><span class="p">),</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
 <span class="nf">lines</span><span class="p">(</span><span class="n">dens.grid</span><span class="p">,</span> <span class="n">predict_fit.quad</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../assets/images/day1_4.png" width="700"/>
+  </figure>
+
 <p>Seems good, but are the assumptions met ?
 Check the residuals vs. fitted values plot</p>
 <p><div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span> <span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span> 
@@ -892,6 +945,10 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
 <span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 <span class="nf">legend</span><span class="p">(</span><span class="m">6.2</span><span class="p">,</span><span class="m">-0.1</span><span class="p">,</span><span class="s">&quot;loess fit&quot;</span><span class="p">,</span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.75</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../assets/images/day1_5.png" width="700"/>
+  </figure>
+
 <p>Again load the data again in the SemiPar package (so load it if not yet done so) called lidar (Light detection and ranging (LIDAR) data), attach the object lidar to have an easier access to the variables and have a look at the help of the lidar data. Start to plot the range vs logratio. </p>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">SemiPar</span><span class="p">)</span>
 <span class="nf">data</span><span class="p">(</span><span class="n">lidar</span><span class="p">)</span>
@@ -905,7 +962,7 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
 <p>Now it should be &ldquo;easy&rdquo; to fit a polynomial of degree 3 as well as setting a grid and plotting predictions. Not yet easy? check the answer below.</p>
 <details class="answer">
 <summary>Answer</summary>
-<div class="highlight"><pre><span></span><code><span class="c1"># fit a cubic model</span>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># fit a cubic model</span>
 <span class="n">fit.cubic</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span> <span class="n">logratio</span> <span class="o">~</span> <span class="nf">poly</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="m">3</span><span class="p">)</span> <span class="p">)</span>
 
 <span class="c1"># set up the grid</span>
@@ -917,11 +974,14 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
 <span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
 <span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span> <span class="n">predict_fit.cubic</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+<img src="../assets/images/day1_6.png" width="700"/>
+</figure></p>
 </details>
 <p>What about the residuals ? Here also for the experts we hide the answer, for those of you that are less familiar the answer is below. </p>
 <details class="answer">
 <summary>Answer</summary>
-<div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span> <span class="n">fit.cubic</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span> 
+<p><div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span> <span class="n">fit.cubic</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span> 
  <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">residuals</span><span class="p">)),</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">residuals</span><span class="p">))),</span> 
  <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;residuals&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;fitted values&quot;</span><span class="p">)</span>
 <span class="nf">scatter.smooth</span><span class="p">(</span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span> <span class="n">fit.cubic</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span>
@@ -930,13 +990,16 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
            <span class="n">lpars</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">))</span>
 <span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+<img src="../assets/images/day1_7.png" width="700"/>
+</figure></p>
 </details>
 <p>The conclusion is that we can definitely still do better!</p>
 <h3 id="polynomial-degree-4-and-10">Polynomial degree 4 and 10</h3>
 <p>Plot the data and fit a polynomial of degree 4. Check the prediction and assumptions. </p>
 <details class="answer">
 <summary>Answer</summary>
-<div class="highlight"><pre><span></span><code><span class="c1"># plot raw data</span>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># plot raw data</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
 
 <span class="c1"># fit a quadratic model</span>
@@ -960,11 +1023,17 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
            <span class="n">lpars</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">))</span>
 <span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+<img src="../assets/images/day1_8.png" width="700"/>
+</figure>
+<figure>
+<img src="../assets/images/day1_9.png" width="700"/>
+</figure></p>
 </details>
 <p>What is next ? Plot the data and fit a polynomial of degree 10. Check the prediction and assumptions. </p>
 <details class="answer">
 <summary>Answer</summary>
-<div class="highlight"><pre><span></span><code><span class="c1"># plot raw data</span>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># plot raw data</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
 
 <span class="c1"># fit a polynomial degree 10</span>
@@ -991,6 +1060,12 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
 <span class="c1"># remove the junk</span>
 <span class="nf">rm</span><span class="p">(</span><span class="n">fit.cubic</span><span class="p">,</span> <span class="n">fit.quad</span><span class="p">,</span> <span class="n">fit.poly10</span><span class="p">,</span> <span class="n">predict_fit.cubic</span><span class="p">,</span> <span class="n">predict_fit.quad</span><span class="p">,</span> <span class="n">predict_fit.poly10</span><span class="p">,</span> <span class="n">range.range</span><span class="p">,</span> <span class="n">range.grid</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+<img src="../assets/images/day1_10.png" width="700"/>
+</figure>
+<figure>
+<img src="../assets/images/day1_11.png" width="700"/>
+</figure></p>
 </details>
 <p>Seems like the polynomial of degree 10 is fitting well the assumptions on the residuals!</p>
 <h3 id="confidence-and-prediction-intervals">Confidence and prediction intervals</h3>
@@ -1032,6 +1107,10 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
 <span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span> <span class="n">predict_fit.cubic</span><span class="p">[,</span><span class="s">&quot;lwr&quot;</span><span class="p">],</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
 <span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span> <span class="n">predict_fit.cubic</span><span class="p">[,</span><span class="s">&quot;upr&quot;</span><span class="p">],</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
 </code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_12.png" width="700"/>
+  </figure>
+
 <h3 id="step-functions">Step functions</h3>
 <div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
 
@@ -1050,6 +1129,9 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
 <span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span> <span class="n">predict_fit.pwsf</span><span class="o">$</span><span class="n">fit</span> <span class="o">+</span> <span class="m">2</span> <span class="o">*</span> <span class="n">predict_fit.pwsf</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 <span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span> <span class="n">predict_fit.pwsf</span><span class="o">$</span><span class="n">fit</span> <span class="o">-</span> <span class="m">2</span> <span class="o">*</span> <span class="n">predict_fit.pwsf</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../assets/images/day1_13.png" width="700"/>
+  </figure>
 <h3 id="piecewise-linear-fits">Piecewise linear fits</h3>
 <div class="highlight"><pre><span></span><code><span class="n">fit.left.linear.1knot</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span> <span class="n">logratio</span> <span class="o">~</span> <span class="n">range</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="p">(</span><span class="n">range</span><span class="o">&lt;</span><span class="m">575</span><span class="p">)</span> <span class="p">)</span>
 <span class="n">fit.right.linear.1knot</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span> <span class="n">logratio</span> <span class="o">~</span> <span class="n">range</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="p">(</span><span class="n">range</span><span class="o">&gt;=</span><span class="m">575</span><span class="p">)</span> <span class="p">)</span>
@@ -1077,6 +1159,10 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
 <span class="c1"># indicate the breakpoint</span>
 <span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">575</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../assets/images/day1_14.png" width="700"/>
+  </figure>
+
 <h3 id="piecewise-cubic-fits">Piecewise cubic fits</h3>
 <div class="highlight"><pre><span></span><code><span class="n">fit.left.cubic.1knot</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span> <span class="n">logratio</span> <span class="o">~</span> <span class="nf">poly</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="m">3</span><span class="p">),</span> <span class="n">subset</span><span class="o">=</span><span class="p">(</span><span class="n">range</span><span class="o">&lt;</span><span class="m">575</span><span class="p">)</span> <span class="p">)</span>
 <span class="n">fit.right.cubic.1knot</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span> <span class="n">logratio</span> <span class="o">~</span> <span class="nf">poly</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="m">3</span><span class="p">),</span> <span class="n">subset</span><span class="o">=</span><span class="p">(</span><span class="n">range</span><span class="o">&gt;=</span><span class="m">575</span><span class="p">)</span> <span class="p">)</span>
@@ -1104,6 +1190,9 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
 <span class="c1"># indicate the breakpoint</span>
 <span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">575</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../assets/images/day1_15.png" width="700"/>
+  </figure>
 <h3 id="linear-splines">Linear splines</h3>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">splines</span><span class="p">)</span>
 
@@ -1140,6 +1229,13 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
 <span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span> <span class="n">predict_fit.ls.2knots</span><span class="o">$</span><span class="n">fit</span> <span class="o">-</span> <span class="m">2</span> <span class="o">*</span> <span class="n">predict_fit.ls.2knots</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 <span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">550</span><span class="p">,</span><span class="m">600</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../assets/images/day1_16.png" width="700"/>
+  </figure>
+<figure>
+  <img src="../assets/images/day1_17.png" width="700"/>
+  </figure>
+
 <h3 id="cubic-splines">Cubic splines</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># fit cubic splines with 1 internal knot</span>
 <span class="n">fit.cs.1knot</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span> <span class="n">logratio</span> <span class="o">~</span> <span class="nf">bs</span><span class="p">(</span><span class="n">range</span><span class="p">,</span> <span class="n">knots</span><span class="o">=</span><span class="m">575</span><span class="p">)</span> <span class="p">)</span>
@@ -1173,6 +1269,14 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
 <span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span> <span class="n">predict_fit.cs.2knots</span><span class="o">$</span><span class="n">fit</span> <span class="o">-</span> <span class="m">2</span> <span class="o">*</span> <span class="n">predict_fit.cs.2knots</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 <span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">550</span><span class="p">,</span><span class="m">600</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../assets/images/day1_18.png" width="700"/>
+  </figure>
+
+<figure>
+  <img src="../assets/images/day1_19.png" width="700"/>
+  </figure>
+
 <h3 id="compare-the-goodness-of-fit-of-each-model">Compare the goodness of fit of each model</h3>
 <div class="highlight"><pre><span></span><code><span class="n">mse</span> <span class="o">=</span> <span class="nf">function</span><span class="p">(</span><span class="n">model</span><span class="p">){</span>
   <span class="n">rmse</span> <span class="o">=</span> <span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">model</span><span class="o">$</span><span class="n">residual</span><span class="o">^</span><span class="m">2</span><span class="p">))</span>
@@ -1204,8 +1308,12 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
 <span class="o">?</span><span class="n">predict.smooth.spline</span>
 <span class="n">predict_fit.ss</span> <span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">fit.ss</span><span class="p">,</span> <span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">))</span>
 <span class="nf">lines</span><span class="p">(</span><span class="n">predict_fit.ss</span><span class="o">$</span><span class="n">x</span><span class="p">,</span> <span class="n">predict_fit.ss</span><span class="o">$</span><span class="n">y</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_finalbefore.png" width="700"/>
+  </figure>
 
-<span class="c1"># bootstrap standard errors</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># bootstrap standard errors</span>
 <span class="c1"># helper functions borrowed from: </span>
 <span class="c1"># https://stackoverflow.com/questions/23852505/how-to-get-confidence-interval-for-smooth-spline</span>
 
@@ -1241,6 +1349,9 @@ We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing
 <span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">sp.cis</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">sp.cis</span><span class="o">$</span><span class="n">lower.ci</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
 <span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">sp.cis</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">sp.cis</span><span class="o">$</span><span class="n">upper.ci</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../assets/images/day1_final.png" width="700"/>
+  </figure>
 
               
             </article>

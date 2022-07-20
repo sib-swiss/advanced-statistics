@@ -550,18 +550,21 @@ Load and explore the dataset babies, called babies.RData in your exercise folder
 <span class="nf">pairs</span><span class="p">(</span><span class="n">babies</span><span class="p">)</span>
 </code></pre></div></p>
 <p>Which factor can explain prematurity?
- Can we use a linear model? If so, try to make predictions.
+ Can we use a linear model? If so, try to make predictions.</p>
+<details class="done">
+<summary>Answer</summary>
 <div class="highlight"><pre><span></span><code>model1 &lt;- lm(as.numeric(as.numeric(levels(prem))[prem]) ~ bwt)
 summary(model1)
 
 plot(bwt, as.numeric(as.numeric(levels(prem))[prem]), ylab=&quot;premature&quot;, xlab=&quot;birth weight&quot;, main=&quot;Babies&quot;,
-     xlim=c(0,200), ylim=c(-0.2,1.2))
+xlim=c(0,200), ylim=c(-0.2,1.2))
 abline(model1, col=&quot;red&quot;, lwd=2)
 
 new_bwt = 170
 predict.model1 &lt;- predict.lm(model1, newdata=data.frame(bwt=new_bwt))
 points(new_bwt, predict.model1, col=&quot;blue&quot;)
-</code></pre></div></p>
+</code></pre></div>
+</details>
 <p>Fit a logistic regression to find parameters explaining the probability of prematurity ?
  What is the effect of birth weight on the probability of prematurity ?
  What about parity ?
