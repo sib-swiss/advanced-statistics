@@ -19,6 +19,9 @@ Perform a graphical exploration of the data
 summary(babies)
 pairs(babies)
 ```
+<figure>
+  <img src="../assets/images/day2_1.png" width="700"/>
+  </figure>
 
  Which factor can explain prematurity?
  Can we use a linear model? If so, try to make predictions.
@@ -35,22 +38,26 @@ pairs(babies)
     predict.model1 <- predict.lm(model1, newdata=data.frame(bwt=new_bwt))
     points(new_bwt, predict.model1, col="blue")
     ```
-
+    <figure>
+    <img src="../assets/images/day2_2.png" width="700"/>
+    </figure>
 
  Fit a logistic regression to find parameters explaining the probability of prematurity ?
  What is the effect of birth weight on the probability of prematurity ?
  What about parity ?
-```r
-model2 <- glm(prem ~ bwt, family=binomial)
-summary(model2)
 
-model3 <- glm(prem ~ bwt+parity, family=binomial)
-summary(model3)
-
-model4 <- glm(prem ~ bwt*smoke+parity, family=binomial)
-summary(model4)
-
-```
+??? done "Answer"
+    ```r
+    model2 <- glm(prem ~ bwt, family=binomial)
+    summary(model2)
+    
+    model3 <- glm(prem ~ bwt+parity, family=binomial)
+    summary(model3)
+      
+    model4 <- glm(prem ~ bwt*smoke+parity, family=binomial)
+    summary(model4)
+    
+    ```
 
 
 Check the deviance residuals using the residualPlot function in the car library
@@ -60,25 +67,49 @@ residualPlot(model2, type = "deviance")
 residualPlot(model2, type = "response")
 residualPlot(model2, type = "pearson")
 ```
+<figure>
+  <img src="../assets/images/day2_3.png" width="700"/>
+  </figure>
+  
+  <figure>
+  <img src="../assets/images/day2_4.png" width="700"/>
+  </figure>
+  
+  <figure>
+  <img src="../assets/images/day2_5.png" width="700"/>
+  </figure>
 
 Construct the quantile residuals using the qresiduals function in the statmod library
 Analyze the deviance
 Look for potential influencial and outlying observations
-```r
-library(statmod)
-model2.residuals <- qresiduals(model2)
-qqnorm(qnorm(model2.residuals))
-qqline(qnorm(model2.residuals), col="red")
 
-model.null <- glm(prem ~ 1, family = binomial)
-summary(model.null)
-anova(model.null, model2, test = "Chisq")
+??? Hint
+    Use the function acf()
+    
 
-influencePlot(model2)
-acf(model2.residuals)
+??? done "Answer"
+    ```r
+    library(statmod)
+    model2.residuals <- qresiduals(model2)
+    qqnorm(qnorm(model2.residuals))
+    qqline(qnorm(model2.residuals), col="red")
+    
+    model.null <- glm(prem ~ 1, family = binomial)
+    summary(model.null)
+    anova(model.null, model2, test = "Chisq")
 
-```
-
+    influencePlot(model2)
+    acf(model2.residuals)
+    ```
+ <figure>
+  <img src="../assets/images/day2_6.png" width="700"/>
+  </figure>
+   <figure>
+  <img src="../assets/images/day2_7.png" width="700"/>
+  </figure>
+   <figure>
+  <img src="../assets/images/day2_8.png" width="700"/>
+  </figure>
 
 ## Challenge: baby food
 
@@ -96,15 +127,27 @@ boxplot(disease ~ sex, babyfood)
 boxplot((disease/(disease + nondisease)) ~ food, babyfood)
 boxplot((disease/(disease + nondisease)) ~ sex, babyfood)
 ```
-
+ <figure>
+  <img src="../assets/images/day2_2_1.png" width="700"/>
+  </figure>
+   <figure>
+  <img src="../assets/images/day2_2_2.png" width="700"/>
+  </figure>
+   <figure>
+  <img src="../assets/images/day2_2_3.png" width="700"/>
+  </figure>
+   <figure>
+  <img src="../assets/images/day2_2_4.png" width="700"/>
+  </figure>
+  
 
 Fit a logistic regression to explain the probability of disease by sex and food.
-```r
-mdl <- glm(cbind(disease, nondisease) ~ sex + food, family = binomial, babyfood)
-summary(mdl)
 
-
-```
+??? done "Answer" 
+    ```r
+    mdl <- glm(cbind(disease, nondisease) ~ sex + food, family = binomial, babyfood)
+    summary(mdl)
+    ```
 
 ## Warm up 2
 
@@ -126,7 +169,9 @@ Study the relationship between the number of plant species and several geographi
 ```r
 pairs(gala)
 ```
-
+ <figure>
+  <img src="../assets/images/day2_3_1.png" width="700"/>
+  </figure>
 
 Fit a poisson model to the galapagos data.
 Which variables are significant ? 
@@ -137,7 +182,9 @@ poisson.glm <- glm(Species ~ ., data=gala, family=poisson)
 summary(poisson.glm)
 residualPlots(poisson.glm)
 ```
-
+ <figure>
+  <img src="../assets/images/day2_3_2.png" width="700"/>
+  </figure>
 
 
 ## Exercise 1: Michelin food
@@ -185,25 +232,53 @@ plot(michelin$Food, michelin$proportion)
 lines(xnew$Food, pred.prop, col = "blue", lwd = 2)
 ```
 
-4. Check the model by looking at the residual deviance, other residuals and especially the quantile residuals
+ <figure>
+  <img src="../assets/images/day2_4_1.png" width="700"/>
+  </figure>
 
-```r
-require(car)
-residualPlot(glm.mich, type = "deviance")
-residualPlot(glm.mich, type = "response")
-residualPlot(glm.mich, type = "pearson")
-library(statmod)
-qres <- qresiduals(glm.mich)
-qqnorm(qres)
-qqline(qres)
-acf(qres)
-```
+
+4. Check the model by looking at the residual deviance, other residuals and especially the quantile residuals
+??? done "Answer"
+    ```r
+    require(car)
+    residualPlot(glm.mich, type = "deviance")
+    residualPlot(glm.mich, type = "response")
+    residualPlot(glm.mich, type = "pearson")
+    library(statmod)
+    qres <- qresiduals(glm.mich)
+    qqnorm(qres)
+    qqline(qres)
+    acf(qres)
+    ```
+      <figure>
+      <img src="../assets/images/day2_4_2.png" width="700"/>
+      </figure>
+  
+     <figure>
+      <img src="../assets/images/day2_4_3.png" width="700"/>
+    </figure>
+
+    <figure>
+     <img src="../assets/images/day2_4_4.png" width="700"/>
+     </figure>
+
+    <figure>
+     <img src="../assets/images/day2_4_5.png" width="700"/>
+     </figure>
+
+     <figure>
+      <img src="../assets/images/day2_4_6.png" width="700"/>
+     </figure>
+
 
 5. Check the model for potential influencial observations.
-```r
-influencePlot(glm.mich)
-```
-
+??? done "Answer"
+    ```r
+    influencePlot(glm.mich)
+    ```
+     <figure>
+     <img src="../assets/images/day2_4_7.png" width="700"/>
+     </figure>
 
 ## Exercise 2: moth death
 
@@ -225,13 +300,13 @@ moth$numalive <- 20 - moth$numdead
 1. Fit a GLM using the sex and dose as predictors. 
 
 Do we need to include an interaction term in the model ?
-
-```r
-glm.moth.1 <- glm(cbind(numalive, numdead) ~ sex + dose, data = moth, family = binomial)
-summary(glm.moth.1)
-glm.moth.2 <- glm(cbind(numalive, numdead) ~ sex * dose, data = moth, family = binomial)
-summary(glm.moth.2)
-```  
+??? done "Answer"
+    ```r
+    glm.moth.1 <- glm(cbind(numalive, numdead) ~ sex + dose, data = moth, family = binomial)
+    summary(glm.moth.1)
+    glm.moth.2 <- glm(cbind(numalive, numdead) ~ sex * dose, data = moth, family = binomial)
+    summary(glm.moth.2)
+    ```  
 2. Does the model fit well ? Perform an analysis of deviance
 
 ```r
@@ -251,7 +326,7 @@ anova(glm.null, glm.moth.1, test = "Chisq")
 ```r
 xnew <- data.frame(sex = rep(c("male", "female"), each = 30), 
                    dose = rep(seq(from = 0, to = 5, length.out = 30), 2))
-pred.prop <- predict(glm.moth, newdata = xnew, type = "response")
+pred.prop <- predict(glm.moth.1, newdata = xnew, type = "response")
 moth$proportion <- moth$numalive/(moth$numdead + moth$numalive)
 color <- moth$sex
 color[color == "male"] <- "blue"
@@ -262,7 +337,9 @@ lines(xnew$dose[which(xnew$sex == "male")], pred.prop[which(xnew$sex == "male")]
 lines(xnew$dose[which(xnew$sex == "female")], pred.prop[which(xnew$sex == "female")],
       col = "red", lwd = 2)
 ```
-
+ <figure>
+     <img src="../assets/images/day2_5_1.png" width="700"/>
+     </figure>
 
 ## Exercise 3: beetle
 
@@ -295,10 +372,12 @@ summary(glm.beetles.log)
 
 ```r
 new_beetle <- data.frame(dose = seq(from = 1.5, to = 1.9, length.out = 100))
-plot(predict(glm.beetles, new_beetle, type = "response"), type = "l", col = "blue")
+plot(predict(glm.beetles, new_beetle, type = "response"),ylab="response", type = "l", col = "blue")
 lines(predict(glm.beetles.log, new_beetle, type = "response"), col = "red")
 ```
-
+ <figure>
+     <img src="../assets/images/day2_6_1.png" width="700"/>
+     </figure>
 
 
 ## Exercise 4: Pima

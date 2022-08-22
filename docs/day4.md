@@ -40,11 +40,10 @@ Now the goal is to build a predictive model for wage based on year, age, marital
 The goal is to fit models ranging from linear to a degree-5 polynomial and seek to determine the simplest model which is sufficient to explain the relationship between wage and age.
 
 First, we perform a linear regression, and we have a look at the summary of the fit. How do you write this ?
-
+??? Hint
+Use anova() to perform an F-test to compare nested models.
 ??? done "Answer"
     ```r
-    # Hint: Use anova() to perform an F-test to compare nested       models.
-
     fit1 <- lm(wage ~ age, data=Wage)
     summary(fit1)
     ```

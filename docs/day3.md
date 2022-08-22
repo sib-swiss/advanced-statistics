@@ -31,6 +31,7 @@ xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy, as.tab
 ### Analysis of individual change over time
 
 #### Non-parametric smoothing spline fit
+We first fit a smoothing spline between the points, this is done using the function panel.spline().
 ```r
 xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy, 
        prepanel = function(x,y) prepanel.spline(x,y), 
@@ -41,29 +42,40 @@ xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy,
 )
 ```
 #### Nonparametric loess fit 
-We will learn more about loess during GAM lecture
-```r
-xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy,
+We will see more about LOESS during the GAM lecture. Try fitting a LOESS function on the xy panel. 
+
+??? Hint
+    Try the help function ?prepanel.spline() that you have seen previously for smoothing splines to understand what to change. Is it the only function you need to change ?
+  
+??? done "Answer"
+
+    ```r
+    xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy,
        prepanel = function(x,y) prepanel.loess(x,y, family="gaussian"),
        xlab = "age", ylab = "tolerance",
        panel = function(x,y){
          panel.xyplot(x,y)
          panel.loess(x,y, family="gaussian")}
-)
-```
+    )
+    ```
 
 #### Parametric/linear fit
-```r
-xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy,
+
+Try now a linear fit. Which function do you need to change
+
+??? done "Answer"
+    ```r
+    xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy,
        prepanel = function(x,y) prepanel.lmline(x,y),
        xlab = "age", ylab = "tolerance",
        panel = function(x,y){
          panel.xyplot(x,y)
          panel.lmline(x,y)}
-)
-```
+      )
+    ```
+    
 #### Individual linear fits
-extract summary from individual linear fits
+Extract summary from individual linear fits.
 ```r
 lm.summary <- by(tolerance_tidy, tolerance_tidy$id, function(x) summary(lm(tolerance ~ time, data=x)))
 lm.summary[1]
@@ -91,7 +103,8 @@ rm(all.intercept, all.slope, all.resVar, all.r2)
 
 ### Analysis of inter-individual differences
 #### Average of the curves (nonparametric)
-
+We will proceed by making a plot with all the smooth splines calculated for all the individual.
+We then calculate averages of values calculated on a grid. This points will then be used to again calculate a smoothing spline. 
 ```r
 
 
@@ -137,6 +150,7 @@ est.nonpara
 rm(t,indiv,i,temp.data,age,tolerance,fit,est,avg.est)
 ```
 #### Average of the curves (parametric)
+In the parametric form, we will predict values on a grid for all the samples, then calculate averages.
 ```r
 # start with an empty plot
 plot(1, type="n", xlab="age", ylab="tolerance", xlim=c(11,15), ylim=c(0,4), main="parametric")
@@ -182,6 +196,7 @@ rm(t,t.cent,indiv,i,temp.data,age,age.cent,tolerance,fit,est,avg.est)
 
 ```
 #### Intercepts and slopes from linear fit
+Fetch the intercepts and slopes from the linear fit
 ```r
 # all.intercepts
 mean(my.summary["all.intercept",]) # 1.35775
@@ -196,7 +211,8 @@ cor(my.summary["all.intercept",], my.summary["all.slope",]) # -0.4481135
 ```
 
 #### Stratify based on covariates
-Gender
+We can stratify the calculated curves based on covariates. We can associate p-values of the estimated parameters, answering questions such as is there any major difference in the calculated slopes in Men vs Women ? This enables to obtain p-value on inter-individual changes. 
+We first start with the covariate Gender: 
 ```r
 table(tolerance_untidy$male) # 9 x females and 7 x males
 
@@ -224,7 +240,7 @@ abline(lm( avg.est ~ t), lwd=2)
 rm(est.para_males, est.para_females, t, avg.est)
 ```
 
-Exposure
+Then the covariate Exposure:
 ```r
 summary(tolerance_untidy$exposure)
 
@@ -257,7 +273,9 @@ rm(median.exposure)
 ```
 
 ## Corn Data
-
+We work with the dataframe: ant111b in the DAAG package.
+It is an agricultural experiment on the Caribbean island of Antigua.
+Corn yield measurements were taken on 4 parcels at 8 sites. We need to discover how to model the harvest weight, and understand if there are significant changes in the sites and parcels, or other covariates in this dataset. 
 ```r
 library(DAAG)
 library(lattice) 
@@ -265,9 +283,7 @@ library(lme4)
 library(WWGbook)
 ```
 ### Data Exploration of harvwt
-Dataframe: ant111b in the DAAG package.
-agricultural experiment on the Caribbean island of Antigua
-Corn yield measurements were taken on 4 parcels at 8 sites
+
 
 ```r
 data(ant111b)
@@ -423,6 +439,8 @@ What do you conclude ?
 
 ## Tolerance data set2
 
+We take again a look at the tolerance dataset and will have now a new look on it with mixed effect modelling.
+
 ```r
 library(lattice)
 library(nlme)
@@ -434,7 +452,7 @@ library(splines)
 
 ### multi-level / mixed-effects modeling
 
-let's begin by assessing the need for a multi-level model
+Let's begin by assessing the need for a multi-level model
 First, we will fit a baseline model (only including an intercept) using ML
 Next, we will fit another model that allows intercepts to vary between clusters
 (i.e. a random intercept model)
@@ -442,6 +460,7 @@ finally we compare the two models to see if the fit has improved as a result of 
 intercepts to vary
 
 ### Fit the 1st model
+Simplest model, also called null model.
 ```r
 fit.01 <- gls(tolerance ~ 1, data=tolerance_tidy, method="ML")
 summary(fit.01)
@@ -454,6 +473,7 @@ abline(h=1.619375, col="red", lwd=2)
 
 
 ### Fit the 2nd model
+Now we put a random effect that is linked to the ids of the kids. This assumes that there is no change true time in the answer to the tolerance in kids, however kids ID matter, i.e. some kids will start higher and some lower and will stay high respectively low in their tolerance to deviant behaviour.
 ```r
 fit.02 <- lme(tolerance ~ 1, random = (~ 1 | id), data=tolerance_tidy, method="ML")
 summary(fit.02)
@@ -472,11 +492,11 @@ plot(tolerance_tidy$age, tolerance_tidy$tolerance, ylim=c(0,4), ylab="tolerance"
 abline(h = fit.02$coefficients$fixed + unlist(fit.02$coefficients$random), col="blue", lwd=2)
 ```
 
-compare the two using AIC, BIC, and likelihood-ratio(LR)
+Compare the two using AIC, BIC, and likelihood-ratio(LR)
 ```r
 anova(fit.01,fit.02)
 ```
-keeping in mind that the assumptions of the LR test is that:
+Keeping in mind that the assumptions of the LR test is that:
 i) models were fit using ML
 ii) model are nested
 both assumption were met and p-val<0.05; therefore we can conclude that allowing for
@@ -484,42 +504,48 @@ random intercepts significantly improved the fit
 
 
 
-What if instead of random intercepts, we had allowed for random slopes?
-We have no reason to believe that individuals should share a baseline value
-(i.e. fixed intercept), but let's try it anyways for the sake of completeness
 
 ### Fit the 3rd model
-```r
-fit.03 <- gls(tolerance ~ time, data=tolerance_tidy, method="ML") # using centered age (i.e. time) for increased interpretability
-summary(fit.03)
 
-# plot fit.03
-plot(tolerance_tidy$age, tolerance_tidy$tolerance, ylim=c(0,4), ylab="tolerance", xlab="age")
-fit.03$coefficients
-abline( gls(tolerance ~ age, data=tolerance_tidy, method="ML"), col="red", lwd=2)
-```
+What if instead of random intercepts, we had allowed for random slopes?
+We have no reason to believe that individuals should share a baseline value
+(i.e. fixed intercept), but let's try it anyways for the sake of completeness.
+This model will assume that there is a fixed intercept, therefore all the fitted lines start at the same height. But we say that time influences the results of the tolerance. How would you model it?
+??? done "Answer"
+    ```r
+    fit.03 <- gls(tolerance ~ time, data=tolerance_tidy, method="ML") # using centered age (i.e.     time) for increased interpretability
+    summary(fit.03)
+
+    # plot fit.03
+    plot(tolerance_tidy$age, tolerance_tidy$tolerance, ylim=c(0,4), ylab="tolerance",     xlab="age")
+    fit.03$coefficients
+    abline( gls(tolerance ~ age, data=tolerance_tidy, method="ML"), col="red", lwd=2)
+    ```
 
 ### Fit the 4th model
-```r
-fit.04 <- lme(tolerance ~ time, random = (~ -1 + time | id), data=tolerance_tidy, method="ML")
-summary(fit.04)
-fit.04$coefficients
+What if the tolerance can be explained by time, but that the changes through time are dependant on the kid. But we expect the intercept to be the same for all individuals. 
 
-# plot fit.04 for patient "978" and compare with fit.03
-plot(tolerance_tidy$age, tolerance_tidy$tolerance, ylim=c(0,4), ylab="tolerance", xlab="age")
-points(tolerance_tidy$age[tolerance_tidy$id=="978"], tolerance_tidy$tolerance[tolerance_tidy$id=="978"], col="blue", pch=16)
-abline(lm(tolerance ~ age, data=tolerance_tidy), col="red", lwd=2)
-predict.fit.04 <- predict(fit.04, newdata=data.frame(time=seq(0,4,length.out=100), id="978"))
-lines(seq(11,15,length.out=100), predict.fit.04, col="blue", lwd=2)
+??? done "Answer"
+    ```r
+    fit.04 <- lme(tolerance ~ time, random = (~ -1 + time | id), data=tolerance_tidy,     method="ML")
+    summary(fit.04)
+    fit.04$coefficients
 
-# plot fit.04 for all individuals
-plot(tolerance_tidy$age, tolerance_tidy$tolerance, ylim=c(0,4), ylab="tolerance", xlab="age")
-id <- as.character(unique(tolerance_untidy$id))
-for (i in 1:length(id)) {
-  predict.fit.04 <- predict(fit.04, newdata=data.frame(time=seq(0,4,length.out=100), id=id[i]))
-  lines(seq(11,15,length.out=100), predict.fit.04, col="blue", lwd=1)
-}
-```
+    # plot fit.04 for patient "978" and compare with fit.03
+    plot(tolerance_tidy$age, tolerance_tidy$tolerance, ylim=c(0,4), ylab="tolerance", xlab="age")
+    points(tolerance_tidy$age[tolerance_tidy$id=="978"], tolerance_tidy$tolerance[tolerance_tidy$id=="978"], col="blue", pch=16)
+    abline(lm(tolerance ~ age, data=tolerance_tidy), col="red", lwd=2)
+    predict.fit.04 <- predict(fit.04, newdata=data.frame(time=seq(0,4,length.out=100), id="978"))
+    lines(seq(11,15,length.out=100), predict.fit.04, col="blue", lwd=2)
+
+    # plot fit.04 for all individuals
+    plot(tolerance_tidy$age, tolerance_tidy$tolerance, ylim=c(0,4), ylab="tolerance", xlab="age")
+    id <- as.character(unique(tolerance_untidy$id))
+    for (i in 1:length(id)) {
+     predict.fit.04 <- predict(fit.04, newdata=data.frame(time=seq(0,4,length.out=100), id=id[i]))
+     lines(seq(11,15,length.out=100), predict.fit.04, col="blue", lwd=1)
+    }
+    ```
 
 compare the two using AIC, BIC, and LR
 
@@ -528,21 +554,21 @@ anova(fit.03,fit.04)
 ```
 
 
-What if instead we had allowed for both random intercepts and random slopes?
-the 1st model is same as fit.03
+
 
 ### Fit the 5th model
+What if instead we had allowed for both random intercepts and random slopes? This means kids do not all start at the same tolerance level, tolerance changes through time but also each kids way of changing true time is significantly different. 
+??? done "Answer"
+    ```r
+    fit.05 <- lme(tolerance ~ time, random = (~ time | id), data=tolerance_tidy, method="ML")
+    summary(fit.05)
 
-```r
-fit.05 <- lme(tolerance ~ time, random = (~ time | id), data=tolerance_tidy, method="ML")
-summary(fit.05)
 
-
-# extract both fixed and random parameters
-fit.05$coefficients
-coef(fit.05) # only fixed parameters
-ranef(fit.05) # only random parameters
-```
+    # extract both fixed and random parameters
+    fit.05$coefficients
+    coef(fit.05) # only fixed parameters
+    ranef(fit.05) # only random parameters
+    ```
 
 compare the two using likelihood-ratio(LR)
 ```r
@@ -551,9 +577,11 @@ anova(fit.03,fit.05)
 ```
 
 
-now let's bring in additional covariates
+
 ### Fit the 6th model
-adding gender
+Now let's bring in additional covariates. 
+
+Starting with adding gender, are boys and girls any different in how they tolerate deviant behaviour ? 
 ```r
 tolerance_tidy$male <- factor(tolerance_tidy$male, levels=c(0,1))
 fit.06 <- lme(tolerance ~ male + time, random = (~ time | id), data=tolerance_tidy, method="ML")
@@ -561,21 +589,23 @@ summary(fit.06)
 anova(fit.03,fit.06)
 ```
 ### Fit the 7th model
-adding exposure
+adding exposure. This is the starting measure each kid has given.
 ```r
 fit.07 <- lme(tolerance ~ male + exposure + time, random = (~ time | id), data=tolerance_tidy, method="ML")
 summary(fit.07)
 anova(fit.06,fit.07)
 ```
 ### Fit the 8th model
-adding interaction between male and exposure
-```r
-fit.08 <- lme(tolerance ~ male * exposure + time, random = (~ time | id), data=tolerance_tidy, method="ML")
-summary(fit.08)
-anova(fit.07,fit.08)
-```
+adding interaction between male and exposure, is the exposure of boys and exposure of girls having a different impact on tolerance (this would be the case for instance if one suspects that girls that rate themselves higher at start have then a very different, for instance more steap curve then boys that rate themselves with a high exposure value).
+??? done "Answer"
+    ```r
+    fit.08 <- lme(tolerance ~ male * exposure + time, random = (~ time | id), data=tolerance_tidy, method="ML")
+    summary(fit.08)
+    anova(fit.07,fit.08)
+    ```
 ### Fit the 9th model
-adding interaction between male and time
+adding interaction between male and time.
+
 ```r
 fit.09 <- lme(tolerance ~ exposure + male * time, random = (~ time | id), data=tolerance_tidy, method="ML")
 summary(fit.09)
