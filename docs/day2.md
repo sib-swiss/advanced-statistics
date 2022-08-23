@@ -4,7 +4,7 @@ In this section, you will find the R code that we will use during the course. We
 
 Slides of lectures:
 
-[Download slides](assets/pdf/Logistic regression and GLM.pdf){: .md-button }
+[Download slides](assets/pdf/day2-Logistic regression and GLM - 230822.pdf){: .md-button }
 
 ## Warm up
 The data records the birth weight of 1174 babies along with information on the mother and the pregnancy.
