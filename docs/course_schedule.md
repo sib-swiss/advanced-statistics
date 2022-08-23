@@ -19,7 +19,7 @@
 
 | block   	| start    	| end      	| subject                             	|
 |---------	|----------	|----------	|-------------------------------------	|
-| block 1 	| 9:15 AM  	| 10:30 AM 	| [Generalized linear models](day2.md) 	|
+| block 1 	| 9:00 AM  	| 10:30 AM 	| [Generalized linear models](day2.md) 	|
 |         	| 10:30 AM 	| 11:00 AM 	| BREAK                               	|
 | block 2 	| 11:00 AM 	| 12:30 PM 	| Further exercises  |
 |         	| 12:30 PM 	| 1:30 PM  	| BREAK                               	|
@@ -31,7 +31,7 @@
 
 | block   	| start    	| end      	| subject                             	|
 |---------	|----------	|----------	|-------------------------------------	|
-| block 1 	| 9:15 AM  	| 10:30 AM 	| [Mixed-effects linear models](day3.md)	|
+| block 1 	| 9:00 AM  	| 10:30 AM 	| [Mixed-effects linear models](day3.md)	|
 |         	| 10:30 AM 	| 11:00 AM 	| BREAK                               	|
 | block 2 	| 11:00 AM 	| 12:30 PM 	| []()            	|
 |         	| 12:30 PM 	| 1:30 PM  	| BREAK                               	|
@@ -43,7 +43,7 @@
 
 | block   	| start    	| end      	| subject                             	|
 |---------	|----------	|----------	|-------------------------------------	|
-| block 1 	| 9:15 AM  	| 10:30 AM 	| [Generalized additive models](day4.md)	|
+| block 1 	| 9:00 AM  	| 10:30 AM 	| [Generalized additive models](day4.md)	|
 |         	| 10:30 AM 	| 11:00 AM 	| BREAK                               	|
 | block 2 	| 11:00 AM 	| 12:30 PM 	| []()            	|
 |         	| 12:30 PM 	| 1:30 PM  	| BREAK                               	|
