@@ -4,7 +4,7 @@ In this section, you will find the R code that we will use during the course. We
 
 Slides of lectures:
 
-[Download slides](assets/pdf/Longitudinal.pdf){: .md-button }
+[Download slides](assets/pdf/Longitudinal data.pdf){: .md-button }
 
 ```r
 library(lattice)
