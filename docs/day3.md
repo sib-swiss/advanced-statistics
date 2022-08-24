@@ -42,7 +42,7 @@ xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy,
 )
 ```
 #### Nonparametric loess fit 
-We will see more about LOESS during the GAM lecture. Try fitting a LOESS function on the xy panel. 
+Try fitting a LOESS function on the xy panel. 
 
 ??? Hint
     Try the help function ?prepanel.spline() that you have seen previously for smoothing splines to understand what to change. Is it the only function you need to change ?
