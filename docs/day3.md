@@ -704,28 +704,28 @@ Let's bring in the covariate drug.
 ```r
 fit.04 <- lme(bdi ~ drug + timepoint, random = (~ 1 | indiv), data=BtheB.tidy, method="ML", na.action=na.omit)
 summary(fit.04)
-anova(fit.03,fit.04)
+anova(fit.02,fit.04)
 ```
 
 How about length ?
 ```r
 fit.05 <- lme(bdi ~ length + timepoint, random = (~ 1 | indiv), data=BtheB.tidy, method="ML", na.action=na.omit)
 summary(fit.05)
-anova(fit.03,fit.05)
+anova(fit.02,fit.05)
 ```
 
 How about treatment ?
 ```r
 fit.06 <- lme(bdi ~ treatment + timepoint, random = (~ 1 | indiv), data=BtheB.tidy, method="ML", na.action=na.omit)
 summary(fit.06)
-anova(fit.03,fit.06)
+anova(fit.02,fit.06)
 ```
 
 How about baseline ?
 ```r
 fit.07 <- lme(bdi ~ pre.bdi + timepoint, random = (~ 1 | indiv), data=BtheB.tidy, method="ML", na.action=na.omit)
 summary(fit.07)
-anova(fit.03,fit.07)
+anova(fit.02,fit.07)
 ```
 
 Is there an interaction between baseline and temporal pattern ?
