@@ -41,7 +41,7 @@ The goal is to fit models ranging from linear to a degree-5 polynomial and seek 
 
 First, we perform a linear regression, and we have a look at the summary of the fit. How do you write this ?
 ??? Hint
-Use anova() to perform an F-test to compare nested models.
+    Use anova() to perform an F-test to compare nested models.
 ??? done "Answer"
     ```r
     fit1 <- lm(wage ~ age, data=Wage)
@@ -66,7 +66,7 @@ anova(fit4, fit5)
 ```
 
 ??? done "Answer"
-    The p-value comparing the linear Model 1 to the quadratic Model 2 is essentially zero (<10???15), indicating that a linear fit is not sufficient. Similarly the p-value comparing the quadratic Model 2 to the cubic Model 3 is very low (0.0017), so the quadratic fit is also insufficient. The p-value comparing the cubic and degree-4 polynomials, Model 3 and Model 4, is approximately 5% while the degree-5 polynomial Model 5 seems unnecessary because its p-value is 0.37. Hence, either a cubic or a quartic polynomial appear to provide a reasonable fit to the data, but lower- or higher-order models are not justified.
+    The p-value comparing the linear Model 1 to the quadratic Model 2 is essentially zero (<10^15), indicating that a linear fit is not sufficient. Similarly the p-value comparing the quadratic Model 2 to the cubic Model 3 is very low (0.0017), so the quadratic fit is also insufficient. The p-value comparing the cubic and degree-4 polynomials, Model 3 and Model 4, is approximately 5% while the degree-5 polynomial Model 5 seems unnecessary because its p-value is 0.37. Hence, either a cubic or a quartic polynomial appear to provide a reasonable fit to the data, but lower- or higher-order models are not justified.
     
     
 ## Step2: Predict whether an individual earns more than $250'000 per year  
