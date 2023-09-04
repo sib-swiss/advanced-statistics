@@ -1,6 +1,6 @@
 ## **EXAM** :scream:
 
-The participants who need credits must answer the following questions and send the results as an R script with comments to rachel.marcone@sib.swiss until latest friday 2nd of September 2022.
+The participants who need credits must answer the following questions and send the results as an R script with comments to rachel.marcone@sib.swiss until latest Friday 15th of September 2023.
 
 [Download exercise material](assets/exercises/dragons.RData){: .md-button }
 
