@@ -82,7 +82,7 @@ summary(fit.glm.4)
 
 agelims = range(age)
 age.grid = seq(from=agelims[1],to=agelims[2])
-pred.fit.glm.4 = predict(fit.glm.4, newdata=list(age=age.grid), type="response", se=T)
+pred.fit.glm.4 = predict(fit.glm.4, newdata=list(age=age.grid), se=T)
 
 proba.fit.glm.4 = exp(pred.fit.glm.4$fit)/(1+exp(pred.fit.glm.4$fit))
 se.bands.logit = cbind(pred.fit.glm.4$fit + 2*pred.fit.glm.4$se.fit, 
