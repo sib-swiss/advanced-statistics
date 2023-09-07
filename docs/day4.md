@@ -5,6 +5,7 @@ In this section, you will find the R code that we will use during the course. We
 Slides of lectures:
 
 [Download slides](assets/pdf/GAM.pdf){: .md-button }
+[Download slides afternoon](assets/pdf/Crossvalidation.pdf){: .md-button }
 
 Exercise 1: Mid-Atlantic Wage Data
 
