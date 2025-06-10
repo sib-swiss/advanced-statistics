@@ -3,10 +3,10 @@ nav:
     - Home: index.md
     - Precourse preparation: precourse.md
     - Course schedule: course_schedule.md
-    - Day 1: day1.md
-    - Day 2: day2.md
-    - Day 3: day3.md
-    - Day 4: day4.md
+    - Linear Regression and Beyond: day1.md
+    - GLM: day2.md
+    - Mixed Effect Models: day3.md
+    - Caret: day4.md
     - Bonus code: bonus_code.md
     - Exam: exam.md
     - Useful links: links.md

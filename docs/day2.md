@@ -2,6 +2,21 @@
 
 In this section, you will find the R code that we will use during the course. We will explain the code and output during correction of the exercises.
 
+## Learning outcomes of the day
+
+**After having completed this chapter you will be able to:**
+
+- Understand why linear models are not enough and how to spot it (Warm up)
+- Understand logistic regression with its residuals (Warm up)
+- Generalised linear models (Poisson for Warm up 2)
+- Understand proportion datasets, like in epidemiological studies (Baby food, Michelin Food)
+- Predict values for a new dataset (Michelin Food)
+- Interaction terms in proportion datasets (Moth death)
+- Understand the effect of different link functions (Beetle)
+- Understand diagnostic tools and confidence intervals (Pima)
+- Understand what an offset is (Lung cancer)
+
+
 Slides of lectures:
 
 [Download slides](assets/pdf/day2-Logistic regression and GLM - 2023.pdf){: .md-button }

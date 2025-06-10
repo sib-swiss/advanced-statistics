@@ -1,7 +1,23 @@
 
-# Simple and multiple linear regression
+# Simple, multiple linear regression and beyond
 
 In this section, you will find the R code that we will use during the course. We will explain the code and output during correction of the exercises.
+
+## Learning outcomes of the day
+
+**After having completed this chapter you will be able to:**
+
+- Do simple and multiple linear regression
+- Understand if the data would be suited for a linear regression
+- Understand the output of a linear regression
+- Understand the interaction term 
+- Find outliers and influential points 
+- Diagnostics on a model
+- Simple transformation on the data to be able to use a linear regression
+- Still in the case of a continuous predictor, going beyond linear regression
+- Including Splines, polynomial functions, step functions.
+
+
 
 Slides of lectures:
 

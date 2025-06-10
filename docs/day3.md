@@ -2,6 +2,18 @@
 
 In this section, you will find the R code that we will use during the course. We will explain the code and output during correction of the exercises.
 
+**After having completed this chapter you will be able to:**
+
+- Plot individual linear models or LOESS fits on data (Tolerance data)
+- Understand Mixed Effect Models 
+- Understand Fixed and Random effects on categorical data (Corn)
+- Understand longitudinal data analysis (Tolerance data)
+- Understand comparisons of models (Tolerance data)
+- Biological interpretation of model comparisons (BtheB data)
+- Integrating B-Spline Basis matrix for Polynomial Splines and random effects (Bone data set)
+- Interaction term and Random effects (Brain Data)
+
+
 Slides of lectures:
 
 [Download slides](assets/pdf/Longitudinal data.pdf){: .md-button }

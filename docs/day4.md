@@ -2,6 +2,16 @@
 
 In this section, you will find the R code that we will use during the course. We will explain the code and output during correction of the exercises.
 
+**After having completed this chapter you will be able to:**
+
+- Understand Sensitivity, Specificity, ROC curve and AUC 
+- Understand different regularisation method 
+- Understand K-fold cross-validation 
+- Understand Leave-one-out validation
+- Understand how to built a signature
+
+Probably through either the cholera dataset (from HistData) the alzheimer dataset and all through CARET package (or maybe also show how to do it in base R, which is possible) also with the ROCR package
+
 Slides of lectures:
 
 [Download slides](assets/pdf/GAM.pdf){: .md-button }
