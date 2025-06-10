@@ -6,8 +6,8 @@ nav:
     - Day1-Linear Regression and Beyond: day1.md
     - Day2-GLM: day2.md
     - Day3-Mixed Effect Models: day3.md
-    - Day4-Caret: day4.md
-    - Bonus code: bonus_code.md
+    - Day4-Caret: day4_new.md
+    - Bonus exercice: day4.md
     - Exam: exam.md
     - Useful links: links.md
 

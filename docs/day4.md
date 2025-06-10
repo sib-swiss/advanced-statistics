@@ -4,18 +4,8 @@ In this section, you will find the R code that we will use during the course. We
 
 **After having completed this chapter you will be able to:**
 
-- Understand Sensitivity, Specificity, ROC curve and AUC 
-- Understand different regularisation method 
-- Understand K-fold cross-validation 
-- Understand Leave-one-out validation
-- Understand how to built a signature
+- Understand how Generalized additive models work and why they are useful
 
-Probably through either the cholera dataset (from HistData) the alzheimer dataset and all through CARET package (or maybe also show how to do it in base R, which is possible) also with the ROCR package
-
-Slides of lectures:
-
-[Download slides](assets/pdf/GAM.pdf){: .md-button }
-[Download slides afternoon](assets/pdf/Crossvalidation.pdf){: .md-button }
 
 Exercise 1: Mid-Atlantic Wage Data
 

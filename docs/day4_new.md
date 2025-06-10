@@ -19,7 +19,7 @@ Slides of lectures:
 [Download slides](assets/pdf/GAM.pdf){: .md-button }
 [Download slides afternoon](assets/pdf/Crossvalidation.pdf){: .md-button }
 
-Exercise 1: NEW- CARET on a LM with CV
+Exercise 1: NEW-CARET on a LM with CV
 
 Describe the data 
 
@@ -81,9 +81,17 @@ Understand Accuracy Kappa and the use of summaryFunction
 
 This we will do on Categorical and also on numeric data 
 
-## Regularisation
+## Regularisation to create a signature
 
 Use some gene-expression data for showing how to generate a good signature. 
+
+Start with N genes (this would be part of the DGE genes and even maybe tested on univariate model)
+
+Use elastic-net and LASSO to find the good signature for the model
+Evaluate it using CARET
+
+Finally do some metrics
+
 
 
 
