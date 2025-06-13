@@ -1,0 +1,934 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../day4_new/">
+      
+      
+        <link rel="next" href="../exam/">
+      
+      
+      <link rel="icon" href="../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Bonus exercice - Advanced statistics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#generalized-additive-models" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Advanced statistics" class="md-header__button md-logo" aria-label="Advanced statistics" data-md-component="logo">
+      
+  <img src="../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Advanced statistics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bonus exercice
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/sib-swiss/advanced-statistics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/advanced-statistics
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Advanced statistics" class="md-nav__button md-logo" aria-label="Advanced statistics" data-md-component="logo">
+      
+  <img src="../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    Advanced statistics
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/sib-swiss/advanced-statistics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/advanced-statistics
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../precourse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precourse preparation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../course_schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course schedule
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day1-Linear Regression and Beyond
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day2-GLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day3-Mixed Effect Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day4_new/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day4-Caret
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Bonus exercice
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bonus exercice
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step1-from-linear-to-degree-5-polynomial-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step1: From linear to degree-5 polynomial regression
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step2-predict-whether-an-individual-earns-more-than-250000-per-year" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step2: Predict whether an individual earns more than $250&lsquo;000 per year
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step3-step-functions-to-model-relationship-between-wage-and-age" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step3 : Step functions to model relationship between wage and age
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step4-linear-and-cubic-splines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step4: Linear and cubic splines
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step5-smoothing-splines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step5 : Smoothing splines
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step6-local-regressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step6: Local regressions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step7-general-additive-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step7 : General Additive Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step8-anova-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step8: ANOVA tests
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step9-gams-with-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step9: GAMs with interaction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step10-logistic-regression-gams" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step10: Logistic regression GAMs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exam
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Useful links
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step1-from-linear-to-degree-5-polynomial-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step1: From linear to degree-5 polynomial regression
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step2-predict-whether-an-individual-earns-more-than-250000-per-year" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step2: Predict whether an individual earns more than $250&lsquo;000 per year
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step3-step-functions-to-model-relationship-between-wage-and-age" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step3 : Step functions to model relationship between wage and age
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step4-linear-and-cubic-splines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step4: Linear and cubic splines
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step5-smoothing-splines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step5 : Smoothing splines
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step6-local-regressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step6: Local regressions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step7-general-additive-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step7 : General Additive Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step8-anova-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step8: ANOVA tests
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step9-gams-with-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step9: GAMs with interaction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step10-logistic-regression-gams" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step10: Logistic regression GAMs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="generalized-additive-models">Generalized additive models</h1>
+<p>In this section, you will find the R code that we will use during the course. We will explain the code and output during correction of the exercises.</p>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Understand how Generalized additive models work and why they are useful</li>
+</ul>
+<p>Exercise 1: Mid-Atlantic Wage Data</p>
+<p>Wage and other data for a group of 3000 male workers in the Mid-Atlantic region.</p>
+<p>First we set for this exercise the libraries that we will need.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">akima</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">gam</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ISLR</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">splines</span><span class="p">)</span>
+</code></pre></div>
+<p>We will now load the Mid-Atlantic Wage dataset which is part of the ISLR package, which is called Wage.</p>
+<p>First have a look at the available variables by checking the help of that package. Once the ISLR package is loaded it attached to your environment some variable that are ready to use as year, age and wage for instance which are part of the Wage data.</p>
+<div class="highlight"><pre><span></span><code><span class="o">?</span><span class="n">Wage</span>
+
+<span class="c1"># explore the data</span>
+<span class="nf">str</span><span class="p">(</span><span class="n">Wage</span><span class="p">)</span>
+
+<span class="c1"># see for example the head of the year variable which is available</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+</code></pre></div>
+<p>Now the goal is to build a predictive model for wage based on year, age, marital status and other variables. We will do the exercise in 7 parts, which we separate in different exercises.</p>
+<h2 id="step1-from-linear-to-degree-5-polynomial-regression">Step1: From linear to degree-5 polynomial regression</h2>
+<p>The goal is to fit models ranging from linear to a degree-5 polynomial and seek to determine the simplest model which is sufficient to explain the relationship between wage and age.</p>
+<p>First, we perform a linear regression, and we have a look at the summary of the fit. How do you write this ?</p>
+<details class="hint">
+<summary>Hint</summary>
+<p>Use anova() to perform an F-test to compare nested models.</p>
+</details>
+<details class="done">
+<summary>Answer</summary>
+<div class="highlight"><pre><span></span><code><span class="n">fit1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit1</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<p>Now we use the poly function for polynomial regression. Which one looks best ? Compare the different fits!</p>
+<div class="highlight"><pre><span></span><code><span class="n">fit2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit2</span><span class="p">)</span>
+<span class="nf">anova</span><span class="p">(</span><span class="n">fit1</span><span class="p">,</span><span class="w"> </span><span class="n">fit2</span><span class="p">)</span>
+<span class="n">fit3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit3</span><span class="p">)</span>
+<span class="nf">anova</span><span class="p">(</span><span class="n">fit2</span><span class="p">,</span><span class="w"> </span><span class="n">fit3</span><span class="p">)</span>
+<span class="n">fit4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit4</span><span class="p">)</span>
+<span class="nf">anova</span><span class="p">(</span><span class="n">fit3</span><span class="p">,</span><span class="w"> </span><span class="n">fit4</span><span class="p">)</span>
+<span class="n">fit5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">5</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit5</span><span class="p">)</span>
+<span class="nf">anova</span><span class="p">(</span><span class="n">fit4</span><span class="p">,</span><span class="w"> </span><span class="n">fit5</span><span class="p">)</span>
+</code></pre></div>
+<details class="done">
+<summary>Answer</summary>
+<p>The p-value comparing the linear Model 1 to the quadratic Model 2 is essentially zero (&lt;10^15), indicating that a linear fit is not sufficient. Similarly the p-value comparing the quadratic Model 2 to the cubic Model 3 is very low (0.0017), so the quadratic fit is also insufficient. The p-value comparing the cubic and degree-4 polynomials, Model 3 and Model 4, is approximately 5% while the degree-5 polynomial Model 5 seems unnecessary because its p-value is 0.37. Hence, either a cubic or a quartic polynomial appear to provide a reasonable fit to the data, but lower- or higher-order models are not justified.</p>
+</details>
+<h2 id="step2-predict-whether-an-individual-earns-more-than-250000-per-year">Step2: Predict whether an individual earns more than $250&lsquo;000 per year</h2>
+<details class="hint">
+<summary>Hint</summary>
+<p>First create the appropriate response vector using I(), and then apply the glm() function using family=&rdquo;binomial&rdquo; in order to fit a polynomial logistic regression model.</p>
+</details>
+<div class="highlight"><pre><span></span><code><span class="n">fit.glm.4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="nf">I</span><span class="p">(</span><span class="n">wage</span><span class="o">&gt;</span><span class="m">250</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="o">=</span><span class="n">binomial</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit.glm.4</span><span class="p">)</span>
+
+<span class="n">agelims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+<span class="n">age.grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">agelims</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="n">to</span><span class="o">=</span><span class="n">agelims</span><span class="p">[</span><span class="m">2</span><span class="p">])</span>
+<span class="n">pred.fit.glm.4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.glm.4</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="n">age.grid</span><span class="p">),</span><span class="w"> </span><span class="n">se</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+
+<span class="n">proba.fit.glm.4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">pred.fit.glm.4</span><span class="o">$</span><span class="n">fit</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">1</span><span class="o">+</span><span class="nf">exp</span><span class="p">(</span><span class="n">pred.fit.glm.4</span><span class="o">$</span><span class="n">fit</span><span class="p">))</span>
+<span class="n">se.bands.logit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="n">pred.fit.glm.4</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="n">pred.fit.glm.4</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                       </span><span class="n">pred.fit.glm.4</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="n">pred.fit.glm.4</span><span class="o">$</span><span class="n">se.fit</span><span class="p">)</span>
+<span class="n">se.bands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">se.bands.logit</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">1</span><span class="o">+</span><span class="nf">exp</span><span class="p">(</span><span class="n">se.bands.logit</span><span class="p">))</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">250</span><span class="p">),</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="n">agelims</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
+<span class="nf">points</span><span class="p">(</span><span class="nf">jitter</span><span class="p">(</span><span class="n">age</span><span class="p">),</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">wage</span><span class="o">&gt;</span><span class="m">250</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="n">.</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="s">&quot;|&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="s">&quot;darkgrey&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">age.grid</span><span class="p">,</span><span class="w"> </span><span class="n">proba.fit.glm.4</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+<span class="nf">matlines</span><span class="p">(</span><span class="n">age.grid</span><span class="p">,</span><span class="w"> </span><span class="n">se.bands</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="step3-step-functions-to-model-relationship-between-wage-and-age">Step3 : Step functions to model relationship between wage and age</h2>
+<details class="hint">
+<summary>Hint</summary>
+<p>Use cut() to fit step functions.</p>
+</details>
+<div class="highlight"><pre><span></span><code><span class="nf">table</span><span class="p">(</span><span class="nf">cut</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">4</span><span class="p">))</span>
+<span class="n">fit.step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">cut</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit.step</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">fit.step</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="step4-linear-and-cubic-splines">Step4: Linear and cubic splines</h2>
+<p>We proceed in 3 steps here.</p>
+<p>i) Fit wage to age using linear splines with internal knots at 25th, 50th and 75th percentiles of age.
+ii) Repeat with a cubic spline.
+iii) Test if using cubic splines improved the goodness of fit.</p>
+<details class="hint">
+<summary>Hint</summary>
+<p>Use bs() to fit splines</p>
+</details>
+<div class="highlight"><pre><span></span><code><span class="nf">quantile</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">probs</span><span class="o">=</span><span class="m">0.25</span><span class="p">)</span>
+<span class="nf">quantile</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">probs</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
+<span class="nf">quantile</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">probs</span><span class="o">=</span><span class="m">0.75</span><span class="p">)</span>
+<span class="n">fit.linearsplines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">bs</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">knots</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">33.75</span><span class="p">,</span><span class="m">42</span><span class="p">,</span><span class="m">51</span><span class="p">)),</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="n">pred.fit.linearsplines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.linearsplines</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="n">age.grid</span><span class="p">),</span><span class="w"> </span><span class="n">se</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">wage</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;gray&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">age.grid</span><span class="p">,</span><span class="w"> </span><span class="n">pred.fit.linearsplines</span><span class="o">$</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">age.grid</span><span class="p">,</span><span class="w"> </span><span class="n">pred.fit.linearsplines</span><span class="o">$</span><span class="n">fit</span><span class="m">+2</span><span class="o">*</span><span class="n">pred.fit.linearsplines</span><span class="o">$</span><span class="n">se</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">age.grid</span><span class="p">,</span><span class="w"> </span><span class="n">pred.fit.linearsplines</span><span class="o">$</span><span class="n">fit</span><span class="m">-2</span><span class="o">*</span><span class="n">pred.fit.linearsplines</span><span class="o">$</span><span class="n">se</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="step5-smoothing-splines">Step5 : Smoothing splines</h2>
+<p>Start with fitting wage to age using smoothing splines.Then assess the effect of varying &ldquo;df&rdquo; on the smooth. 
+In this exercise, try different df for different smoothing. df controls the &ldquo;complexity&rdquo; of the model employed. What do you observe ?</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># (the model only gets more complex, but the general shape won&#39;t change).</span>
+<span class="n">fit.smooth.spline.5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">smooth.spline</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">wage</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="o">=</span><span class="m">5</span><span class="p">)</span>
+<span class="n">fit.smooth.spline.10</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">smooth.spline</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">wage</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="o">=</span><span class="m">10</span><span class="p">)</span>
+<span class="n">fit.smooth.spline.15</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">smooth.spline</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">wage</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="o">=</span><span class="m">15</span><span class="p">)</span>
+<span class="n">fit.smooth.spline.20</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">smooth.spline</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">wage</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="o">=</span><span class="m">20</span><span class="p">)</span>
+<span class="c1"># cross-validation</span>
+<span class="n">fit.smooth.spline.cv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">smooth.spline</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">wage</span><span class="p">,</span><span class="w"> </span><span class="n">cv</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">wage</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;gray&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">fit.smooth.spline.5</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="n">lty</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">fit.smooth.spline.10</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">fit.smooth.spline.15</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">fit.smooth.spline.20</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="n">lty</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">fit.smooth.spline.cv</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="n">lty</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topright&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;5 DF&quot;</span><span class="p">,</span><span class="s">&quot;10 DF&quot;</span><span class="p">,</span><span class="s">&quot;15 DF&quot;</span><span class="p">,</span><span class="s">&quot;20 DF&quot;</span><span class="p">,</span><span class="s">&quot;6.8 DF&quot;</span><span class="p">),</span><span class="w"> </span>
+<span class="w">       </span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="s">&quot;blue&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="n">.</span><span class="m">8</span><span class="p">)</span>
+</code></pre></div>
+<details class="done">
+<summary>Answer&rdquo;</summary>
+<p>A substantial difference can be found when going from 2 to 10, but very little change will take place when going from 10 to 50 </p>
+</details>
+<h2 id="step6-local-regressions">Step6: Local regressions</h2>
+<p>Fit wage to age using a local regression (loess function) with default parameters
+What does the parameter &ldquo;span&rdquo; refer to in the loess function? How does increasing the &ldquo;span&rdquo; affect the fit?</p>
+<div class="highlight"><pre><span></span><code><span class="n">fit.local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">loess</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">span</span><span class="w"> </span><span class="o">=</span><span class="n">.</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="n">fit.local.2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">loess</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">span</span><span class="w"> </span><span class="o">=</span><span class="n">.</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">wage</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="n">agelims</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="n">.</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;darkgrey&quot;</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="s">&quot;Local Regression&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">age.grid</span><span class="p">,</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.local</span><span class="p">,</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="n">age.grid</span><span class="p">)),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="s">&quot;red &quot;</span><span class="p">,</span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">age.grid</span><span class="p">,</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.local.2</span><span class="p">,</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="n">age.grid</span><span class="p">)),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="s">&quot; blue&quot;</span><span class="p">,</span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;topright&quot;</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Span=0.2&quot;</span><span class="p">,</span><span class="s">&quot;Span=0.5&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="n">.</span><span class="m">8</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="step7-general-additive-model">Step7 : General Additive Model</h2>
+<p>Load the library &ldquo;gam&rdquo; and try to look at the help of the gam function. Fit a GAM to predict wage using smoothing splines of year and age, treating education as a qualitative predictor
+Repeat using a GAM with a loess smoother. Try to plot the fitted gam objects.</p>
+<div class="highlight"><pre><span></span><code><span class="n">gam.s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gam</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">s</span><span class="p">(</span><span class="n">year</span><span class="p">,</span><span class="m">4</span><span class="p">)</span><span class="o">+</span><span class="nf">s</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">5</span><span class="p">)</span><span class="o">+</span><span class="n">education</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">gam.s</span><span class="p">)</span>
+<span class="n">gam.lo.1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gam</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">lo</span><span class="p">(</span><span class="n">year</span><span class="p">,</span><span class="n">span</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span><span class="o">+</span><span class="nf">lo</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">span</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span><span class="o">+</span><span class="n">education</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">gam.lo.1</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="step8-anova-tests">Step8: ANOVA tests</h2>
+<p>Determine which of these three models is the best:
+i) a GAM that excludes year (M1),
+ii) a GAM that uses a linear function of year (M2),
+iii) or a GAM that uses a spline function of year (M3).
+iv) Make prediction on the training set (original data) using M2 from above.</p>
+<div class="highlight"><pre><span></span><code><span class="n">gam.m1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gam</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">s</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">5</span><span class="p">)</span><span class="o">+</span><span class="n">education</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="n">gam.m2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gam</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">year</span><span class="o">+</span><span class="nf">s</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">5</span><span class="p">)</span><span class="o">+</span><span class="n">education</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="n">gam.m3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gam</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">s</span><span class="p">(</span><span class="n">year</span><span class="p">,</span><span class="m">4</span><span class="p">)</span><span class="o">+</span><span class="nf">s</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">5</span><span class="p">)</span><span class="o">+</span><span class="n">education</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="nf">anova</span><span class="p">(</span><span class="n">gam.m1</span><span class="p">,</span><span class="n">gam.m2</span><span class="p">,</span><span class="n">gam.m3</span><span class="p">,</span><span class="n">test</span><span class="o">=</span><span class="s">&quot;F&quot;</span><span class="p">)</span>
+
+<span class="n">pred.gam.m2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">gam.m2</span><span class="p">,</span><span class="n">newdata</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="step9-gams-with-interaction">Step9: GAMs with interaction</h2>
+<p>Use <code>r lo()</code> function to allow for interaction between age and year in the GAM, treating education like before. We can plot the resulting two-dimensional surface using the akima package (akima::plot).</p>
+<div class="highlight"><pre><span></span><code><span class="n">gam.lo.2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gam</span><span class="p">(</span><span class="n">wage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">lo</span><span class="p">(</span><span class="n">year</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">span</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span><span class="o">+</span><span class="n">education</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">gam.lo.2</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="step10-logistic-regression-gams">Step10: Logistic regression GAMs</h2>
+<p>Try to fit a logistic regression GAM, handling year with a linear function, age with a smoothing spline, and education with dummy variables like before. Try removing the &ldquo;&lt;HS&rdquo; category. Use the <code>r plot()</code> function to visualize the logistic regression GAMs.</p>
+<div class="highlight"><pre><span></span><code><span class="n">gam.lr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gam</span><span class="p">(</span><span class="nf">I</span><span class="p">(</span><span class="n">wage</span><span class="o">&gt;</span><span class="m">250</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">year</span><span class="o">+</span><span class="nf">s</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">5</span><span class="p">)</span><span class="o">+</span><span class="n">education</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="o">=</span><span class="n">binomial</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">)</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">gam.lr</span><span class="p">,</span><span class="n">se</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;green&quot;</span><span class="p">)</span>
+
+<span class="n">gam.lr.s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gam</span><span class="p">(</span><span class="nf">I</span><span class="p">(</span><span class="n">wage</span><span class="o">&gt;</span><span class="m">250</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">year</span><span class="o">+</span><span class="nf">s</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="m">5</span><span class="p">)</span><span class="o">+</span><span class="n">education</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="o">=</span><span class="n">binomial</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">Wage</span><span class="p">,</span><span class="w"> </span>
+<span class="w">               </span><span class="n">subset</span><span class="o">=</span><span class="p">(</span><span class="n">education</span><span class="o">!=</span><span class="s">&quot;1. &lt; HS Grad&quot;</span><span class="p">))</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">gam.lr.s</span><span class="p">,</span><span class="n">se</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;green&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
