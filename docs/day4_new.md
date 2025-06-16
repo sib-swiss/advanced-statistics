@@ -1,4 +1,4 @@
-# Generalized additive models
+# CARET-Day
 
 In this section, you will find the R code that we will use during the course. We will explain the code and output during correction of the exercises.
 
@@ -19,7 +19,7 @@ Slides of lectures:
 [Download slides](assets/pdf/GAM.pdf){: .md-button }
 [Download slides afternoon](assets/pdf/Crossvalidation.pdf){: .md-button }
 
-# Exercise 1: Alzheimer Data
+## Alzheimer Data
 
 Washington University conducted a clinical study to determine if biological measurements made from cerebrospinal fluid (CSF) can be used to diagnose or predict Alzheimer's disease ("Craig-Schapiro, R., et al. (2011). Multiplexed Immunoassay Panel Identifies Novel CSF Biomarkers for Alzheimer's Disease Diagnosis and Prognosis. PLoS ONE, 6(4), e18850."). These data are a modified version of the values used for the publication.
 
@@ -299,7 +299,7 @@ check which one has the best p-value and good ROC.
 We now have some candidates for multivariate analysis that look interesting, tau p_tau as well as Ab_42 where already known by the literature, which is a good indicator that the code works nicely!
 
 
-### Knn-method (imputing)
+## Knn-method (imputing)
 
 Let us say we have some missing data in our dataset (we do not here so we will add some).
 ```
@@ -364,7 +364,7 @@ summary(glmFit4)
 
 ```
 
-## Regularisation
+## Lasso-Regularisation
 
 There are three types of regularisations that we will try. We will start with the lasso method.
 
@@ -451,7 +451,7 @@ unique(selected_vars_caret == selected_vars)
 ```
 Therefore all the same variables have been selected.
 
-### Ridge regression
+## Ridge regression
 Do the same now with Ridge regression.
 
 ??? done "Answer"
@@ -535,7 +535,8 @@ Do the same now with Ridge regression.
     Therefore all the same variables have been selected.
     
     
-### Elastic Net    
+## Elastic Net    
+
 Do the same now with Elastic net regression. You will now see a difference in the caret function.
 
 ??? done "Answer"
@@ -658,6 +659,8 @@ Again for random forest we can just process everything the same way but specifyi
     ```r
     plot(rf_caret)
     ```
+    
+    One can have a look at the importance of the variables 
     
     ```r
     var_imp <- varImp(rf_caret)
