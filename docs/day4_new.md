@@ -12,8 +12,6 @@ In this section, you will find the R code that we will use during the course. We
 - Understand KNN-method
 - Understand Random Forests
 
-Probably through either the cholera dataset (from HistData) the alzheimer dataset and all through CARET package (or maybe also show how to do it in base R, which is possible) also with the ROCR package
-
 Slides of lectures:
 
 [Download slides](assets/pdf/GAM.pdf){: .md-button }
@@ -53,7 +51,6 @@ Within the training set however we will again use a process of splitting and tes
 It is important to set a seed in order to be reproducible.
 
 ```r
-library(caret)
 set.seed(3456)
 trainIndex <- createDataPartition(alzheimer$diagnosis, p = .8, 
                                   list = FALSE, 
@@ -74,8 +71,6 @@ table(alzheimerTest$diagnosis)
 table(alzheimer$diagnosis)
 ```
 
-
-CHANGE THIS HERE AS IT IS COPY PASTE
 In some cases there is an important qualitative factor in the data that should be considered during (re)sampling. For example:
 
 in clinical trials, there may be hospital-to-hospital differences
@@ -458,7 +453,6 @@ Do the same now with Ridge regression.
     We start by using the glmnet package and the glmnet function and find the best model
     
     ```r
-    library(glmnet)
     ridge_model <- glmnet(y= alzheimerTrain$diagnosis, x=alzheimerTrain[,names_candidates] , family = "binomial", alpha = 0)  # alpha = 0 is Ridge
     
     # Plot coefficient paths
@@ -543,7 +537,6 @@ Do the same now with Elastic net regression. You will now see a difference in th
     We start by using the glmnet package and the glmnet function and find the best model
     
     ```r
-    library(glmnet)
     elastic_model <- glmnet(y= alzheimerTrain$diagnosis, x=alzheimerTrain[,names_candidates] , family = "binomial", alpha = 0.5)  # alpha between 0 and 1 is Elastic net
     
     # Plot coefficient paths

@@ -34,6 +34,10 @@ install.packages("splines")
 install.packages("statmod")
 install.packages("WWGbook")
 install.packages("caret")
+install.packages("glmnet")
 install.packages("ROCR")
+install.packages("pROC")
+install.packages(AppliedPredictiveModeling)
+#devtools::install_github('araastat/reprtree') # this is optional
 ```
 
