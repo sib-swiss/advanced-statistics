@@ -1,0 +1,1605 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../course_schedule/">
+      
+      
+        <link rel="next" href="../day2/">
+      
+      
+      <link rel="icon" href="../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Day1-Linear Regression and Beyond - Advanced statistics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#simple-multiple-linear-regression-and-beyond" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Advanced statistics" class="md-header__button md-logo" aria-label="Advanced statistics" data-md-component="logo">
+      
+  <img src="../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Advanced statistics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Day1-Linear Regression and Beyond
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/sib-swiss/advanced-statistics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/advanced-statistics
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Advanced statistics" class="md-nav__button md-logo" aria-label="Advanced statistics" data-md-component="logo">
+      
+  <img src="../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    Advanced statistics
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/sib-swiss/advanced-statistics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/advanced-statistics
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../precourse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precourse preparation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../course_schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course schedule
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Day1-Linear Regression and Beyond
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day1-Linear Regression and Beyond
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes-of-the-day" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning outcomes of the day
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-of-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source of data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simple-linear-models-and-simple-multiple-linear-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Simple linear models and simple multiple linear models
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Simple linear models and simple multiple linear models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-class-data-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      The class data set
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-hellung-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      The hellung dataset
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beyond-linearity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beyond linearity
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Beyond linearity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linear-fit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linear fit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quadratic-fit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quadratic fit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cubic-fit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cubic fit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polynomial-degree-4-and-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Polynomial degree 4 and 10
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confidence-and-prediction-intervals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confidence and prediction intervals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#piecewise-linear-fits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Piecewise linear fits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#piecewise-cubic-fits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Piecewise cubic fits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linear-splines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linear splines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cubic-splines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cubic splines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compare-the-goodness-of-fit-of-each-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compare the goodness of fit of each model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smoothingnatural-splines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Smoothing/natural splines
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day2-GLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day3-Mixed Effect Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day4_new/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day4-Caret
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bonus exercice
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exam
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Useful links
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes-of-the-day" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning outcomes of the day
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-of-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source of data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simple-linear-models-and-simple-multiple-linear-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Simple linear models and simple multiple linear models
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Simple linear models and simple multiple linear models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-class-data-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      The class data set
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-hellung-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      The hellung dataset
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beyond-linearity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beyond linearity
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Beyond linearity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linear-fit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linear fit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quadratic-fit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quadratic fit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cubic-fit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cubic fit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polynomial-degree-4-and-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Polynomial degree 4 and 10
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confidence-and-prediction-intervals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confidence and prediction intervals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#piecewise-linear-fits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Piecewise linear fits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#piecewise-cubic-fits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Piecewise cubic fits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linear-splines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linear splines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cubic-splines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cubic splines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compare-the-goodness-of-fit-of-each-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compare the goodness of fit of each model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smoothingnatural-splines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Smoothing/natural splines
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="simple-multiple-linear-regression-and-beyond">Simple, multiple linear regression and beyond</h1>
+<p>In this section, you will find the R code that we will use during the course. We will explain the code and output during correction of the exercises.</p>
+<h2 id="learning-outcomes-of-the-day">Learning outcomes of the day</h2>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Do simple and multiple linear regression</li>
+<li>Understand if the data would be suited for a linear regression</li>
+<li>Understand the output of a linear regression</li>
+<li>Understand the interaction term </li>
+<li>Find outliers and influential points </li>
+<li>Diagnostics on a model</li>
+<li>Simple transformation on the data to be able to use a linear regression</li>
+<li>Still in the case of a continuous predictor, going beyond linear regression</li>
+<li>Including Splines, polynomial functions, step functions.</li>
+</ul>
+<p>Slides of lectures:
+<a class="md-button" href="../assets/pdf/Intro_ASM25.pdf">Download slides Intro Lecture</a></p>
+<p><a class="md-button" href="../assets/pdf/Day1a-LinearRegressionAndBeyond-2025.pdf">Download slides Morning Lecture</a></p>
+<p><a class="md-button" href="../assets/pdf/Day1b-BeyondLinearity-2025.pdf">Download slides Afternoon Lecture</a></p>
+<p>Data for exercises:</p>
+<p><a class="md-button" href="../assets/exercises/exercises-all.zip">Download full data for the week</a></p>
+<h2 id="source-of-data">Source of data</h2>
+<p>We created a (non-existing) class of students for which you have some information. The name of the students, their gender, the age, the height and the weight of those adolescent students are provided. </p>
+<p>Before starting the exercises, set the working directory to where you have downloaded and unzipped the <a href="https://sib-swiss.github.io/advanced-statistics/materials/">data folder</a> with the files for the exercises 
+and load the necessary packages. </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When using setwd(), change the path within quotes to where you have saved the data for the exercises. Make sure to always be in the right folder for the exercises.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Change the path here:</span>
+<span class="nf">setwd</span><span class="p">(</span><span class="s">&quot;/path/to/whereDataFolderIsSaved/&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load the libraries needed for this exercise</span>
+<span class="c1"># Here only plotting libraries are needed</span>
+
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">car</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="simple-linear-models-and-simple-multiple-linear-models">Simple linear models and simple multiple linear models</h2>
+<h3 id="the-class-data-set">The class data set</h3>
+<p>Import the data into your R session and explore its structure: what are the different columns corresponding to?
+Is the table in a usable format ?</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Load the class table</span>
+<span class="n">class</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;exercises/class.txt&quot;</span><span class="p">)</span>
+
+<span class="c1"># Have a look</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">class</span><span class="p">[,</span><span class="m">-1</span><span class="p">])</span>
+</code></pre></div>
+<p>Here we see a problem for the Gender, what is it ? Can you correct for it ?</p>
+<details class="done">
+<summary>Answer</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">#Gender is a &quot;character&quot; variable and should be a factor</span>
+<span class="n">class</span><span class="o">$</span><span class="n">Gender</span><span class="p">[</span><span class="n">class</span><span class="o">$</span><span class="n">Gender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;F&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span>
+<span class="n">class</span><span class="o">$</span><span class="n">Gender</span><span class="p">[</span><span class="n">class</span><span class="o">$</span><span class="n">Gender</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;M&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span>
+<span class="n">class</span><span class="o">$</span><span class="n">Gender</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">class</span><span class="o">$</span><span class="n">Gender</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<p>Now we make use of the function pairs (do not know it? look it up with the help!). We then create a simple linear model using Age to describe the height of our students, have a look at the summary of this regression, then plot it.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">pairs</span><span class="p">(</span><span class="n">class</span><span class="p">[,</span><span class="m">-1</span><span class="p">])</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_pairs.png" width="700"/>
+  </figure>
+
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Height</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Age</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">class</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">class</span><span class="o">$</span><span class="n">Age</span><span class="p">,</span><span class="w"> </span><span class="n">class</span><span class="o">$</span><span class="n">Height</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">20</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">200</span><span class="p">))</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="c1">#putting the xlim to 0 we can visually see the intercept</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_plotabline0.png" width="700"/>
+  </figure>
+
+<p>Are there any influencial points ? Do they have something special? What do you do with them ?</p>
+<div class="highlight"><pre><span></span><code><span class="n">hat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm.influence</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">hat</span><span class="o">$</span><span class="n">hat</span><span class="p">)</span>
+
+<span class="n">car</span><span class="o">::</span><span class="nf">influencePlot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Hat-Values&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;Studentized Residuals&quot;</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_hat.png" width="700"/>
+  </figure>
+
+<figure>
+  <img src="../assets/images/day1_influence.png" width="700"/>
+  </figure>
+
+<p>Use the predict function to calculate a confidence interval.</p>
+<div class="highlight"><pre><span></span><code><span class="n">new_age</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="m">0.25</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">class</span><span class="o">$</span><span class="n">Age</span><span class="p">,</span><span class="w"> </span><span class="n">class</span><span class="o">$</span><span class="n">Height</span><span class="p">,</span><span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">)</span>
+<span class="nf">points</span><span class="p">(</span><span class="n">class</span><span class="o">$</span><span class="n">Age</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">7</span><span class="p">,</span><span class="m">19</span><span class="p">)],</span><span class="n">class</span><span class="o">$</span><span class="n">Height</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">7</span><span class="p">,</span><span class="m">19</span><span class="p">)],</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;green&quot;</span><span class="p">)</span>
+<span class="n">conf_interval</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict.lm</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">Age</span><span class="o">=</span><span class="n">new_age</span><span class="p">),</span><span class="w"> </span><span class="n">interval</span><span class="o">=</span><span class="s">&quot;confidence&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.95</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">new_age</span><span class="p">,</span><span class="w"> </span><span class="n">conf_interval</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">new_age</span><span class="p">,</span><span class="w"> </span><span class="n">conf_interval</span><span class="p">[,</span><span class="m">3</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+<span class="n">pred_interval</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">Age</span><span class="o">=</span><span class="n">new_age</span><span class="p">),</span><span class="w"> </span><span class="n">interval</span><span class="o">=</span><span class="s">&quot;prediction&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.95</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">new_age</span><span class="p">,</span><span class="w"> </span><span class="n">pred_interval</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">new_age</span><span class="p">,</span><span class="w"> </span><span class="n">pred_interval</span><span class="p">[,</span><span class="m">3</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_finalplot.png" width="700"/>
+  </figure>
+
+<p>Now model the Height with the weight, with a combination of age and weight as well as age and gender allowing for a possible interaction.
+<div class="highlight"><pre><span></span><code><span class="n">model.2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Height</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Weight</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">class</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">model.2</span><span class="p">)</span>
+
+<span class="n">model.3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Height</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Weight</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">class</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">model.3</span><span class="p">)</span>
+
+<span class="n">model.4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Height</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Gender</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">class</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">model.4</span><span class="p">)</span>
+
+<span class="n">model.5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">Height</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Gender</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">class</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">model.5</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="the-hellung-dataset">The hellung dataset</h3>
+<p>Again load the data in the ISwR package called hellung and have a look at the help to understand the data.
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">ISwR</span><span class="p">)</span>
+<span class="nf">data</span><span class="p">(</span><span class="n">hellung</span><span class="p">)</span>
+<span class="o">?</span><span class="n">hellung</span>
+</code></pre></div>
+Plot the diameter of the Tetrahymena cells in relationship with the concentration of those cells. Do you have any clear evidence of what to model ? 
+<div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="n">hellung</span><span class="o">$</span><span class="n">diameter</span><span class="p">,</span><span class="w"> </span><span class="n">hellung</span><span class="o">$</span><span class="n">conc</span><span class="p">,</span><span class="w"> </span>
+<span class="w">     </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Diameter&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;Concentration&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_afternoon_plot.png" width="700"/>
+  </figure>
+
+<p>Do a linear model between concentration and diameter, check all the assumption. Is anything violated ?
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">conc</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">diameter</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">hellung</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="nf">abline</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="nf">qqnorm</span><span class="p">(</span><span class="nf">residuals</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+<span class="nf">qqline</span><span class="p">(</span><span class="nf">residuals</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+<span class="nf">ks.test</span><span class="p">(</span><span class="nf">residuals</span><span class="p">(</span><span class="n">model</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;pnorm&quot;</span><span class="p">)</span>
+
+<span class="nf">influencePlot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Hat-Values&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;Studentized Residuals&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_qqplot.png" width="700"/>
+  </figure>
+
+<figure>
+  <img src="../assets/images/day1_influence2.png" width="700"/>
+  </figure>
+<p>We therefore need to adapt our model. In the first plot the data seemed to have a logarithmic pattern. We will try if this helps in modelling the data.
+<div class="highlight"><pre><span></span><code><span class="n">logconc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">hellung</span><span class="o">$</span><span class="n">conc</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">hellung</span><span class="o">$</span><span class="n">diameter</span><span class="p">,</span><span class="w"> </span><span class="n">logconc</span><span class="p">,</span><span class="w"> </span>
+<span class="w">     </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Diameter&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;log(concentration)&quot;</span><span class="p">)</span>
+
+<span class="n">modellog</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">logconc</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">diameter</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">hellung</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">modellog</span><span class="p">)</span>
+
+<span class="nf">abline</span><span class="p">(</span><span class="n">modellog</span><span class="p">)</span>
+</code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_log.png" width="700"/>
+  </figure>
+
+<p>We also test the different assumptions.
+<div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="nf">fitted</span><span class="p">(</span><span class="n">modellog</span><span class="p">),</span><span class="w"> </span><span class="nf">residuals</span><span class="p">(</span><span class="n">modellog</span><span class="p">))</span>
+<span class="nf">qqnorm</span><span class="p">(</span><span class="nf">residuals</span><span class="p">(</span><span class="n">modellog</span><span class="p">))</span>
+<span class="nf">qqline</span><span class="p">(</span><span class="nf">residuals</span><span class="p">(</span><span class="n">modellog</span><span class="p">))</span>
+<span class="nf">ks.test</span><span class="p">(</span><span class="nf">residuals</span><span class="p">(</span><span class="n">modellog</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;pnorm&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_qqplot2.png" width="700"/>
+  </figure>
+
+<p>Now we can add glucose to the equation. What are your conclusions ?
+<div class="highlight"><pre><span></span><code><span class="n">modellog.2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">logconc</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">diameter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">glucose</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">hellung</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">modellog.2</span><span class="p">)</span>
+</code></pre></div></p>
+<h2 id="beyond-linearity">Beyond linearity</h2>
+<p>Again load the data this time in the SemiPar package called janka, attach the object janka to have an easier access to the variables and have a look at the help of the janka data. </p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">SemiPar</span><span class="p">)</span>
+<span class="nf">data</span><span class="p">(</span><span class="n">janka</span><span class="p">)</span>
+<span class="nf">attach</span><span class="p">(</span><span class="n">janka</span><span class="p">)</span>
+</code></pre></div>
+<p>Plot the data using the log of the hardness.
+<div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="n">dens</span><span class="p">,</span><span class="nf">log</span><span class="p">(</span><span class="n">hardness</span><span class="p">),</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="o">=</span><span class="s">&quot;Janka data&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_1.png" width="700"/>
+  </figure>
+
+<h3 id="linear-fit">Linear fit</h3>
+<p>Start with a linear regression, plot the estimated fit and have a look at the residuals vs. fitted values. What do you observe ?
+<div class="highlight"><pre><span></span><code><span class="c1"># fit a linear model</span>
+<span class="n">fit.linear</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">hardness</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">dens</span><span class="w"> </span><span class="p">)</span>
+
+<span class="c1"># plot the estimated linear fit</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">fit.linear</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+
+<span class="c1"># let&#39;s also look at residuals vs. fitted values</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">fit.linear</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span><span class="w"> </span><span class="n">fit.linear</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span>
+<span class="w">     </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.linear</span><span class="o">$</span><span class="n">residuals</span><span class="p">)),</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.linear</span><span class="o">$</span><span class="n">residuals</span><span class="p">))),</span>
+<span class="w">     </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;residuals&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;fitted values&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_2.png" width="700"/>
+  </figure>
+
+<p>Now you realise something seems off. Can you try to show it visually ? </p>
+<details class="answer">
+<summary>Answer</summary>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># we want the error terms to be normally distributed around zero, so let&#39;s add that to the plot</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+<span class="c1"># another way to assess the residual plot is to use a scatterplot smoother that captures the trend in residuals</span>
+<span class="c1"># scatter.smooth uses loess algorithm for local weighted regression</span>
+<span class="nf">scatter.smooth</span><span class="p">(</span><span class="n">fit.linear</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span><span class="w"> </span><span class="n">fit.linear</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span>
+<span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.linear</span><span class="o">$</span><span class="n">residuals</span><span class="p">)),</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.linear</span><span class="o">$</span><span class="n">residuals</span><span class="p">))),</span>
+<span class="w">           </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;residuals&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;fitted values&quot;</span><span class="p">,</span>
+<span class="w">           </span><span class="n">lpars</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">))</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="m">7.6</span><span class="p">,</span><span class="m">0.22</span><span class="p">,</span><span class="s">&quot;loess fit&quot;</span><span class="p">,</span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">0.75</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+<img src="../assets/images/day1_3.png" width="700"/>
+</figure></p>
+</details>
+<h3 id="quadratic-fit">Quadratic fit</h3>
+<p>The last smooth curve showed a quadratic pattern. We will try to see if we can improve the fit using the poly function and a quadratic model y = ax^2+bx+c.</p>
+<p>We will plot the estimated fit. To do so, we need to predict the fit at desired points on the X axis (let&rsquo;s call it the grid). After creating the grid, we can use predict() to estimate the fitted model on the specified grid. The arguments of the predict() function can vary depending on the object class of the fit, but R detects the appropriate predict function automatically. For example, there are predict.lm(), predict.glm(), predict.poly(), etc. The list goes on and on! In this case we feed an object of class &ldquo;lm&rdquo; to predict() so you can use ?predict.lm to get more info about the arguments usage/needed.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">dens</span><span class="p">,</span><span class="nf">log</span><span class="p">(</span><span class="n">hardness</span><span class="p">),</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+
+<span class="c1"># fit a quadratic model</span>
+<span class="n">fit.quad</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">hardness</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">dens</span><span class="p">,</span><span class="w"> </span><span class="n">degree</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span>
+
+<span class="c1"># plot the estimated linear fit</span>
+<span class="c1"># create a grid</span>
+<span class="n">dens.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">dens</span><span class="p">)</span>
+<span class="n">dens.grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">dens.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">dens.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+
+<span class="c1"># predict</span>
+<span class="n">predict_fit.quad</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.quad</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">dens</span><span class="o">=</span><span class="n">dens.grid</span><span class="p">))</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">dens</span><span class="p">,</span><span class="nf">log</span><span class="p">(</span><span class="n">hardness</span><span class="p">),</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">dens.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.quad</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_4.png" width="700"/>
+  </figure>
+
+<p>Seems good, but are the assumptions met ?
+Check the residuals vs. fitted values plot</p>
+<p><div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span><span class="w"> </span><span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span><span class="w"> </span>
+<span class="w">     </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">)),</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">))),</span><span class="w"> </span>
+<span class="w">     </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;residuals&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;fitted values&quot;</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+Here some more information on the arguments required by predict().
+First, you need to specify the model you&rsquo;re trying to predict from. Depending on the class of the fit object (e.g. lm, glm, etc.), R will then invoke a particular predict method.
+The second optional argument is &ldquo;newdata&rdquo;, a data frame to let R know at which values of the predictor(s) you would want to make the predictions.
+Always make sure the variable names in newdata are the same as in the model.
+If newdata is omitted, by default predictions are made based on the data used for the fit (observed data).
+The accuracy or precision of our estimates can be expressed in terms of a confidence interval (CI) or a prediction interval (PI).
+Here is a link where these intervals are nicely explained: https://www.graphpad.com/support/faq/the-distinction-between-confidence-intervals-prediction-intervals-and-tolerance-intervals/
+By setting the &ldquo;interval&rdquo; argument to either &ldquo;confidence&rdquo; or &ldquo;prediction&rdquo; predict() will return the requested interval along the fitted values.
+If you would rather do the calculations manually, you can get the standard errors on your predictions as well by setting the argument se.fit to TRUE.
+We will come back to intervals later. Let&rsquo;s move on with a LOESS smoothing of our points to assess whether the quadratic fit improved our residual plot. Looks much better, don&rsquo;t you agree?</p>
+<div class="highlight"><pre><span></span><code><span class="nf">scatter.smooth</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span><span class="w"> </span><span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span>
+<span class="w">               </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">)),</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">))),</span>
+<span class="w">               </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;residuals&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;fitted values&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="n">lpars</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">))</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="m">6.2</span><span class="p">,</span><span class="m">-0.1</span><span class="p">,</span><span class="s">&quot;loess fit&quot;</span><span class="p">,</span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">0.75</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_5.png" width="700"/>
+  </figure>
+
+<p>Again load the data again in the SemiPar package (so load it if not yet done so) called lidar (Light detection and ranging (LIDAR) data), attach the object lidar to have an easier access to the variables and have a look at the help of the lidar data. Start to plot the range vs logratio. </p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">SemiPar</span><span class="p">)</span>
+<span class="nf">data</span><span class="p">(</span><span class="n">lidar</span><span class="p">)</span>
+<span class="nf">attach</span><span class="p">(</span><span class="n">lidar</span><span class="p">)</span>
+
+<span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>A linear and quadratic fit are clearly not appropriate for the lidar data, so let&rsquo;s start from polynomial degree 3. Try fitting polynomials of degree 3, 4, and 10 to lidar data</p>
+<h3 id="cubic-fit">Cubic fit</h3>
+<p>Now it should be &ldquo;easy&rdquo; to fit a polynomial of degree 3 as well as setting a grid and plotting predictions. Not yet easy? check the answer below.</p>
+<details class="answer">
+<summary>Answer</summary>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># fit a cubic model</span>
+<span class="n">fit.cubic</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+
+<span class="c1"># set up the grid</span>
+<span class="n">range.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+<span class="n">range.grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+
+<span class="c1"># use predict() to estimated the model at desired points on the X-axis (i.e. the grid)</span>
+<span class="n">predict_fit.cubic</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.cubic</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">))</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cubic</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+<img src="../assets/images/day1_6.png" width="700"/>
+</figure></p>
+</details>
+<p>What about the residuals ? Here also for the experts we hide the answer, for those of you that are less familiar the answer is below. </p>
+<details class="answer">
+<summary>Answer</summary>
+<p><div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span><span class="w"> </span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span><span class="w"> </span>
+<span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">residuals</span><span class="p">)),</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">residuals</span><span class="p">))),</span><span class="w"> </span>
+<span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;residuals&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;fitted values&quot;</span><span class="p">)</span>
+<span class="nf">scatter.smooth</span><span class="p">(</span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span><span class="w"> </span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span>
+<span class="w">           </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">residuals</span><span class="p">)),</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.cubic</span><span class="o">$</span><span class="n">residuals</span><span class="p">))),</span>
+<span class="w">           </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;residuals&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;fitted values&quot;</span><span class="p">,</span>
+<span class="w">           </span><span class="n">lpars</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">))</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+<img src="../assets/images/day1_7.png" width="700"/>
+</figure></p>
+</details>
+<p>The conclusion is that we can definitely still do better!</p>
+<h3 id="polynomial-degree-4-and-10">Polynomial degree 4 and 10</h3>
+<p>Plot the data and fit a polynomial of degree 4. Check the prediction and assumptions. </p>
+<details class="answer">
+<summary>Answer</summary>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+
+<span class="c1"># fit a quadratic model</span>
+<span class="n">fit.quad</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+
+<span class="c1"># set up the grid</span>
+<span class="n">range.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+<span class="n">range.grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+
+<span class="c1"># make predictions on the grid</span>
+<span class="n">predict_fit.quad</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.quad</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">))</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.quad</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+<span class="c1"># residual plot</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span><span class="w"> </span><span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span><span class="w"> </span>
+<span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">)),</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">))),</span><span class="w"> </span>
+<span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;residuals&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;fitted values&quot;</span><span class="p">)</span>
+<span class="nf">scatter.smooth</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span><span class="w"> </span><span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span>
+<span class="w">           </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">)),</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.quad</span><span class="o">$</span><span class="n">residuals</span><span class="p">))),</span>
+<span class="w">           </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;residuals&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;fitted values&quot;</span><span class="p">,</span>
+<span class="w">           </span><span class="n">lpars</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">))</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+<img src="../assets/images/day1_8.png" width="700"/>
+</figure>
+<figure>
+<img src="../assets/images/day1_9.png" width="700"/>
+</figure></p>
+</details>
+<p>What is next ? Plot the data and fit a polynomial of degree 10. Check the prediction and assumptions. </p>
+<details class="answer">
+<summary>Answer</summary>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+
+<span class="c1"># fit a polynomial degree 10</span>
+<span class="n">fit.poly10</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+
+<span class="c1"># set up the grid</span>
+<span class="n">range.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+<span class="n">range.grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+
+<span class="c1"># make predictions on the grid</span>
+<span class="n">predict_fit.poly10</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.poly10</span><span class="p">,</span><span class="w">   </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">))</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.poly10</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+<span class="c1"># residual plot</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">fit.poly10</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span><span class="w"> </span><span class="n">fit.poly10</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span><span class="w"> </span>
+<span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.poly10</span><span class="o">$</span><span class="n">residuals</span><span class="p">)),</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.poly10</span><span class="o">$</span><span class="n">residuals</span><span class="p">))),</span><span class="w"> </span>
+<span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;residuals&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;fitted values&quot;</span><span class="p">)</span>
+<span class="nf">scatter.smooth</span><span class="p">(</span><span class="n">fit.poly10</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span><span class="w"> </span><span class="n">fit.poly10</span><span class="o">$</span><span class="n">residuals</span><span class="p">,</span>
+<span class="w">           </span><span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.poly10</span><span class="o">$</span><span class="n">residuals</span><span class="p">)),</span><span class="nf">max</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">fit.poly10</span><span class="o">$</span><span class="n">residuals</span><span class="p">))),</span>
+<span class="w">           </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;residuals&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;fitted values&quot;</span><span class="p">,</span>
+<span class="w">           </span><span class="n">lpars</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">))</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+<span class="c1"># remove the junk</span>
+<span class="nf">rm</span><span class="p">(</span><span class="n">fit.cubic</span><span class="p">,</span><span class="w"> </span><span class="n">fit.quad</span><span class="p">,</span><span class="w"> </span><span class="n">fit.poly10</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cubic</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.quad</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.poly10</span><span class="p">,</span><span class="w"> </span><span class="n">range.range</span><span class="p">,</span><span class="w"> </span><span class="n">range.grid</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+<img src="../assets/images/day1_10.png" width="700"/>
+</figure>
+<figure>
+<img src="../assets/images/day1_11.png" width="700"/>
+</figure></p>
+</details>
+<p>Seems like the polynomial of degree 10 is fitting well the assumptions on the residuals!</p>
+<h3 id="confidence-and-prediction-intervals">Confidence and prediction intervals</h3>
+<p>Using the prediction with the polynomial of degree 3 try to calculate the confidence and prediction interval.
+<div class="highlight"><pre><span></span><code><span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+
+<span class="c1"># fit the model</span>
+<span class="n">fit.cubic</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+
+<span class="c1"># set up the grid</span>
+<span class="n">range.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+<span class="n">range.grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+
+<span class="c1"># use the interval argument to fetch confidence intervals</span>
+<span class="n">predict_fit.cubic</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.cubic</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">),</span><span class="w"> </span><span class="n">interval</span><span class="o">=</span><span class="s">&quot;confidence&quot;</span><span class="p">)</span>
+
+<span class="c1"># keep in mind that confidence level is by default set to 0.95, but of course can be modified via the &quot;level&quot; argument</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cubic</span><span class="p">[,</span><span class="s">&quot;fit&quot;</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cubic</span><span class="p">[,</span><span class="s">&quot;lwr&quot;</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cubic</span><span class="p">[,</span><span class="s">&quot;upr&quot;</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+<span class="c1"># alternatively we can write our own code to compute confidence intervals using the standard errors of the estimates</span>
+<span class="n">predict_fit.cubic</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.cubic</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">),</span><span class="w"> </span><span class="n">se.fit</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot the estimated fit</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cubic</span><span class="o">$</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+<span class="c1"># compute and plot confidence bands</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cubic</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.cubic</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cubic</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.cubic</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+<span class="c1"># use the interval argument to fetch prediction intervals</span>
+<span class="n">predict_fit.cubic</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.cubic</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">),</span><span class="w"> </span><span class="n">interval</span><span class="o">=</span><span class="s">&quot;prediction&quot;</span><span class="p">)</span>
+
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cubic</span><span class="p">[,</span><span class="s">&quot;lwr&quot;</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cubic</span><span class="p">[,</span><span class="s">&quot;upr&quot;</span><span class="p">],</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+</code></pre></div></p>
+<figure>
+  <img src="../assets/images/day1_12.png" width="700"/>
+  </figure>
+
+<h3 id="step-functions">Step functions</h3>
+<div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+
+<span class="nf">table</span><span class="p">(</span><span class="nf">cut</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="m">3</span><span class="p">))</span><span class="w"> </span><span class="c1"># note that you need to specify the number of breaking points</span>
+<span class="c1"># (390,500] (500,610] (610,720] </span>
+<span class="c1"># 74        74        73</span>
+
+<span class="n">fit.pwsf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">cut</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">breaks</span><span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit.pwsf</span><span class="p">)</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">range.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+<span class="n">range.grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+<span class="n">predict_fit.pwsf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.pwsf</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">),</span><span class="w"> </span><span class="n">se.fit</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.pwsf</span><span class="o">$</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.pwsf</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.pwsf</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.pwsf</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.pwsf</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_13.png" width="700"/>
+  </figure>
+<h3 id="piecewise-linear-fits">Piecewise linear fits</h3>
+<div class="highlight"><pre><span></span><code><span class="n">fit.left.linear.1knot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">subset</span><span class="o">=</span><span class="p">(</span><span class="n">range</span><span class="o">&lt;</span><span class="m">575</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="n">fit.right.linear.1knot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">subset</span><span class="o">=</span><span class="p">(</span><span class="n">range</span><span class="o">&gt;=</span><span class="m">575</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit.left.linear.1knot</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit.right.linear.1knot</span><span class="p">)</span>
+
+<span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">range.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+<span class="n">range.grid.left</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="m">575</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">50</span><span class="p">)</span>
+<span class="n">range.grid.right</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="m">575</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">50</span><span class="p">)</span>
+
+<span class="c1"># predict the fit on the grid</span>
+<span class="c1"># left</span>
+<span class="n">predict_fit.left.linear.1knot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.left.linear.1knot</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid.left</span><span class="p">),</span><span class="w"> </span><span class="n">se.fit</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid.left</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.left.linear.1knot</span><span class="o">$</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid.left</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.left.linear.1knot</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.left.linear.1knot</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid.left</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.left.linear.1knot</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.left.linear.1knot</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="c1"># right</span>
+<span class="n">predict_fit.right.linear.1knot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.right.linear.1knot</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid.right</span><span class="p">),</span><span class="w"> </span><span class="n">se.fit</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid.right</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.right.linear.1knot</span><span class="o">$</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid.right</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.right.linear.1knot</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.right.linear.1knot</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid.right</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.right.linear.1knot</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.right.linear.1knot</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="c1"># indicate the breakpoint</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">575</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_14.png" width="700"/>
+  </figure>
+
+<h3 id="piecewise-cubic-fits">Piecewise cubic fits</h3>
+<div class="highlight"><pre><span></span><code><span class="n">fit.left.cubic.1knot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">subset</span><span class="o">=</span><span class="p">(</span><span class="n">range</span><span class="o">&lt;</span><span class="m">575</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="n">fit.right.cubic.1knot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">subset</span><span class="o">=</span><span class="p">(</span><span class="n">range</span><span class="o">&gt;=</span><span class="m">575</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit.left.cubic.1knot</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit.right.cubic.1knot</span><span class="p">)</span>
+
+<span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">range.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+<span class="n">range.grid.left</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="m">575</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">50</span><span class="p">)</span>
+<span class="n">range.grid.right</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="m">575</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">50</span><span class="p">)</span>
+
+<span class="c1"># predict the fit on the grid</span>
+<span class="c1"># left</span>
+<span class="n">predict_fit.left.cubic.1knot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.left.cubic.1knot</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid.left</span><span class="p">),</span><span class="w"> </span><span class="n">se.fit</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid.left</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.left.cubic.1knot</span><span class="o">$</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid.left</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.left.cubic.1knot</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.left.cubic.1knot</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid.left</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.left.cubic.1knot</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.left.cubic.1knot</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="c1"># right</span>
+<span class="n">predict_fit.right.cubic.1knot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.right.cubic.1knot</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid.right</span><span class="p">),</span><span class="w"> </span><span class="n">se.fit</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid.right</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.right.cubic.1knot</span><span class="o">$</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid.right</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.right.cubic.1knot</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.right.cubic.1knot</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid.right</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.right.cubic.1knot</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.right.cubic.1knot</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="c1"># indicate the breakpoint</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">575</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_15.png" width="700"/>
+  </figure>
+<h3 id="linear-splines">Linear splines</h3>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">splines</span><span class="p">)</span>
+
+<span class="o">?</span><span class="n">bs</span>
+
+<span class="n">fit.ls.1knot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">bs</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">knots</span><span class="o">=</span><span class="m">575</span><span class="p">,</span><span class="w"> </span><span class="n">degree</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit.ls.1knot</span><span class="p">)</span>
+
+<span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">range.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+<span class="n">range.grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+
+<span class="c1"># predict the fit on the grid</span>
+<span class="n">predict_fit.ls.1knot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.ls.1knot</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">),</span><span class="w"> </span><span class="n">se.fit</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.ls.1knot</span><span class="o">$</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.ls.1knot</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.ls.1knot</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.ls.1knot</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.ls.1knot</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">575</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+<span class="c1"># repeat above with 2 internal knots at desired points</span>
+<span class="n">fit.ls.2knots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">bs</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">knots</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">550</span><span class="p">,</span><span class="m">600</span><span class="p">),</span><span class="w"> </span><span class="n">degree</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit.ls.2knots</span><span class="p">)</span>
+
+<span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">range.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+<span class="n">range.grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+
+<span class="c1"># predict the fit on the grid</span>
+<span class="n">predict_fit.ls.2knots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.ls.2knots</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">),</span><span class="w"> </span><span class="n">se.fit</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.ls.2knots</span><span class="o">$</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.ls.2knots</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.ls.2knots</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.ls.2knots</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.ls.2knots</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">550</span><span class="p">,</span><span class="m">600</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_16.png" width="700"/>
+  </figure>
+<figure>
+  <img src="../assets/images/day1_17.png" width="700"/>
+  </figure>
+
+<h3 id="cubic-splines">Cubic splines</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># fit cubic splines with 1 internal knot</span>
+<span class="n">fit.cs.1knot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">bs</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">knots</span><span class="o">=</span><span class="m">575</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit.cs.1knot</span><span class="p">)</span>
+
+<span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">range.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+<span class="n">range.grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+
+<span class="c1"># predict the fit on the grid</span>
+<span class="n">predict_fit.cs.1knot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.cs.1knot</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">),</span><span class="w"> </span><span class="n">se.fit</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cs.1knot</span><span class="o">$</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cs.1knot</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.cs.1knot</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cs.1knot</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.cs.1knot</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">575</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+<span class="c1"># fit cubic splines with 2 internal knots</span>
+<span class="n">fit.cs.2knots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">bs</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">knots</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">550</span><span class="p">,</span><span class="m">600</span><span class="p">))</span><span class="w"> </span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">fit.cs.2knots</span><span class="p">)</span>
+
+<span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">range.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+<span class="n">range.grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+
+<span class="c1"># predict the fit on the grid</span>
+<span class="n">predict_fit.cs.2knots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.cs.2knots</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">),</span><span class="w"> </span><span class="n">se.fit</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cs.2knots</span><span class="o">$</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cs.2knots</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.cs.2knots</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">range.grid</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.cs.2knots</span><span class="o">$</span><span class="n">fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">predict_fit.cs.2knots</span><span class="o">$</span><span class="n">se.fit</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">550</span><span class="p">,</span><span class="m">600</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_18.png" width="700"/>
+  </figure>
+
+<figure>
+  <img src="../assets/images/day1_19.png" width="700"/>
+  </figure>
+
+<h3 id="compare-the-goodness-of-fit-of-each-model">Compare the goodness of fit of each model</h3>
+<div class="highlight"><pre><span></span><code><span class="n">mse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">model</span><span class="p">){</span>
+<span class="w">  </span><span class="n">rmse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">model</span><span class="o">$</span><span class="n">residual</span><span class="o">^</span><span class="m">2</span><span class="p">))</span>
+<span class="w">  </span><span class="nf">round</span><span class="p">(</span><span class="n">rmse</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">mse_fit.ls.1knot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mse</span><span class="p">(</span><span class="n">fit.ls.1knot</span><span class="p">)</span>
+<span class="n">mse_fit.ls.2knots</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mse</span><span class="p">(</span><span class="n">fit.ls.2knots</span><span class="p">)</span>
+<span class="n">mse_fit.cs.1knot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mse</span><span class="p">(</span><span class="n">fit.cs.1knot</span><span class="p">)</span>
+<span class="n">mse_fit.cs.2knots</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mse</span><span class="p">(</span><span class="n">fit.cs.2knots</span><span class="p">)</span>
+
+<span class="n">model_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;linear splines with 1 knot&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;linear splines with 2 knots&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">               </span><span class="s">&quot;cubic splines with 1 knot&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cubic splines with 2 knots&quot;</span><span class="p">)</span>
+<span class="n">mses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">mse_fit.ls.1knot</span><span class="p">,</span><span class="w"> </span><span class="n">mse_fit.ls.2knots</span><span class="p">,</span>
+<span class="w">         </span><span class="n">mse_fit.cs.1knot</span><span class="p">,</span><span class="w"> </span><span class="n">mse_fit.cs.2knots</span><span class="p">)</span>
+<span class="n">mse_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span><span class="w"> </span><span class="n">mses</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">mse_table</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Models&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;RMSE&quot;</span><span class="p">)</span>
+<span class="n">knitr</span><span class="o">::</span><span class="nf">kable</span><span class="p">(</span><span class="n">mse_table</span><span class="p">,</span><span class="w"> </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mean squared errors for different models&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;simple&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="smoothingnatural-splines">Smoothing/natural splines</h3>
+<div class="highlight"><pre><span></span><code><span class="n">fit.ss</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">smooth.spline</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">logratio</span><span class="p">)</span>
+<span class="n">fit.ss</span>
+
+<span class="c1"># plot raw data</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">range.range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+<span class="n">range.grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="n">range.range</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="nf">length</span><span class="p">(</span><span class="n">range</span><span class="p">))</span>
+
+<span class="c1"># predict the fit on the grid</span>
+<span class="o">?</span><span class="n">predict.smooth.spline</span>
+<span class="n">predict_fit.ss</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">fit.ss</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">range</span><span class="o">=</span><span class="n">range.grid</span><span class="p">))</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">predict_fit.ss</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">predict_fit.ss</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_finalbefore.png" width="700"/>
+  </figure>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># bootstrap standard errors</span>
+<span class="c1"># helper functions borrowed from: </span>
+<span class="c1"># https://stackoverflow.com/questions/23852505/how-to-get-confidence-interval-for-smooth-spline</span>
+
+<span class="c1"># Helper functions</span>
+<span class="n">resampler</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="w">  </span><span class="n">resample.rows</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="n">replace</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">resample.rows</span><span class="p">,])</span>
+<span class="p">}</span>
+
+<span class="n">spline.estimator</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">smooth.spline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">data</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">cv</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+<span class="w">  </span><span class="n">eval.grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="nf">min</span><span class="p">(</span><span class="n">data</span><span class="p">[,</span><span class="m">1</span><span class="p">]),</span><span class="n">to</span><span class="o">=</span><span class="nf">max</span><span class="p">(</span><span class="n">data</span><span class="p">[,</span><span class="m">1</span><span class="p">]),</span><span class="n">length.out</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="nf">predict</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">eval.grid</span><span class="p">)</span><span class="o">$</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="c1"># We only want the predicted values</span>
+<span class="p">}</span>
+
+<span class="n">spline.cis</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="m">0.05</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">spline.main</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">spline.estimator</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+<span class="w">  </span><span class="n">spline.boots</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">replicate</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="nf">spline.estimator</span><span class="p">(</span><span class="nf">resampler</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">))</span>
+<span class="w">  </span><span class="n">cis.lower</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="n">spline.main</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">spline.boots</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="n">quantile</span><span class="p">,</span><span class="n">probs</span><span class="o">=</span><span class="m">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">/</span><span class="m">2</span><span class="p">)</span>
+<span class="w">  </span><span class="n">cis.upper</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="n">spline.main</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">spline.boots</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="n">quantile</span><span class="p">,</span><span class="n">probs</span><span class="o">=</span><span class="n">alpha</span><span class="o">/</span><span class="m">2</span><span class="p">)</span>
+<span class="w">  </span><span class="kr">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">main.curve</span><span class="o">=</span><span class="n">spline.main</span><span class="p">,</span><span class="n">lower.ci</span><span class="o">=</span><span class="n">cis.lower</span><span class="p">,</span><span class="n">upper.ci</span><span class="o">=</span><span class="n">cis.upper</span><span class="p">,</span>
+<span class="w">              </span><span class="n">x</span><span class="o">=</span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="nf">min</span><span class="p">(</span><span class="n">data</span><span class="p">[,</span><span class="m">1</span><span class="p">]),</span><span class="n">to</span><span class="o">=</span><span class="nf">max</span><span class="p">(</span><span class="n">data</span><span class="p">[,</span><span class="m">1</span><span class="p">]),</span><span class="n">length.out</span><span class="o">=</span><span class="n">m</span><span class="p">)))</span>
+<span class="p">}</span>
+
+<span class="c1"># sample data</span>
+<span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">logratio</span><span class="p">)</span>
+
+<span class="c1"># run and plot</span>
+<span class="n">sp.cis</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">spline.cis</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="o">=</span><span class="m">10000</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="n">data</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">sp.cis</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">sp.cis</span><span class="o">$</span><span class="n">main.curve</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">sp.cis</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">sp.cis</span><span class="o">$</span><span class="n">lower.ci</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">sp.cis</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">sp.cis</span><span class="o">$</span><span class="n">upper.ci</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+  <img src="../assets/images/day1_final.png" width="700"/>
+  </figure>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

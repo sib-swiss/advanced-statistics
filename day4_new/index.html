@@ -1,0 +1,1216 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../day3/">
+      
+      
+        <link rel="next" href="../day4/">
+      
+      
+      <link rel="icon" href="../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Day4-Caret - Advanced statistics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#caret-day" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Advanced statistics" class="md-header__button md-logo" aria-label="Advanced statistics" data-md-component="logo">
+      
+  <img src="../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Advanced statistics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Day4-Caret
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/sib-swiss/advanced-statistics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/advanced-statistics
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Advanced statistics" class="md-nav__button md-logo" aria-label="Advanced statistics" data-md-component="logo">
+      
+  <img src="../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    Advanced statistics
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/sib-swiss/advanced-statistics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/advanced-statistics
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../precourse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precourse preparation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../course_schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Course schedule
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day1-Linear Regression and Beyond
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day2-GLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day3-Mixed Effect Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Day4-Caret
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Day4-Caret
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#alzheimer-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alzheimer Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-splitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Splitting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-measures-using-cross-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance measures using Cross-Validation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#knn-method-imputing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knn-method (imputing)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lasso-regularisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lasso-Regularisation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ridge-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ridge regression
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elastic-net" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elastic Net
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leave-one-out-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leave-one-out method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#random-forest" class="md-nav__link">
+    <span class="md-ellipsis">
+      Random Forest
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bonus exercice
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exam
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Useful links
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#alzheimer-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alzheimer Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-splitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Splitting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-measures-using-cross-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance measures using Cross-Validation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#knn-method-imputing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knn-method (imputing)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lasso-regularisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lasso-Regularisation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ridge-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ridge regression
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elastic-net" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elastic Net
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leave-one-out-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leave-one-out method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#random-forest" class="md-nav__link">
+    <span class="md-ellipsis">
+      Random Forest
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="caret-day">CARET-Day</h1>
+<p>In this section, you will find the R code that we will use during the course. We will explain the code and output during correction of the exercises.</p>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Understand Sensitivity, Specificity, ROC curve and AUC </li>
+<li>Understand different regularisation method </li>
+<li>Understand K-fold cross-validation </li>
+<li>Understand Leave-one-out validation</li>
+<li>Understand how to built a signature</li>
+<li>Understand KNN-method</li>
+<li>Understand Random Forests</li>
+</ul>
+<p>Slides of lectures:</p>
+<p><a class="md-button" href="../assets/pdf/Day4-Caret-Day-2025.pdf">Download slides morning</a>
+<a class="md-button" href="../assets/pdf/Day4-GAM-2025.pdf">Download slides afternoon</a></p>
+<h2 id="alzheimer-data">Alzheimer Data</h2>
+<p>Washington University conducted a clinical study to determine if biological measurements made from cerebrospinal fluid (CSF) can be used to diagnose or predict Alzheimer&rsquo;s disease (&ldquo;Craig-Schapiro, R., et al. (2011). Multiplexed Immunoassay Panel Identifies Novel CSF Biomarkers for Alzheimer&rsquo;s Disease Diagnosis and Prognosis. PLoS ONE, 6(4), e18850.&rdquo;). These data are a modified version of the values used for the publication.</p>
+<p>The R factor vector diagnosis contains the outcome data for 333 of the subjects. The demographic and laboratory results are collected in the data frame predictors.</p>
+<p>One important indicator of Alzheimer&rsquo;s disease is the genetic background of a subject. In particular, what versions of the Apolipoprotein E gene inherited from one&rsquo;s parents has an association with the disease. There are three variants of the gene: E2, E3 and E4. Since a child inherits a version of the gene from each parent, there are six possible combinations (e.g. E2/E2, E2/E3, and so on). This data is contained in the predictor column named Genotype.</p>
+<p>First we set for this exercise the libraries that we will need and load the data which is part of the AppliedPredictiveModeling package and is called AlzheimerDisease.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">caret</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">pROC</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ROCR</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">AppliedPredictiveModeling</span><span class="p">)</span>
+<span class="nf">data</span><span class="p">(</span><span class="n">AzheimerDisease</span><span class="p">)</span>
+
+<span class="n">alzheimer</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="n">predictors</span><span class="p">,</span><span class="n">diagnosis</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">alzheimer</span><span class="p">)</span><span class="w"> </span><span class="c1">## realize male is not a factor</span>
+<span class="n">alzheimer</span><span class="o">$</span><span class="n">male</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.factor</span><span class="p">(</span><span class="n">alzheimer</span><span class="o">$</span><span class="n">male</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="data-splitting">Data Splitting</h2>
+<p>We first start by splitting the data into a training and a test set.</p>
+<p>The test set will be used only after having decided on the best model.</p>
+<p>Within the training set however we will again use a process of splitting and testing using cross validation.</p>
+<p>It is important to set a seed in order to be reproducible.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">set.seed</span><span class="p">(</span><span class="m">3456</span><span class="p">)</span>
+<span class="n">trainIndex</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">createDataPartition</span><span class="p">(</span><span class="n">alzheimer</span><span class="o">$</span><span class="n">diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="m">8</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                  </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                  </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="nf">dim</span><span class="p">(</span><span class="n">trainIndex</span><span class="p">)</span>
+<span class="nf">dim</span><span class="p">(</span><span class="n">alzheimer</span><span class="p">)</span>
+<span class="n">alzheimerTrain</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">alzheimer</span><span class="p">[</span><span class="w"> </span><span class="n">trainIndex</span><span class="p">,]</span>
+<span class="n">alzheimerTest</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">alzheimer</span><span class="p">[</span><span class="o">-</span><span class="n">trainIndex</span><span class="p">,]</span>
+</code></pre></div>
+<p>Try to understand how the test and training set is distributed in terms of control and impaired patients.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">table</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="p">)</span>
+
+<span class="nf">table</span><span class="p">(</span><span class="n">alzheimerTest</span><span class="o">$</span><span class="n">diagnosis</span><span class="p">)</span>
+
+<span class="nf">table</span><span class="p">(</span><span class="n">alzheimer</span><span class="o">$</span><span class="n">diagnosis</span><span class="p">)</span>
+</code></pre></div>
+<p>In some cases there is an important qualitative factor in the data that should be considered during (re)sampling. For example:</p>
+<p>in clinical trials, there may be hospital-to-hospital differences
+with longitudinal or repeated measures data, subjects (or general independent experimental unit) may have multiple rows in the data set, etc.
+There may be an interest in making sure that these groups are not contained in the training and testing set since this may bias the test set performance to be more optimistic. Also, when one or more specific groups are held out, the resampling might capture the “ruggedness” of the model. In the example where clinical data is recorded over multiple sites, the resampling performance estimates partly measure how extensible the model is across sites.</p>
+<h2 id="performance-measures-using-cross-validation">Performance measures using Cross-Validation</h2>
+<p>We start by choosing the parameters of the trainControl function in order to do cross-Validation (CV). For that we need to choose the number of folds of the cross-validation.</p>
+<div class="highlight"><pre><span></span><code><span class="n">fitControl_CV_accuracy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">trainControl</span><span class="p">(</span><span class="c1">## 5-fold CV</span>
+<span class="w">                           </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cv&quot;</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span>
+<span class="w">                          </span><span class="p">)</span>
+</code></pre></div>
+<p>We can also do repeated CV (RCV) which repeats the process of folds, n number of times.</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">fitControl_RCV_accuracy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">trainControl</span><span class="p">(</span>
+<span class="w">                           </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;repeatedcv&quot;</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">repeats</span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+<span class="w">                          </span><span class="p">)</span>
+</code></pre></div>
+We could also choose ourselves the folds using the function 
+It is important to use the set the classProbs = TRUE in order to have in each folds controls and impared samples.
+<div class="highlight"><pre><span></span><code><span class="n">folds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">createFolds</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">returnTrain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">fitControl_CV_folds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">trainControl</span><span class="p">(</span><span class="c1">## 5-fold CV</span>
+<span class="w">                           </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cv&quot;</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">index</span><span class="o">=</span><span class="w"> </span><span class="n">folds</span><span class="p">)</span>
+</code></pre></div></p>
+<p>We can also estimate ROC curves, as well as sensitivity and specificity on our training set.</p>
+<div class="highlight"><pre><span></span><code><span class="n">fitControl_CV_ROC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">trainControl</span><span class="p">(</span><span class="c1">## 5-fold CV</span>
+<span class="w">                           </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cv&quot;</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">classProbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">    </span><span class="c1"># Needed for ROC</span>
+<span class="w">  </span><span class="n">summaryFunction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">twoClassSummary</span><span class="w"> </span><span class="p">)</span><span class="w">       </span><span class="c1"># Needed for ROC</span>
+</code></pre></div>
+<p>&hellip; or with repeated CV &hellip;</p>
+<div class="highlight"><pre><span></span><code><span class="n">fitControl_RCV_ROC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">trainControl</span><span class="p">(</span><span class="c1">## 5-fold CV</span>
+<span class="w">                           </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;repeatedcv&quot;</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">repeats</span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">classProbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">    </span><span class="c1"># Needed for ROC</span>
+<span class="w">  </span><span class="n">summaryFunction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">twoClassSummary</span><span class="w"> </span><span class="p">)</span><span class="w">       </span><span class="c1"># Needed for ROC</span>
+</code></pre></div>
+<p>Optionally one can also save the predictions in each repeat using the &ldquo;savePrediction&rdquo; option. </p>
+<div class="highlight"><pre><span></span><code><span class="n">fitControl_RCV_ROC_PRED</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">trainControl</span><span class="p">(</span><span class="c1">## 5-fold CV</span>
+<span class="w">                           </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;repeatedcv&quot;</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">repeats</span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span>
+<span class="w">                          </span><span class="n">savePredictions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;final&quot;</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">classProbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">   </span><span class="c1"># Needed for ROC</span>
+<span class="w">  </span><span class="n">summaryFunction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">twoClassSummary</span><span class="w"> </span><span class="p">)</span><span class="w">   </span><span class="c1"># Needed for ROC</span>
+</code></pre></div>
+<p>The trainControl function is the function that can do it all, from bayesian Models to GAMs, but also regularizations amongst others. Have a look at the help in the caret tutorial book! We will see some other trainControl functions and methods later, such as regularization for example, which will be explained in a later exercise. </p>
+<p>Now, to find the best model according to the chosen method with the trainControl, we use the &ldquo;train&rdquo; function from the caret package.
+We need to provide the predictor and outcome data objects, as well as the method used. As we want to fit the binomial data and look at the performance, we need to use the option family=binomial(link=&rdquo;logit&rdquo;) and the method glm. We can use the first column as a predictor for this exercise. </p>
+<p>By default for classification data it will choose the Accuracy as the method for performance measure. </p>
+<p>We start by using the default.</p>
+<div class="highlight"><pre><span></span><code><span class="n">glmFit1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">ACE_CD143_Angiotensin_Converti</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;glm&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">family</span><span class="o">=</span><span class="nf">binomial</span><span class="p">(</span><span class="n">link</span><span class="o">=</span><span class="s">&quot;logit&quot;</span><span class="p">),</span>
+<span class="w">                 </span><span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_CV_accuracy</span>
+<span class="w">                 </span><span class="p">)</span>
+</code></pre></div>
+<p>To look at the output we can first look at the summary of the glm</p>
+<div class="highlight"><pre><span></span><code><span class="nf">summary</span><span class="p">(</span><span class="n">glmFit1</span><span class="p">)</span>
+</code></pre></div>
+<p>We realise that this is the same as performing our standard glm</p>
+<div class="highlight"><pre><span></span><code><span class="nf">summary</span><span class="p">(</span><span class="nf">glm</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">ACE_CD143_Angiotensin_Converti</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">family</span><span class="o">=</span><span class="nf">binomial</span><span class="p">(</span><span class="n">link</span><span class="o">=</span><span class="s">&quot;logit&quot;</span><span class="p">)))</span>
+</code></pre></div>
+<p>Now let us check how the accuracy was calculated and how we can now be confident about the estimation of the performance in this case</p>
+<div class="highlight"><pre><span></span><code><span class="n">glmFit1</span><span class="o">$</span><span class="n">results</span>
+</code></pre></div>
+<p>We can also look at individual Accuracy measurements in each of the folds</p>
+<div class="highlight"><pre><span></span><code><span class="n">glmFit1</span><span class="o">$</span><span class="n">resample</span>
+</code></pre></div>
+<p>And then we can see that the Accuracy in the results section is just the average of the Accuracy in each of the folds.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">mean</span><span class="p">(</span><span class="n">glmFit1</span><span class="o">$</span><span class="n">resample</span><span class="o">$</span><span class="n">Accuracy</span><span class="p">)</span>
+</code></pre></div>
+<p>Let us do the fit now with the repeated CV</p>
+<div class="highlight"><pre><span></span><code><span class="n">glmFit2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">ACE_CD143_Angiotensin_Converti</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;glm&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">family</span><span class="o">=</span><span class="nf">binomial</span><span class="p">(</span><span class="n">link</span><span class="o">=</span><span class="s">&quot;logit&quot;</span><span class="p">),</span>
+<span class="w">                 </span><span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_RCV_accuracy</span>
+<span class="w">                 </span><span class="p">)</span>
+</code></pre></div>
+<p>Check what it changed in the section &ldquo;resample&rdquo;!</p>
+<p>Now we can change the default measure if instead of the accuracy we would like to know more about the variability of the sensitivity and specificity. For that we only need to change the trControl with the appropriate control function and we will know.</p>
+<div class="highlight"><pre><span></span><code><span class="n">glmFit3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">ACE_CD143_Angiotensin_Converti</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;glm&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">family</span><span class="o">=</span><span class="nf">binomial</span><span class="p">(</span><span class="n">link</span><span class="o">=</span><span class="s">&quot;logit&quot;</span><span class="p">),</span>
+<span class="w">                 </span><span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_RCV_ROC</span>
+<span class="w">                 </span><span class="p">)</span>
+</code></pre></div>
+<p>You must have gotten a Warning message, why ? </p>
+<details class="done">
+<summary>Answer</summary>
+<p>The default metric is Accuracy and not ROC, this is therefore just a warning saying you forgot to change the metric parameter. Here is how it would be correct
+<div class="highlight"><pre><span></span><code><span class="n">glmFit3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">ACE_CD143_Angiotensin_Converti</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="p">,</span><span class="w"> </span>
+<span class="w">             </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;glm&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">             </span><span class="n">family</span><span class="o">=</span><span class="nf">binomial</span><span class="p">(</span><span class="n">link</span><span class="o">=</span><span class="s">&quot;logit&quot;</span><span class="p">),</span>
+<span class="w">             </span><span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_RCV_ROC</span><span class="p">,</span>
+<span class="w">             </span><span class="n">metric</span><span class="o">=</span><span class="s">&quot;ROC&quot;</span>
+<span class="w">             </span><span class="p">)</span>
+</code></pre></div></p>
+</details>
+<p>Now check the result section 
+<div class="highlight"><pre><span></span><code><span class="n">glmFit3</span><span class="o">$</span><span class="n">results</span>
+</code></pre></div></p>
+<p>We can now read clearly the ROC (or average ROC on our folds), as well as Sensitivity and Specificity. What can you conclude ?</p>
+<p>And what changes if you use the &ldquo;fitControl_RCV_ROC_PRED&rdquo; ?</p>
+<details class="done">
+<summary>Answer</summary>
+<p><div class="highlight"><pre><span></span><code><span class="n">glmFit4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">ACE_CD143_Angiotensin_Converti</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="p">,</span><span class="w"> </span>
+<span class="w">             </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;glm&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">             </span><span class="n">family</span><span class="o">=</span><span class="nf">binomial</span><span class="p">(</span><span class="n">link</span><span class="o">=</span><span class="s">&quot;logit&quot;</span><span class="p">),</span>
+<span class="w">             </span><span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_RCV_ROC_PRED</span><span class="p">,</span>
+<span class="w">             </span><span class="n">metric</span><span class="o">=</span><span class="s">&quot;ROC&quot;</span>
+<span class="w">             </span><span class="p">)</span>
+
+<span class="n">glmFit4</span><span class="o">$</span><span class="n">pred</span><span class="w">             </span>
+</code></pre></div>
+This is so useful as you can assess how many times each sample is classified wrongly or correctly and in which fold, so dependant on which samples. This helps in spotting which samples would benefit from another model and also helps creating new hypotheses. </p>
+</details>
+<p>Bonus let us make a loop of all possible predictors in uni-variate analysis and 
+check which one has the best p-value and good ROC.</p>
+<details class="done">
+<summary>Answer</summary>
+<div class="highlight"><pre><span></span><code><span class="n">col_num</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dim</span><span class="p">(</span><span class="n">alzheimer</span><span class="p">)[</span><span class="m">2</span><span class="p">]</span><span class="m">-1</span><span class="w"> </span><span class="c1"># we do not use the last column for prediction</span>
+<span class="n">pval</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="n">col_num</span><span class="p">)</span><span class="w"> </span>
+<span class="n">rocval</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="n">col_num</span><span class="p">)</span>
+<span class="n">alzheimerTrain_temp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="w"> </span><span class="c1">## we create a temp copy of the alzheimer training data</span>
+<span class="kr">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">col_num</span><span class="p">){</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">alzheimerTrain_temp</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;temp&quot;</span><span class="w"> </span><span class="c1">## create the column name that is temp </span>
+
+<span class="n">glmFit1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain_temp</span><span class="p">,</span><span class="w"> </span>
+<span class="w">             </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;glm&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">             </span><span class="n">family</span><span class="o">=</span><span class="s">&quot;binomial&quot;</span><span class="p">,</span>
+<span class="w">             </span><span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_RCV_ROC</span><span class="p">,</span>
+<span class="w">             </span><span class="n">metric</span><span class="o">=</span><span class="s">&quot;ROC&quot;</span>
+<span class="w">             </span><span class="p">)</span>
+
+<span class="w">   </span><span class="nf">colnames</span><span class="p">(</span><span class="n">alzheimerTrain_temp</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span><span class="w">  </span><span class="c1">#restore correct name         </span>
+<span class="w"> </span><span class="n">pval</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="n">glmFit1</span><span class="p">)</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[,</span><span class="s">&quot;Pr(&gt;|z|)&quot;</span><span class="p">][</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="c1">## store pvalue from GLM  </span>
+<span class="w"> </span><span class="n">rocval</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">glmFit1</span><span class="o">$</span><span class="n">results</span><span class="o">$</span><span class="n">ROC</span><span class="w">  </span><span class="c1">## store ROC result</span>
+<span class="p">}</span>
+<span class="c1">## careful we need to adjust the pvalues for multiple testing</span>
+
+<span class="n">pval_adj</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">p.adjust</span><span class="p">(</span><span class="n">pval</span><span class="p">)</span>
+<span class="nf">length</span><span class="p">(</span><span class="n">pval_adj</span><span class="p">[</span><span class="n">pval_adj</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">])</span>
+
+<span class="n">data_results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="p">)[</span><span class="o">-</span><span class="nf">ncol</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="p">)],</span><span class="w"> </span><span class="n">pval_adj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pval_adj</span><span class="p">,</span><span class="w"> </span><span class="n">ROC</span><span class="o">=</span><span class="w"> </span><span class="n">rocval</span><span class="p">)</span>
+
+<span class="n">data_results</span><span class="p">[</span><span class="n">data_results</span><span class="o">$</span><span class="n">pval_adj</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">,]</span>
+
+<span class="n">names_candidates</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data_results</span><span class="p">[</span><span class="n">data_results</span><span class="o">$</span><span class="n">pval_adj</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">,</span><span class="s">&quot;Name&quot;</span><span class="p">]</span>
+</code></pre></div>
+</details>
+<p>We now have some candidates for multivariate analysis that look interesting, tau p_tau as well as Ab_42 where already known by the literature, which is a good indicator that the code works nicely!</p>
+<h2 id="knn-method-imputing">Knn-method (imputing)</h2>
+<p>Let us say we have some missing data in our dataset (we do not here so we will add some).
+<div class="highlight"><pre><span></span><code>alzheimerTrain_NA &lt;- alzheimerTrain
+random_rows &lt;- sample(1:nrow(alzheimerTrain), size = 30, replace = FALSE)
+random_cols &lt;- sample(1:(ncol(alzheimerTrain)-1), size = 30, replace = FALSE)
+for(i in 1:30){
+alzheimerTrain_NA[random_rows[i],random_cols[i]] &lt;- NA
+}
+alzheimerTrain_NA[15,1]&lt;-NA
+summary(alzheimerTrain_NA)
+</code></pre></div>
+By default glm in base R will give you an Error message if you have NAs
+<div class="highlight"><pre><span></span><code><span class="n">glmFit4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">ACE_CD143_Angiotensin_Converti</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain_NA</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;glm&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">family</span><span class="o">=</span><span class="nf">binomial</span><span class="p">(</span><span class="n">link</span><span class="o">=</span><span class="s">&quot;logit&quot;</span><span class="p">),</span>
+<span class="w">                 </span><span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_RCV_ROC_PRED</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">metric</span><span class="o">=</span><span class="s">&quot;ROC&quot;</span>
+<span class="w">                 </span><span class="p">)</span>
+</code></pre></div></p>
+<p>So we need to do some imputation (or tell glm what to do with the NAs, via na.action = na.omit)
+<div class="highlight"><pre><span></span><code><span class="n">glmFit4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">ACE_CD143_Angiotensin_Converti</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain_NA</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;glm&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">family</span><span class="o">=</span><span class="nf">binomial</span><span class="p">(</span><span class="n">link</span><span class="o">=</span><span class="s">&quot;logit&quot;</span><span class="p">),</span>
+<span class="w">                 </span><span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_RCV_ROC_PRED</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">metric</span><span class="o">=</span><span class="s">&quot;ROC&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">na.action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">na.omit</span>
+<span class="w">                 </span><span class="p">)</span>
+
+<span class="nf">summary</span><span class="p">(</span><span class="n">glmFit4</span><span class="p">)</span><span class="w">                 </span>
+</code></pre></div></p>
+<p>What changed in the summary function ?</p>
+<p>Now this can be a problem if you have many parameters included and many NAs in different spots. Another way is imputation. With the train function this can be done easily. However knnImpute only works for numeric data. We can use it here by only selecting the numeric subset of the data. knnImpute is a function that can also be used outside of the train function, before running train. </p>
+<p>We use for that the function preProcess and the method knnImpute. We use the function predict to impute the values. And then combine with the output. 
+<div class="highlight"><pre><span></span><code><span class="n">pre_proc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">preProcess</span><span class="p">(</span><span class="n">alzheimerTrain_NA</span><span class="p">[,</span><span class="nf">setdiff</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">alzheimerTrain_NA</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;male&quot;</span><span class="p">,</span><span class="s">&quot;Genotype&quot;</span><span class="p">,</span><span class="s">&quot;diagnosis&quot;</span><span class="p">))],</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;center&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;scale&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;knnImpute&quot;</span><span class="p">))</span>
+
+<span class="n">predictors_imputed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">pre_proc</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain_NA</span><span class="p">[,</span><span class="nf">setdiff</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">alzheimerTrain_NA</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;male&quot;</span><span class="p">,</span><span class="s">&quot;Genotype&quot;</span><span class="p">,</span><span class="s">&quot;diagnosis&quot;</span><span class="p">))])</span>
+
+<span class="c1"># Combine with untouched outcome</span>
+<span class="n">data_imputed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="n">predictors_imputed</span><span class="p">,</span><span class="w"> </span><span class="n">diagnosis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain_NA</span><span class="o">$</span><span class="n">diagnosis</span><span class="p">)</span>
+
+
+<span class="n">glmFit4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">ACE_CD143_Angiotensin_Converti</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data_imputed</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;glm&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">family</span><span class="o">=</span><span class="nf">binomial</span><span class="p">(</span><span class="n">link</span><span class="o">=</span><span class="s">&quot;logit&quot;</span><span class="p">),</span>
+<span class="w">                 </span><span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_CV_ROC</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">metric</span><span class="o">=</span><span class="s">&quot;ROC&quot;</span>
+<span class="w">                </span><span class="c1"># ,</span>
+<span class="w">                 </span><span class="c1"># preProcess =  c(&quot;center&quot;, &quot;scale&quot;, &quot;knnImpute&quot;) if only numeric data this works best</span>
+<span class="w">                 </span><span class="p">)</span>
+
+<span class="nf">summary</span><span class="p">(</span><span class="n">glmFit4</span><span class="p">)</span><span class="w">                 </span>
+</code></pre></div></p>
+<h2 id="lasso-regularisation">Lasso-Regularisation</h2>
+<p>There are three types of regularisations that we will try. We will start with the lasso method.</p>
+<p>It is always recommanded not to start with too many features in order for the method to perform better. </p>
+<p>Therefore we will try it but only on the candidate features we have chosen in the previous step. In gene expression data, you could start with doing a DGE between the two groups to find a candidate list of genes to select for creating a model. It is okay to do so here as we are only working on our training data. </p>
+<p>We start by using the glmnet package and the glmnet function and find the best model</p>
+<p><div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">glmnet</span><span class="p">)</span>
+<span class="n">lasso_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glmnet</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">alzheimerTrain</span><span class="p">[,</span><span class="n">names_candidates</span><span class="p">]</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binomial&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">  </span><span class="c1"># alpha = 1 is LASSO</span>
+
+<span class="c1"># Plot coefficient paths</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">lasso_model</span><span class="p">,</span><span class="w"> </span><span class="n">xvar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lambda&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</code></pre></div>
+Then we can use cross validation to choose the best lambda</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Cross-validated LASSO</span>
+<span class="n">y_numeric</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Impaired&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="n">cv_lasso</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cv.glmnet</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y_numeric</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="p">[,</span><span class="n">names_candidates</span><span class="p">]),</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binomial&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">nfolds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
+
+<span class="c1"># Plot cross-validation curve</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">cv_lasso</span><span class="p">)</span>
+
+<span class="c1"># Best lambda</span>
+<span class="n">best_lambda</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cv_lasso</span><span class="o">$</span><span class="n">lambda.min</span>
+</code></pre></div>
+<p>You can now observe how the coefficients are estimated from the CV lasso method</p>
+<div class="highlight"><pre><span></span><code><span class="n">coefs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">cv_lasso</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lambda.min&quot;</span><span class="p">)</span>
+<span class="n">coefs</span>
+</code></pre></div>
+<p>We then select the variables that are not 0 and create our final model. We can do this with standard glm or again with performance validation.</p>
+<div class="highlight"><pre><span></span><code><span class="n">selected_vars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">coefs</span><span class="p">)[</span><span class="nf">which</span><span class="p">(</span><span class="n">coefs</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">0</span><span class="p">)][</span><span class="m">-1</span><span class="p">]</span>
+<span class="n">alzheimer_selected</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="p">[,</span><span class="w"> </span><span class="n">selected_vars</span><span class="p">])</span>
+<span class="n">glm_fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">alzheimer_selected</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binomial&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>And then we have a look at the results</p>
+<div class="highlight"><pre><span></span><code><span class="nf">summary</span><span class="p">(</span><span class="n">glm_fit</span><span class="p">)</span>
+</code></pre></div>
+<p>We see that the coefficients for the selected columns are not alll significant. Why ?</p>
+<p>We will now use the caret package to have results for performance as well as model optimization. </p>
+<div class="highlight"><pre><span></span><code><span class="n">lasso_caret</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Alpha_1_Antitrypsin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B_Lymphocyte_Chemoattractant_BL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">FAS</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Fibrinogen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">GRO_alpha</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Gamma_Interferon_induced_Monokin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">IL_7</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MIF</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MMP10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MMP7</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NT_proBNP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">PAI_1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Pancreatic_polypeptide</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">TRAIL_R3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p_tau</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Ab_42</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;glmnet&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                  </span><span class="n">family</span><span class="o">=</span><span class="s">&quot;binomial&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_CV_ROC</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">metric</span><span class="o">=</span><span class="s">&quot;ROC&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">tuneGrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expand.grid</span><span class="p">(</span>
+<span class="w">    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w">             </span><span class="c1"># LASSO (alpha = 1)</span>
+<span class="w">    </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="o">^</span><span class="nf">seq</span><span class="p">(</span><span class="m">-4</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span><span class="w">  </span><span class="c1"># search over lambda</span>
+<span class="w">  </span><span class="p">)</span>
+<span class="w"> </span><span class="p">)</span><span class="w">  </span>
+</code></pre></div>
+<p>We can see that based on ROC not the same lambda is selected. </p>
+<div class="highlight"><pre><span></span><code><span class="n">lasso_caret</span><span class="o">$</span><span class="n">bestTune</span><span class="o">$</span><span class="n">lambda</span>
+<span class="n">best_lambda</span>
+</code></pre></div>
+<p><div class="highlight"><pre><span></span><code><span class="n">lasso_model_caret_final</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glmnet</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">alzheimerTrain</span><span class="p">[,</span><span class="n">names_candidates</span><span class="p">]</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binomial&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="n">lambda</span><span class="o">=</span><span class="n">lasso_caret</span><span class="o">$</span><span class="n">bestTune</span><span class="o">$</span><span class="n">lambda</span><span class="p">)</span>
+
+<span class="n">coefs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">lasso_model_caret_final</span><span class="p">)</span>
+<span class="n">selected_vars_caret</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">coefs</span><span class="p">)[</span><span class="nf">which</span><span class="p">(</span><span class="n">coefs</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">0</span><span class="p">)][</span><span class="m">-1</span><span class="p">]</span>
+<span class="nf">unique</span><span class="p">(</span><span class="n">selected_vars_caret</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">selected_vars</span><span class="p">)</span>
+</code></pre></div>
+Therefore all the same variables have been selected.</p>
+<h2 id="ridge-regression">Ridge regression</h2>
+<p>Do the same now with Ridge regression.</p>
+<details class="done">
+<summary>Answer</summary>
+<p>We start by using the glmnet package and the glmnet function and find the best model</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">ridge_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glmnet</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">alzheimerTrain</span><span class="p">[,</span><span class="n">names_candidates</span><span class="p">]</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binomial&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w">  </span><span class="c1"># alpha = 0 is Ridge</span>
+
+<span class="c1"># Plot coefficient paths</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">ridge_model</span><span class="p">,</span><span class="w"> </span><span class="n">xvar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lambda&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</code></pre></div>
+Then we can use cross validation to choose the best lambda</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Cross-validated Ridge</span>
+<span class="n">y_numeric</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Impaired&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="n">cv_ridge</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cv.glmnet</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y_numeric</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="p">[,</span><span class="n">names_candidates</span><span class="p">]),</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binomial&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">nfolds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
+
+<span class="c1"># Plot cross-validation curve</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">cv_ridge</span><span class="p">)</span>
+
+<span class="c1"># Best lambda</span>
+<span class="n">best_lambda</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cv_ridge</span><span class="o">$</span><span class="n">lambda.min</span>
+</code></pre></div>
+<p>You can now observe how the coefficients are estimated from the CV lasso method</p>
+<div class="highlight"><pre><span></span><code><span class="n">coefs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">cv_ridge</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lambda.min&quot;</span><span class="p">)</span>
+<span class="n">coefs</span>
+</code></pre></div>
+<p>We then select the variables that are not 0 and create our final model. We can do this with standard glm or again with performance validation.</p>
+<div class="highlight"><pre><span></span><code><span class="n">selected_vars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">coefs</span><span class="p">)[</span><span class="nf">which</span><span class="p">(</span><span class="n">coefs</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">0</span><span class="p">)][</span><span class="m">-1</span><span class="p">]</span>
+<span class="n">alzheimer_selected</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="p">[,</span><span class="w"> </span><span class="n">selected_vars</span><span class="p">])</span>
+<span class="n">glm_fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">alzheimer_selected</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binomial&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>And then we have a look at the results</p>
+<div class="highlight"><pre><span></span><code><span class="nf">summary</span><span class="p">(</span><span class="n">glm_fit</span><span class="p">)</span>
+</code></pre></div>
+<p>We see that the coefficients for the selected columns are not alll significant. Why ?</p>
+<p>We will now use the caret package to have results for performance as well as model optimization. </p>
+<div class="highlight"><pre><span></span><code><span class="n">ridge_caret</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Alpha_1_Antitrypsin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B_Lymphocyte_Chemoattractant_BL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">FAS</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Fibrinogen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">GRO_alpha</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Gamma_Interferon_induced_Monokin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">IL_7</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MIF</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MMP10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MMP7</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NT_proBNP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">PAI_1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Pancreatic_polypeptide</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">TRAIL_R3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p_tau</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Ab_42</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="p">,</span><span class="w"> </span>
+<span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;glmnet&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="n">family</span><span class="o">=</span><span class="s">&quot;binomial&quot;</span><span class="p">,</span>
+<span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_CV_ROC</span><span class="p">,</span>
+<span class="n">metric</span><span class="o">=</span><span class="s">&quot;ROC&quot;</span><span class="p">,</span>
+<span class="n">tuneGrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expand.grid</span><span class="p">(</span>
+<span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w">             </span><span class="c1"># Ridge (alpha = 0)</span>
+<span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="o">^</span><span class="nf">seq</span><span class="p">(</span><span class="m">-4</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span><span class="w">  </span><span class="c1"># search over lambda</span>
+<span class="p">)</span>
+<span class="p">)</span><span class="w">  </span>
+</code></pre></div>
+<p>We can see that based on ROC not the same lambda is selected. </p>
+<div class="highlight"><pre><span></span><code><span class="n">ridge_caret</span><span class="o">$</span><span class="n">bestTune</span><span class="o">$</span><span class="n">lambda</span>
+<span class="n">best_lambda</span>
+</code></pre></div>
+<p><div class="highlight"><pre><span></span><code><span class="n">ridge_model_caret_final</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glmnet</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">alzheimerTrain</span><span class="p">[,</span><span class="n">names_candidates</span><span class="p">]</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binomial&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="n">lambda</span><span class="o">=</span><span class="n">ridge_caret</span><span class="o">$</span><span class="n">bestTune</span><span class="o">$</span><span class="n">lambda</span><span class="p">)</span>
+
+<span class="n">coefs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">ridge_model_caret_final</span><span class="p">)</span>
+<span class="n">selected_vars_caret</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">coefs</span><span class="p">)[</span><span class="nf">which</span><span class="p">(</span><span class="n">coefs</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">0</span><span class="p">)][</span><span class="m">-1</span><span class="p">]</span>
+<span class="nf">unique</span><span class="p">(</span><span class="n">selected_vars_caret</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">selected_vars</span><span class="p">)</span>
+</code></pre></div>
+Therefore all the same variables have been selected.</p>
+</details>
+<h2 id="elastic-net">Elastic Net</h2>
+<p>Do the same now with Elastic net regression. You will now see a difference in the caret function.</p>
+<details class="done">
+<summary>Answer</summary>
+<p>We start by using the glmnet package and the glmnet function and find the best model</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">elastic_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glmnet</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">alzheimerTrain</span><span class="p">[,</span><span class="n">names_candidates</span><span class="p">]</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binomial&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">  </span><span class="c1"># alpha between 0 and 1 is Elastic net</span>
+
+<span class="c1"># Plot coefficient paths</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">elastic_model</span><span class="p">,</span><span class="w"> </span><span class="n">xvar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lambda&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</code></pre></div>
+Then we can use cross validation to choose the best lambda</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Cross-validated Ridge</span>
+<span class="n">y_numeric</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Impaired&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="n">cv_elastic</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cv.glmnet</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y_numeric</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="p">[,</span><span class="n">names_candidates</span><span class="p">]),</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binomial&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">nfolds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
+
+<span class="c1"># Plot cross-validation curve</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">cv_elastic</span><span class="p">)</span>
+
+<span class="c1"># Best lambda</span>
+<span class="n">best_lambda</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cv_elastic</span><span class="o">$</span><span class="n">lambda.min</span>
+</code></pre></div>
+<p>You can now observe how the coefficients are estimated from the CV lasso method</p>
+<div class="highlight"><pre><span></span><code><span class="n">coefs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">cv_elastic</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lambda.min&quot;</span><span class="p">)</span>
+<span class="n">coefs</span>
+</code></pre></div>
+<p>We then select the variables that are not 0 and create our final model. We can do this with standard glm or again with performance validation.</p>
+<div class="highlight"><pre><span></span><code><span class="n">selected_vars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">coefs</span><span class="p">)[</span><span class="nf">which</span><span class="p">(</span><span class="n">coefs</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">0</span><span class="p">)][</span><span class="m">-1</span><span class="p">]</span>
+<span class="n">alzheimer_selected</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="p">[,</span><span class="w"> </span><span class="n">selected_vars</span><span class="p">])</span>
+<span class="n">glm_fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">alzheimer_selected</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binomial&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>And then we have a look at the results</p>
+<div class="highlight"><pre><span></span><code><span class="nf">summary</span><span class="p">(</span><span class="n">glm_fit</span><span class="p">)</span>
+</code></pre></div>
+<p>We see that the coefficients for the selected columns are not alll significant. Why ?</p>
+<p>We will now use the caret package to have results for performance as well as model optimization. The train function can optimize alpha and lambda.</p>
+<div class="highlight"><pre><span></span><code><span class="n">elastic_caret</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Alpha_1_Antitrypsin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B_Lymphocyte_Chemoattractant_BL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">FAS</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Fibrinogen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">GRO_alpha</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Gamma_Interferon_induced_Monokin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">IL_7</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MIF</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MMP10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MMP7</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NT_proBNP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">PAI_1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Pancreatic_polypeptide</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">TRAIL_R3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p_tau</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Ab_42</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="p">,</span><span class="w"> </span>
+<span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;glmnet&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="n">family</span><span class="o">=</span><span class="s">&quot;binomial&quot;</span><span class="p">,</span>
+<span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_CV_ROC</span><span class="p">,</span>
+<span class="n">metric</span><span class="o">=</span><span class="s">&quot;ROC&quot;</span><span class="p">,</span>
+<span class="n">tuneGrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">expand.grid</span><span class="p">(</span>
+<span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="m">20</span><span class="p">),</span><span class="w">             </span><span class="c1"># Ridge (alpha = 0)</span>
+<span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="o">^</span><span class="nf">seq</span><span class="p">(</span><span class="m">-4</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span><span class="w">  </span><span class="c1"># search over lambda</span>
+<span class="p">)</span>
+<span class="p">)</span><span class="w">  </span>
+</code></pre></div>
+<p>We can see that based on ROC not the same lambda is selected and the best alpha selected is neither 1 nor 0 nor 0.5</p>
+<div class="highlight"><pre><span></span><code><span class="n">elastic_caret</span><span class="o">$</span><span class="n">bestTune</span><span class="o">$</span><span class="n">lambda</span>
+<span class="n">best_lambda</span>
+<span class="n">elastic_caret</span><span class="o">$</span><span class="n">bestTune</span><span class="o">$</span><span class="n">alpha</span>
+</code></pre></div>
+<p><div class="highlight"><pre><span></span><code><span class="n">elastic_model_caret_final</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glmnet</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="o">$</span><span class="n">diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">alzheimerTrain</span><span class="p">[,</span><span class="n">names_candidates</span><span class="p">]</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;binomial&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elastic_caret</span><span class="o">$</span><span class="n">bestTune</span><span class="o">$</span><span class="n">alpha</span><span class="p">,</span><span class="n">lambda</span><span class="o">=</span><span class="n">elastic_caret</span><span class="o">$</span><span class="n">bestTune</span><span class="o">$</span><span class="n">lambda</span><span class="p">)</span>
+
+<span class="n">coefs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">coef</span><span class="p">(</span><span class="n">ridge_model_caret_final</span><span class="p">)</span>
+<span class="n">selected_vars_caret</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">coefs</span><span class="p">)[</span><span class="nf">which</span><span class="p">(</span><span class="n">coefs</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="m">0</span><span class="p">)][</span><span class="m">-1</span><span class="p">]</span>
+<span class="nf">unique</span><span class="p">(</span><span class="n">selected_vars_caret</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">selected_vars</span><span class="p">)</span>
+</code></pre></div>
+Therefore all the same variables have been selected.</p>
+</details>
+<h2 id="leave-one-out-method">Leave-one-out method</h2>
+<p>Try the leave-one-out method. Where do you need to adapt the code in the Control or the train function ?</p>
+<details class="done">
+<summary>Answer</summary>
+<div class="highlight"><pre><span></span><code><span class="n">fitControl_LOOCV_ROC</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">trainControl</span><span class="p">(</span><span class="c1">## 5-fold CV</span>
+<span class="w">                      </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;LOOCV&quot;</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">classProbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">    </span><span class="c1"># Needed for ROC</span>
+<span class="w"> </span><span class="n">summaryFunction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">twoClassSummary</span><span class="w"> </span><span class="p">)</span><span class="w">   </span>
+</code></pre></div>
+</details>
+<h2 id="random-forest">Random Forest</h2>
+<p>Again for random forest we can just process everything the same way but specifying that we want to use random forest or rf, but where ? changing the train or the control function?</p>
+<details class="done">
+<summary>Answer</summary>
+<p><div class="highlight"><pre><span></span><code><span class="n">rf_caret</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Alpha_1_Antitrypsin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B_Lymphocyte_Chemoattractant_BL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">FAS</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Fibrinogen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">GRO_alpha</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Gamma_Interferon_induced_Monokin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">IL_7</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MIF</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MMP10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MMP7</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NT_proBNP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">PAI_1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Pancreatic_polypeptide</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">TRAIL_R3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p_tau</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Ab_42</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="p">,</span><span class="w"> </span>
+<span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rf&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="n">trControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitControl_CV_ROC</span><span class="p">,</span>
+<span class="n">metric</span><span class="o">=</span><span class="s">&quot;ROC&quot;</span><span class="p">,</span>
+<span class="n">tuneLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span>
+<span class="p">)</span><span class="w">  </span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">rf_caret</span><span class="p">)</span>
+</code></pre></div>
+Have now a look at the plot with the parameters</p>
+<div class="highlight"><pre><span></span><code><span class="nf">plot</span><span class="p">(</span><span class="n">rf_caret</span><span class="p">)</span>
+</code></pre></div>
+<p>One can have a look at the importance of the variables </p>
+<div class="highlight"><pre><span></span><code><span class="n">var_imp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">varImp</span><span class="p">(</span><span class="n">rf_caret</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">var_imp</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<p>So with Random forest the method selects Ab_42, tau, p_tau, MMP10 and IL_7.</p>
+<p>Bonus : 
+One can visualise random forest trees using the reprtree package </p>
+<div class="highlight"><pre><span></span><code><span class="n">final_rf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rf_caret</span><span class="o">$</span><span class="n">finalModel</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">reprtree</span><span class="p">)</span>
+
+<span class="n">rf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">randomForest</span><span class="p">(</span><span class="n">diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Ab_42</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tau</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p_tau</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MMP10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">IL_7</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alzheimerTrain</span><span class="p">,</span><span class="w"> </span><span class="n">ntree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
+
+
+<span class="n">reprtree</span><span class="o">::</span><span class="nf">plot.getTree</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="c1">## difficult to visulize but in other datasets could be important</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

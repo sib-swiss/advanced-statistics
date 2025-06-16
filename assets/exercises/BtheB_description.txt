@@ -1,0 +1,48 @@
+########################################################
+“Beat the Blues” clinical trial
+########################################################
+
+This dataset was used as an example in Chapter 11 of “A Handbook of Statistical Analysis using R” by Brian S. Everitt and Torsten Hothorn.
+The authors include this data set in their HSAUR package on CRAN.
+
+# ------------------------------------------
+The Background
+
+“These data resulted from a clinical trial of an interactive multimedia program called ‘Beat the Blues’ designed to deliver cognitive behavioral 
+therapy (CBT) to depressed patients via a computer terminal. Full details are given here: Proudfoot et. al (2003), but in essence Beat the Blues 
+is an interactive program using multimedia techniques, in particular video vignettes.”
+
+“In a randomized controlled trial of the program, patients with depression recruited in primary care were randomized to either the Beating the Blues 
+program or to”Treatment as Usual" (TAU). Patients randomized to the BEat the Blues also received pharmacology and/or general practice (GP) support 
+and practical/social help,offered as part of treatment as usual, with the exception of any face-to-face counseling or psychological intervention. 
+Patients allocated to TAU received whatever treatment their GP prescribed. The latter included, besides any medication, discussion of problems with GP, 
+provisions of practical/social help, referral to a counselor, referral to a practice nurse, referral to mental health professionals, or further physical 
+examination.
+
+# ------------------------------------------
+The Research Question
+
+Net of other factors (use of antidepressants and length of the current episode), does the Beat-the-Blues program results in better depression 
+trajectories over treatment as usual ?
+
+# ------------------------------------------
+The Data
+
+The variables are as follows:
+
+    drug did the patient take anti-depressant drugs (No or Yes)
+    length the length of the current episode of depression, a factor with levels:
+        “<6m” less than six months
+        “>6m” more than six months
+    treatment treatment group, a factor with levels:
+        “TAU” treatment as usual
+        “BtheB” Beat the Blues
+    bdi.pre Beck Depression Inventory II, before treatment
+    bdi.2m Beck Depression Inventory II, after 2 months
+    bdi.4m Beck Depression Inventory II, after 4 months
+    bdi.6m Beck Depression Inventory II, after 6 months
+    bdi.8m Beck Depression Inventory II, after 8 months
+
+The Beck Depression Inventory (BDI, BDI-1A, BDI-II), created by Aaron T. Beck, is a 21-question multiple-choice self-report inventory, 
+one of the most widely used psychometric tests for measuring the severity of depression. Its development marked a shift among mental health 
+professionals, who had until then, viewed depression from a psychodynamic perspective, instead of it being rooted in the patient's own thoughts. 
