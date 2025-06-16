@@ -20,10 +20,11 @@ In this section, you will find the R code that we will use during the course. We
 
 
 Slides of lectures:
+[Download slides Intro Lecture](assets/pdf/Intro_ASM25.pdf){: .md-button }
 
-[Download slides Morning Lecture](assets/pdf/day1a.pdf){: .md-button }
+[Download slides Morning Lecture](assets/pdf/Day1a-LinearRegressionAndBeyond-2025.pdf){: .md-button }
 
-[Download slides Afternoon Lecture](assets/pdf/day1b.pdf){: .md-button }
+[Download slides Afternoon Lecture](assets/pdf/Day1b-BeyondLinearity-2025.pdf){: .md-button }
 
 Data for exercises:
 

@@ -14,8 +14,8 @@ In this section, you will find the R code that we will use during the course. We
 
 Slides of lectures:
 
-[Download slides](assets/pdf/GAM.pdf){: .md-button }
-[Download slides afternoon](assets/pdf/Crossvalidation.pdf){: .md-button }
+[Download slides morning](assets/pdf/Day4-Caret-Day-2025.pdf){: .md-button }
+[Download slides afternoon](assets/pdf/Day4-GAM-2025.pdf){: .md-button }
 
 ## Alzheimer Data
 
