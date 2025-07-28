@@ -402,8 +402,8 @@ We then select the variables that are not 0 and create our final model. We can d
 
 ```r
 selected_vars <- rownames(coefs)[which(coefs != 0)][-1]
-alzheimer_selected <- as.matrix(alzheimerTrain[, selected_vars])
-glm_fit <- glm(alzheimerTrain$diagnosis ~ alzheimer_selected, family = "binomial")
+alzheimer_selected <- alzheimerTrain[, selected_vars])
+glm_fit <- glm(diagnosis ~ alzheimer_selected, family = "binomial")
 ```
 
 And then we have a look at the results
@@ -412,7 +412,7 @@ And then we have a look at the results
 summary(glm_fit)
 ```
 
-We see that the coefficients for the selected columns are not alll significant. Why ?
+We see that the coefficients for the selected columns are not all significant. Why ?
 
 We will now use the caret package to have results for performance as well as model optimization. 
 
