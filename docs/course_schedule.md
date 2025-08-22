@@ -10,7 +10,7 @@
 | block 1 	| 9:30 AM  	| 10:30 AM 	| [Simple and multiple linear regression](day1.md) |
 |         	| 10:30 AM 	| 11:00 AM 	| BREAK                          	|
 | block 2 	| 11:00 AM 	| 12:30 PM 	| []() 	     |
-|         	| 12:30 PM 	| 1:30 PM  	| BREAK                          	|
+|         	| 12-12:30 PM 	| 1-1:30 PM  	| BREAK                          	|
 | block 3 	| 1:30 PM  	| 3:00 PM  	| []()             	 |
 |         	| 3:00 PM  	| 3:30 PM  	| BREAK                          	|
 | block 4 	| 3:30 PM  	| 5:00 PM  	| []()                  |
@@ -22,7 +22,7 @@
 | block 1 	| 9:00 AM  	| 10:30 AM 	| [Generalized linear models](day2.md) 	|
 |         	| 10:30 AM 	| 11:00 AM 	| BREAK                               	|
 | block 2 	| 11:00 AM 	| 12:30 PM 	| Further exercises  |
-|         	| 12:30 PM 	| 1:30 PM  	| BREAK                               	|
+|         	| 12-12:30 PM 	| 1-1:30 PM  	| BREAK                         	|
 | block 3 	| 1:30 PM  	| 3:00 PM  	| []()      	|
 |         	| 3:00 PM  	| 3:30 PM  	| BREAK                               	|
 | block 4 	| 3:30 PM  	| 5:00 PM  	| Further exercises	|
@@ -34,7 +34,7 @@
 | block 1 	| 9:00 AM  	| 10:30 AM 	| [Mixed-effects linear models](day3.md)	|
 |         	| 10:30 AM 	| 11:00 AM 	| BREAK                               	|
 | block 2 	| 11:00 AM 	| 12:30 PM 	| []()            	|
-|         	| 12:30 PM 	| 1:30 PM  	| BREAK                               	|
+|         	| 12-12:30 PM 	| 1-1:30 PM  	| BREAK                          	|
 | block 3 	| 1:30 PM  	| 3:00 PM  	| [Longitudinal data analysis](day3.md)  |
 |         	| 3:00 PM  	| 3:30 PM  	| BREAK                               	|
 | block 4 	| 3:30 PM  	| 5:00 PM  	| []() 	|
@@ -46,7 +46,7 @@
 | block 1 	| 9:00 AM  	| 10:30 AM 	| [Performance and Regularizations](day4.md)	|
 |         	| 10:30 AM 	| 11:00 AM 	| BREAK                               	|
 | block 2 	| 11:00 AM 	| 12:30 PM 	| []()            	|
-|         	| 12:30 PM 	| 1:30 PM  	| BREAK                               	|
+|         	|12-12:30 PM 	| 1-1:30 PM  	| BREAK                                	|
 | block 3 	| 1:30 PM  	| 3:00 PM  	| []()  |
 |         	| 3:00 PM  	| 3:30 PM  	| BREAK                               	|
 | block 4 	| 3:30 PM  	| 5:00 PM  	| []() 	|
