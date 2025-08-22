@@ -6,8 +6,8 @@
 
 | block   	| start    	| end      	| subject                        	|
 |---------	|----------	|----------	|--------------------------------	|
-| introduction 	| 9:15 AM  	| 9:30 AM 	| [Simple and multiple linear regression](day1.md) |
-| block 1 	| 9:30 AM  	| 10:30 AM 	| []() |
+| introduction 	| 9:00 AM  	| 9:30 AM 	| Intro |
+| block 1 	| 9:30 AM  	| 10:30 AM 	| [Simple and multiple linear regression](day1.md) |
 |         	| 10:30 AM 	| 11:00 AM 	| BREAK                          	|
 | block 2 	| 11:00 AM 	| 12:30 PM 	| []() 	     |
 |         	| 12:30 PM 	| 1:30 PM  	| BREAK                          	|
