@@ -33,7 +33,7 @@ library(caret)
 library(pROC)
 library(ROCR)
 library(AppliedPredictiveModeling)
-data(AzheimerDisease)
+data(AlzheimerDisease)
 
 alzheimer <- cbind(predictors,diagnosis)
 summary(alzheimer) ## realize male is not a factor
@@ -101,8 +101,9 @@ fitControl_RCV_accuracy <- trainControl(
                            repeats= 10
                           )
 ```
-We could also choose ourselves the folds using the function 
-It is important to use the set the classProbs = TRUE in order to have in each folds controls and impared samples.
+We could also choose ourselves the folds using the function.
+It is important to set the classProbs = TRUE, in order to have in each folds controls and impared samples.
+
 ```r
 folds <- createFolds(y = alzheimerTrain$diagnosis, k = 5, returnTrain = TRUE)
 fitControl_CV_folds <- trainControl(## 5-fold CV
@@ -158,7 +159,7 @@ By default for classification data it will choose the Accuracy as the method for
 We start by using the default.
 
 ```r
-glmFit1 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain, 
+glmFit1 <- train(diagnosis ~ Creatine_Kinase_MB, data = alzheimerTrain, 
                  method = "glm", 
                  family=binomial(link="logit"),
                  trControl = fitControl_CV_accuracy
@@ -174,7 +175,7 @@ summary(glmFit1)
 We realise that this is the same as performing our standard glm
 
 ```r
-summary(glm(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain, 
+summary(glm(diagnosis ~ Creatine_Kinase_MB, data = alzheimerTrain, 
   family=binomial(link="logit")))
 ```
 
@@ -199,7 +200,7 @@ mean(glmFit1$resample$Accuracy)
 Let us do the fit now with the repeated CV
 
 ```r
-glmFit2 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain, 
+glmFit2 <- train(diagnosis ~ Creatine_Kinase_MB, data = alzheimerTrain, 
                  method = "glm", 
                  family=binomial(link="logit"),
                  trControl = fitControl_RCV_accuracy
@@ -212,7 +213,7 @@ Check what it changed in the section "resample"!
 Now we can change the default measure if instead of the accuracy we would like to know more about the variability of the sensitivity and specificity. For that we only need to change the trControl with the appropriate control function and we will know.
 
 ```r
-glmFit3 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain, 
+glmFit3 <- train(diagnosis ~ Creatine_Kinase_MB, data = alzheimerTrain, 
                  method = "glm", 
                  family=binomial(link="logit"),
                  trControl = fitControl_RCV_ROC
@@ -224,7 +225,7 @@ You must have gotten a Warning message, why ?
 ??? done "Answer"
     The default metric is Accuracy and not ROC, this is therefore just a warning saying you forgot to change the metric parameter. Here is how it would be correct
     ```r
-    glmFit3 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain, 
+    glmFit3 <- train(diagnosis ~ Creatine_Kinase_MB, data = alzheimerTrain, 
                  method = "glm", 
                  family=binomial(link="logit"),
                  trControl = fitControl_RCV_ROC,
@@ -232,7 +233,17 @@ You must have gotten a Warning message, why ?
                  )
     ```
 
-Now check the result section 
+Now we can plot the ROC curve:
+```{r}
+library(pROC)
+
+roc_obj <- roc(glmFit4$pred$obs, glmFit4$pred$Impaired)  # assuming "Impaired" is the positive class
+plot(roc_obj, col = "blue", lwd = 2, main = "ROC Curve")
+auc(roc_obj)  # prints the AUC value
+```
+
+Check also the result section
+
 ```r
 glmFit3$results
 ```
@@ -243,7 +254,7 @@ And what changes if you use the "fitControl_RCV_ROC_PRED" ?
 
 ??? done "Answer"
     ```r
-    glmFit4 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain, 
+    glmFit4 <- train(diagnosis ~ Creatine_Kinase_MB, data = alzheimerTrain, 
                  method = "glm", 
                  family=binomial(link="logit"),
                  trControl = fitControl_RCV_ROC_PRED,
@@ -308,19 +319,19 @@ alzheimerTrain_NA[15,1]<-NA
 summary(alzheimerTrain_NA)
 ```
 By default glm in base R will give you an Error message if you have NAs
+
 ```r
-glmFit4 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain_NA, 
+glmFit4 <- train(diagnosis ~ Creatine_Kinase_MB, data = alzheimerTrain_NA, 
                  method = "glm", 
                  family=binomial(link="logit"),
                  trControl = fitControl_RCV_ROC_PRED,
                  metric="ROC"
                  )
-
 ```
 
 So we need to do some imputation (or tell glm what to do with the NAs, via na.action = na.omit)
 ```r
-glmFit4 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain_NA, 
+glmFit4 <- train(diagnosis ~ Creatine_Kinase_MB, data = alzheimerTrain_NA, 
                  method = "glm", 
                  family=binomial(link="logit"),
                  trControl = fitControl_RCV_ROC_PRED,
@@ -346,7 +357,7 @@ predictors_imputed <- predict(pre_proc, newdata = alzheimerTrain_NA[,setdiff(col
 data_imputed <- cbind(predictors_imputed, diagnosis = alzheimerTrain_NA$diagnosis)
 
 
-glmFit4 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = data_imputed, 
+glmFit4 <- train(diagnosis ~ Creatine_Kinase_MB, data = data_imputed, 
                  method = "glm", 
                  family=binomial(link="logit"),
                  trControl = fitControl_CV_ROC,
@@ -400,10 +411,11 @@ coefs
 
 We then select the variables that are not 0 and create our final model. We can do this with standard glm or again with performance validation.
 
-```r
+```{r}
 selected_vars <- rownames(coefs)[which(coefs != 0)][-1]
-alzheimer_selected <- alzheimerTrain[, selected_vars])
-glm_fit <- glm(diagnosis ~ alzheimer_selected, family = "binomial")
+alzheimer_selected <- alzheimerTrain[, selected_vars]
+alzheimer_selected$diagnosis = alzheimerTrain$diagnosis
+glm_fit <- glm(diagnosis ~., data= alzheimer_selected,family = "binomial")
 ```
 
 And then we have a look at the results
