@@ -489,7 +489,7 @@ fit.cs.1knot$fitted.values[2] ## this gives you the same
 
 
 plot(range,bs(range, knots=575)[,1]) ## this is a 3rd degree function 
-plot(range,bs(range, knots=575)[,1])  ## this as well etc 
+plot(range,bs(range, knots=575)[,2])  ## this as well etc 
 
 
 
@@ -497,6 +497,7 @@ plot(range,bs(range, knots=575)[,1])  ## this as well etc
 ## of the values of x, the estimated coefficient correspond to the coefficient
 ## of the bspline functions.
 ## each of the bspline function or cubic here
+
 fit.cs.1knot <- lm( logratio ~ bs(range, knots=575) )
 summary(fit.cs.1knot)
 
