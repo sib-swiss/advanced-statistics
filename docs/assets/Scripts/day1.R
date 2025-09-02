@@ -2,9 +2,7 @@
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2023
-# GLM
-
+# Advanced Statistics: Statistical Modeling; 2025
 
 
 ########################################################
@@ -13,7 +11,7 @@
 
 library(ggplot2)
 
-class <- read.table("exercises/class.txt")
+class <- read.table("/Users/rachelmarcone/Downloads/advanced-statistics/docs/assets/exercises/class.txt")
 
 summary(class[,-1])
 
@@ -64,7 +62,7 @@ summary(model.5)
 ########################################################
 
 library(ISwR)
-data(hellung)
+data(hellung) 
 
 plot(hellung$diameter, hellung$conc, 
      xlab="Diameter", ylab="Concentration")
@@ -88,6 +86,7 @@ modellog <- lm(logconc ~ diameter, data=hellung)
 summary(modellog)
 
 abline(modellog)
+influencePlot(modellog, xlab="Hat-Values", ylab="Studentized Residuals")
 
 plot(fitted(modellog), residuals(modellog))
 qqnorm(residuals(modellog))
@@ -97,6 +96,15 @@ ks.test(residuals(modellog), "pnorm")
 modellog.2 <- lm(logconc ~ diameter + glucose, data=hellung)
 summary(modellog.2)
 
+qqnorm(residuals(modellog.2))
+qqline(residuals(modellog.2))
+ks.test(residuals(modellog.2), "pnorm")
+
+influencePlot(modellog.2, xlab="Hat-Values", ylab="Studentized Residuals")
+## this is less good but probably do to inbalance of the glucose levels
+## should do a random subsampling towards similar numbers
+## then if the fit there is good re-do this a number of times
+## to get a good idea of the parameters
 
 
 ########################################################
@@ -218,6 +226,8 @@ plot(range,logratio, ylab="response", xlab="X")
 
 # fit a cubic model
 fit.cubic <- lm( logratio ~ poly(range,3) )
+#,raw=T) ##provides teh same
+# as lm(formula = logratio ~ range + I(range^2) + I(range^3))
 
 # set up the grid
 range.range <- range(range)
@@ -234,7 +244,9 @@ plot(fit.cubic$fitted.values, fit.cubic$residuals,
 scatter.smooth(fit.cubic$fitted.values, fit.cubic$residuals,
                ylim=c(-max(range(fit.cubic$residuals)),max(range(fit.cubic$residuals))),
                ylab="residuals", xlab="fitted values",
-               lpars=list(col="blue", lwd=2, lty=2))
+               lpars=list(col="blue", lwd=2, lty=2)
+               #,span=0.2
+               )
 abline(a=0, b=0, col="blue", lwd=2)
 
 
@@ -464,6 +476,30 @@ abline(v=c(550,600), col="blue", lwd=2, lty=2)
 # fit cubic splines with 1 internal knot
 fit.cs.1knot <- lm( logratio ~ bs(range, knots=575) )
 summary(fit.cs.1knot)
+
+## to understand the fitted value we can do the comptation manually for for example the
+## second value :
+bs(range, knots=575)[2,1]* fit.cs.1knot$coefficients[2]+ 
+  bs(range, knots=575)[2,2]* fit.cs.1knot$coefficients[3]+
+  bs(range, knots=575)[2,3]* fit.cs.1knot$coefficients[4]+
+  bs(range, knots=575)[2,4]* fit.cs.1knot$coefficients[5] + 
+  fit.cs.1knot$coefficients[1] ## intercept
+
+fit.cs.1knot$fitted.values[2] ## this gives you the same 
+
+
+plot(range,bs(range, knots=575)[,1]) ## this is a 3rd degree function 
+plot(range,bs(range, knots=575)[,1])  ## this as well etc 
+
+
+
+## Hence Bspline matrix values gives you the value of the bspline functions at each
+## of the values of x, the estimated coefficient correspond to the coefficient
+## of the bspline functions.
+## each of the bspline function or cubic here
+fit.cs.1knot <- lm( logratio ~ bs(range, knots=575) )
+summary(fit.cs.1knot)
+
 
 # plot raw data
 plot(range,logratio, ylab="response", xlab="X")

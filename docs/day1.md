@@ -254,7 +254,7 @@ abline(fit.linear, lwd=2, col="red")
 
 # let's also look at residuals vs. fitted values
 plot(fit.linear$fitted.values, fit.linear$residuals,
-     ylim=c(-max(range(fit.linear$residuals)),max(range(fit.linear$residuals))),
+     ylim=c(-max(abs(range(fit.linear$residuals))),max(abs(range(fit.linear$residuals)))),
      ylab="residuals", xlab="fitted values")
 ```
 <figure>
@@ -270,7 +270,7 @@ Now you realise something seems off. Can you try to show it visually ?
     # another way to assess the residual plot is to use a scatterplot smoother that captures the trend in residuals
     # scatter.smooth uses loess algorithm for local weighted regression
     scatter.smooth(fit.linear$fitted.values, fit.linear$residuals,
-    ylim=c(-max(range(fit.linear$residuals)),max(range(fit.linear$residuals))),
+    ylim=c(-max(abs(range(fit.linear$residuals))),max(abs(range(fit.linear$residuals)))),
                ylab="residuals", xlab="fitted values",
                lpars=list(col="blue", lwd=2, lty=2))
     abline(a=0, b=0, col="blue", lwd=2)
@@ -291,7 +291,7 @@ We will plot the estimated fit. To do so, we need to predict the fit at desired 
 plot(dens,log(hardness), ylab="response", xlab="X")
 
 # fit a quadratic model
-fit.quad <- lm( log(hardness) ~ poly(dens, degree=2) ) 
+fit.quad <- lm( log(hardness) ~ poly(dens, degree=2,raw=T) ) 
 
 # plot the estimated linear fit
 # create a grid
@@ -312,7 +312,7 @@ Check the residuals vs. fitted values plot
 
 ```r
 plot(fit.quad$fitted.values, fit.quad$residuals, 
-     ylim=c(-max(range(fit.quad$residuals)),max(range(fit.quad$residuals))), 
+     ylim=c(-max(abs(range(fit.quad$residuals))),max(abs(range(fit.quad$residuals)))), 
      ylab="residuals", xlab="fitted values")
 abline(a=0, b=0, col="blue", lwd=2)
 ```
@@ -329,7 +329,7 @@ We will come back to intervals later. Let's move on with a LOESS smoothing of ou
 
 ```r
 scatter.smooth(fit.quad$fitted.values, fit.quad$residuals,
-               ylim=c(-max(range(fit.quad$residuals)),max(range(fit.quad$residuals))),
+               ylim=c(-max(abs(range(fit.quad$residuals))),max(abs(range(fit.quad$residuals)))),
                ylab="residuals", xlab="fitted values",
                lpars=list(col="blue", lwd=2, lty=2))
 abline(a=0, b=0, col="blue", lwd=2)
@@ -362,7 +362,7 @@ Now it should be "easy" to fit a polynomial of degree 3 as well as setting a gri
 
     ```r
     # fit a cubic model
-    fit.cubic <- lm( logratio ~ poly(range,3) )
+    fit.cubic <- lm( logratio ~ poly(range,3,raw=T) )
 
     # set up the grid
     range.range <- range(range)
@@ -384,7 +384,7 @@ What about the residuals ? Here also for the experts we hide the answer, for tho
      ylim=c(-max(range(fit.cubic$residuals)),max(range(fit.cubic$residuals))), 
      ylab="residuals", xlab="fitted values")
     scatter.smooth(fit.cubic$fitted.values, fit.cubic$residuals,
-               ylim=c(-max(range(fit.cubic$residuals)),max(range(fit.cubic$residuals))),
+               ylim=c(-max(abs(range(fit.cubic$residuals))),max(abs(range(fit.cubic$residuals)))),
                ylab="residuals", xlab="fitted values",
                lpars=list(col="blue", lwd=2, lty=2))
     abline(a=0, b=0, col="blue", lwd=2)
@@ -403,7 +403,7 @@ Plot the data and fit a polynomial of degree 4. Check the prediction and assumpt
     plot(range,logratio, ylab="response", xlab="X")
 
     # fit a quadratic model
-    fit.quad <- lm( logratio ~ poly(range,4) )
+    fit.quad <- lm( logratio ~ poly(range,4,raw=T) )
 
     # set up the grid
     range.range <- range(range)
@@ -415,10 +415,10 @@ Plot the data and fit a polynomial of degree 4. Check the prediction and assumpt
 
     # residual plot
     plot(fit.quad$fitted.values, fit.quad$residuals, 
-     ylim=c(-max(range(fit.quad$residuals)),max(range(fit.quad$residuals))), 
+     ylim=c(-max(abs(range(fit.quad$residuals))),max(range(fit.quad$residuals))), 
      ylab="residuals", xlab="fitted values")
     scatter.smooth(fit.quad$fitted.values, fit.quad$residuals,
-               ylim=c(-max(range(fit.quad$residuals)),max(range(fit.quad$residuals))),
+               ylim=c(-max(abs(range(fit.quad$residuals))),max(range(fit.quad$residuals))),
                ylab="residuals", xlab="fitted values",
                lpars=list(col="blue", lwd=2, lty=2))
     abline(a=0, b=0, col="blue", lwd=2)
@@ -438,7 +438,7 @@ What is next ? Plot the data and fit a polynomial of degree 10. Check the predic
     plot(range,logratio, ylab="response", xlab="X")
 
     # fit a polynomial degree 10
-    fit.poly10 <- lm( logratio ~ poly(range,10) )
+    fit.poly10 <- lm( logratio ~ poly(range,10,raw=T) )
 
     # set up the grid
     range.range <- range(range)
@@ -450,10 +450,10 @@ What is next ? Plot the data and fit a polynomial of degree 10. Check the predic
 
     # residual plot
     plot(fit.poly10$fitted.values, fit.poly10$residuals, 
-     ylim=c(-max(range(fit.poly10$residuals)),max(range(fit.poly10$residuals))), 
+     ylim=c(-max(abs(range(fit.poly10$residuals))),max(range(fit.poly10$residuals))), 
      ylab="residuals", xlab="fitted values")
     scatter.smooth(fit.poly10$fitted.values, fit.poly10$residuals,
-               ylim=c(-max(range(fit.poly10$residuals)),max(range(fit.poly10$residuals))),
+               ylim=c(-max(abs(range(fit.poly10$residuals))),max(range(fit.poly10$residuals))),
                ylab="residuals", xlab="fitted values",
                lpars=list(col="blue", lwd=2, lty=2))
     abline(a=0, b=0, col="blue", lwd=2)
@@ -477,7 +477,7 @@ Using the prediction with the polynomial of degree 3 try to calculate the confid
 plot(range,logratio, ylab="response", xlab="X")
 
 # fit the model
-fit.cubic <- lm( logratio ~ poly(range,3) )
+fit.cubic <- lm( logratio ~ poly(range,3,raw=T) )
 
 # set up the grid
 range.range <- range(range)
@@ -538,6 +538,7 @@ lines(range.grid, predict_fit.pwsf$fit - 2 * predict_fit.pwsf$se.fit, col="red",
 <figure>
   <img src="../assets/images/day1_13.png" width="700"/>
   </figure>
+  
 ### Piecewise linear fits
 
 ```r
@@ -574,8 +575,8 @@ abline(v=575, col="blue", lwd=2, lty=2)
 ### Piecewise cubic fits
 
 ```r
-fit.left.cubic.1knot <- lm( logratio ~ poly(range,3), subset=(range<575) )
-fit.right.cubic.1knot <- lm( logratio ~ poly(range,3), subset=(range>=575) )
+fit.left.cubic.1knot <- lm( logratio ~ poly(range,3,raw=T), subset=(range<575) )
+fit.right.cubic.1knot <- lm( logratio ~ poly(range,3,raw=T), subset=(range>=575) )
 
 summary(fit.left.cubic.1knot)
 summary(fit.right.cubic.1knot)
