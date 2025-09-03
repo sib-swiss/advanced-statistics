@@ -2,7 +2,7 @@
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2023
+# Advanced Statistics: Statistical Modeling; 2025
 # Longitudinal Data Analysis
 
 library(lattice)
@@ -18,7 +18,7 @@ library(lattice)
 library(nlme)
 library(splines)
 # load the "tolerance" data set: "tolerance.RData"
-load("tolerance.RData")
+load("/exercises/tolerance.RData")
 
 str(tolerance_untidy)
 str(tolerance_tidy)
@@ -62,8 +62,10 @@ xyplot(tolerance ~ age | as.factor(id), ylim=c(0,4), data=tolerance_tidy,
 )
 
 # extract summary from individual linear fits
-lm.summary <- by(tolerance_tidy, tolerance_tidy$id, function(x) summary(lm(tolerance ~ time, data=x)))
-lm.summary[1]
+lm.summary <- by(tolerance_tidy, tolerance_tidy$id, 
+                 function(x) summary(lm(tolerance ~ time, 
+                                        data=x)))
+lm.summary[[1]]
 lm.summary[[1]]$coefficients
 
 # fetch intercepts
@@ -72,6 +74,9 @@ all.intercept <- sapply(lm.summary, function(x) x$coefficients[1,1])
 # fetch slopes
 all.slope <- sapply(lm.summary, function(x) x$coefficients[2,1])
 
+# fetch p-values of slopes
+all.slope.p <- sapply(lm.summary, function(x) x$coefficients[2,4])
+
 # fetch residual variances, i.e. (Residual standard error)^2
 all.resVar <- sapply(lm.summary, function(x) (x$sigma)^2)
 
@@ -79,7 +84,7 @@ all.resVar <- sapply(lm.summary, function(x) (x$sigma)^2)
 all.r2 <- sapply(lm.summary, function(x) x$r.squared)
 
 # combine them in one matrix
-my.summary <- rbind(all.intercept, all.slope, all.resVar, all.r2)
+my.summary <- rbind(all.intercept, all.slope,all.slope.p, all.resVar, all.r2)
 my.summary
 
 # remove the junk
@@ -265,7 +270,7 @@ rm(median.exposure)
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2023
+# Advanced Statistics: Statistical Modeling; 2025
 # Mixed models
 
 # The purpose of this TP is to carry out some mixed model analyses using R. 

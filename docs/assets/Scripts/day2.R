@@ -2,7 +2,7 @@
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; Aug 2023
+# Advanced Statistics: Statistical Modeling; Sep 2025
 # GLM
 
 
@@ -12,7 +12,7 @@
 ########################################################
 
 # Load and explore the dataset babies.
-load("babies.RData")
+load("/exercises/babies.RData")
 attach(babies)
 
 # The data records the birth weight of 1174 babies along with information on the mother and the pregnancy.
@@ -151,7 +151,7 @@ residualPlots(poisson.glm)
 # "A Modern Approach to Regression with R" by Simon J Sheather.
 # Download the file and import it into R.
 
-michelin <- read.delim("MichelinFood.txt", header=TRUE, sep="\t", as.is=TRUE)
+michelin <- read.delim("exercises/MichelinFood.txt", header=TRUE, sep="\t", as.is=TRUE)
 michelin
 
 # The Food column represents the ranking of the food. 
@@ -201,7 +201,10 @@ acf(qres)
 # ------------------------------------------
 # 5. Check the model for potential influencial observations.
 
+d <- influencePlot(glm.mich,id=list(method="identify")) ## clickable when done
+## press "finish"
 influencePlot(glm.mich)
+
 
 
 
@@ -229,6 +232,9 @@ glm.moth.1 <- glm(cbind(numalive, numdead) ~ sex + dose, data = moth, family = b
 summary(glm.moth.1)
 glm.moth.2 <- glm(cbind(numalive, numdead) ~ sex * dose, data = moth, family = binomial)
 summary(glm.moth.2)
+
+glm.moth.3 <- glm(cbind(numalive, numdead) ~ sex : dose + dose, data = moth, family = binomial)
+summary(glm.moth.3)
 
 
 # ------------------------------------------
@@ -443,6 +449,8 @@ glm.cancer.bin <- glm(cbind(success, failures) ~ city + age, family = "binomial"
                       data = eba1977)
 summary(glm.cancer.bin)
 
+glm.cancer.bin.age <- glm(cbind(success, failures) ~ age, family = "binomial",
+                      data = eba1977)
 
 # ------------------------------------------
 # 4. Compare with the Poisson model.

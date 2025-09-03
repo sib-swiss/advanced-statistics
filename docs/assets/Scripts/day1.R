@@ -11,7 +11,7 @@
 
 library(ggplot2)
 
-class <- read.table("/Users/rachelmarcone/Downloads/advanced-statistics/docs/assets/exercises/class.txt")
+class <- read.table("/exercises/class.txt")
 
 summary(class[,-1])
 
