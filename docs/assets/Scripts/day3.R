@@ -329,7 +329,7 @@ ant111b.lmer
 #   . ??2residual = 0.762 = 0.577
 
 mean(ant111b$harvwt)
-sqrt(var(ant111b$harvwt))
+sqrt(var(ant111b$harvwt)) 
 fixef(ant111b.lmer)
 # The numbers provided by ranef aren't estimates of the random effects
 # They are called BLUPs (Best Linear Unbiased Predictors) of the random effects
@@ -345,7 +345,7 @@ print(data.frame(mean = means, fitted = siteFit,fitted.lm=siteFit.lm))
 # They are shrinkage estimates that are between the grand (overall) mean 
 # and the individual sample means
 
-# site	mean	fitted		site	ranef	
+# site	mean	fitted 		site	ranef	
 # DBAN	4.885	4.851		  DBAN	0.559	  0.061
 # LFAN	4.208	4.212		  LFAN	-0.079	0.061
 # NSAN	2.090	2.217		  NSAN	-2.075	0.061
@@ -357,9 +357,10 @@ print(data.frame(mean = means, fitted = siteFit,fitted.lm=siteFit.lm))
 # var	  2.512	2.232		  var	  2.232	
 # stdev	1.585	1.494		  stdev	1.494	
 
-dotplot(ranef(ant111b.lmer, condVar = TRUE), strip = FALSE)[[1]] 
+p <-dotplot(ranef(ant111b.lmer, condVar = TRUE), strip = FALSE)[[1]] 
 
-
+## attr(ranef(ant111b.lmer, condVar = TRUE)$site, "postVar") 
+## gives you the values computed
 # ------------------------------------------
 # Now, we will do the same type of modeling but this time with the ears variable as the outcome.
 
@@ -397,8 +398,8 @@ print(data.frame(mean = means, fitted = siteFit))
 
 # Give the estimated variance for each source of variation, ??2site and ??2residual.
 
-variance.site =  6.760^2 = 45.696
-variance.residual = 3.980^2 = 15.839 
+#variance.site =  6.760^2 = 45.696
+#variance.residual = 3.980^2 = 15.839 
 
 # Which source of variation is larger ? 
 # What proportion of variation is due to differences between sites ?
@@ -432,7 +433,7 @@ shapiro.test(resid(ears.lmer))
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2023
+# Advanced Statistics: Statistical Modeling; 2025
 # Longitudinal Data Analysis
 
 library(lattice)
@@ -495,17 +496,23 @@ anova(fit.01,fit.02)
 # We have no reason to believe that individuals should share a baseline value 
 # (i.e. fixed intercept), but let's try it anyways for the sake of completeness
 
-# fit the 1st model
+# fit the 3rd model
 fit.03 <- gls(tolerance ~ time, data=tolerance_tidy, method="ML") # using centered age (i.e. time) for increased interpretability
 summary(fit.03)
+
+tolerance_tidy$id2 <- factor(tolerance_tidy$id)
+fit.03prime <- gls(tolerance ~ time +time:id2 + id2, data=tolerance_tidy, method="ML") # using centered age (i.e. time) for increased interpretability
+summary(fit.03prime)
 
 # plot fit.03
 plot(tolerance_tidy$age, tolerance_tidy$tolerance, ylim=c(0,4), ylab="tolerance", xlab="age")
 fit.03$coefficients
 abline( gls(tolerance ~ age, data=tolerance_tidy, method="ML"), col="red", lwd=2)
 
-# fit the 2nd model
+# fit the 4th model
 fit.04 <- lme(tolerance ~ time, random = (~ -1 + time | id), data=tolerance_tidy, method="ML")
+#fit.04 <- lmer(tolerance ~ time +( -1 + time | id), data=tolerance_tidy, REML=F) ## same for lmer
+
 summary(fit.04)
 fit.04$coefficients
 
@@ -532,8 +539,8 @@ anova(fit.03,fit.04)
 # What if instead we had allowed for both random intercepts and random slopes?
 
 # the 1st model is same as fit.03
-# fit the 2nd model
-fit.05 <- lme(tolerance ~ time, random = (~ time | id), data=tolerance_tidy, method="ML")
+# fit the 5nd model
+fit.05 <- lme(tolerance ~ time, random = (~ time | id ), data=tolerance_tidy, method="ML")
 summary(fit.05)
 
 # extract both fixed and random parameters
@@ -587,7 +594,7 @@ fit.12 <- lme(tolerance ~  exposure + time, random = (~ time | id), data=toleran
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2023
+# Advanced Statistics: Statistical Modeling; 2025
 # Longitudinal Data Analysis
 
 library(lattice)
@@ -598,7 +605,7 @@ library(splines)
 ########################################################
 
 # load the "BtheB_tidy" data set: "BtheB_tidy.RData"
-load("BtheB_tidy.RData")
+load("exercises/BtheB_tidy.RData")
 
 # examine the data 
 str(BtheB.tidy)
@@ -698,7 +705,7 @@ summary(fit.10)
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2023
+# Advanced Statistics: Statistical Modeling; 2025
 # Longitudinal Data Analysis
 
 library(lattice)
@@ -781,7 +788,7 @@ anova(fit.02,fit.03)
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2023
+# Advanced Statistics: Statistical Modeling; 2025
 # Mixed models
 
 # The purpose of this TP is to carry out some mixed model analyses using R. 
@@ -890,7 +897,7 @@ summary(rat.brain.lmer1)
 # We can also think of the new model as having two random intercepts per rat, one for 
 # the carbachol treatment and an additional one for the basal treatment.
 
-rat.brain.lmer2 <- lmer(activate ~ region.f*treat + (treat |animal), REML=TRUE, data = rat.brain)
+rat.brain.lmer2 <- lmer(activate ~ region.f*treat + (treat |animal), REML=T, data = rat.brain)
 summary(rat.brain.lmer2)
 
 # What happens to the estimated fixed effects coefficients? What about their standard errors?
