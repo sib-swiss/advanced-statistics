@@ -1,7 +1,10 @@
 # Advanced statistics: Statistical modelling
 
 ## Teachers
+
 Rachel Marcone
+
+Paolo Angelino
 
 Thomas Zwahlen
 
