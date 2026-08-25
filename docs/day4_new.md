@@ -21,9 +21,9 @@ Slides of lectures:
 
 Washington University conducted a clinical study to determine if biological measurements made from cerebrospinal fluid (CSF) can be used to diagnose or predict Alzheimer's disease ("Craig-Schapiro, R., et al. (2011). Multiplexed Immunoassay Panel Identifies Novel CSF Biomarkers for Alzheimer's Disease Diagnosis and Prognosis. PLoS ONE, 6(4), e18850."). These data are a modified version of the values used for the publication.
 
-The R factor vector diagnosis contains the outcome data for 333 of the subjects. The demographic and laboratory results are collected in the data frame predictors.
+The R factor vector "diagnosis" (try ?diagnosis in R to understand this object) contains the outcome data for 333 of the subjects. It is either "Impaired" or "Control", therefore a binary output. The demographic and laboratory results are collected in the data frame "predictors". This type of dataframes are quite common in clinical data sets. 
 
-One important indicator of Alzheimer's disease is the genetic background of a subject. In particular, what versions of the Apolipoprotein E gene inherited from one's parents has an association with the disease. There are three variants of the gene: E2, E3 and E4. Since a child inherits a version of the gene from each parent, there are six possible combinations (e.g. E2/E2, E2/E3, and so on). This data is contained in the predictor column named Genotype.
+One important indicator of Alzheimer's disease is the genetic background of a subject. In particular, what versions of the Apolipoprotein E gene inherited from one's parents has an association with the disease. There are three variants of the gene: E2, E3 and E4. Since a child inherits a version of the gene from each parent, there are six possible combinations (e.g. E2/E2, E2/E3, and so on). This data is contained in the "predictor" dataframe in a column named Genotype.
 
 
 First we set for this exercise the libraries that we will need and load the data which is part of the AppliedPredictiveModeling package and is called AlzheimerDisease.
@@ -46,7 +46,7 @@ We first start by splitting the data into a training and a test set.
 
 The test set will be used only after having decided on the best model.
 
-Within the training set however we will again use a process of splitting and testing using cross validation.
+Within the training set however we will again use a process of splitting and testing using cross validation method, this in order to find the best model.
 
 It is important to set a seed in order to be reproducible.
 
@@ -61,6 +61,8 @@ alzheimerTrain <- alzheimer[ trainIndex,]
 alzheimerTest  <- alzheimer[-trainIndex,]
 ```
 
+The variable "alzheimerTrain" is our training set and the "alzheimerTest" is our test set.
+
 Try to understand how the test and training set is distributed in terms of control and impaired patients.
 
 ```r
@@ -73,13 +75,16 @@ table(alzheimer$diagnosis)
 
 In some cases there is an important qualitative factor in the data that should be considered during (re)sampling. For example:
 
-in clinical trials, there may be hospital-to-hospital differences
-with longitudinal or repeated measures data, subjects (or general independent experimental unit) may have multiple rows in the data set, etc.
-There may be an interest in making sure that these groups are not contained in the training and testing set since this may bias the test set performance to be more optimistic. Also, when one or more specific groups are held out, the resampling might capture the “ruggedness” of the model. In the example where clinical data is recorded over multiple sites, the resampling performance estimates partly measure how extensible the model is across sites.
+* in clinical trials, there may be hospital-to-hospital differences, gender difference, age category differences.
+* with longitudinal or repeated measures data, subjects (or general independent experimental unit) may have multiple rows in the data set, etc.
+
+There may be an interest in making sure that these groups are not contained only in the training or only in the testing set since this may bias the test set performance to be more optimistic. Also, when one or more specific groups are held out, the resampling might capture the “ruggedness” of the model. In the example where clinical data is recorded over multiple sites, the resampling performance estimates how extensible the model is across sites.
 
 
 
 ## Performance measures using Cross-Validation
+
+### Prepare the type of cross-validation used
 
 We start by choosing the parameters of the trainControl function in order to do cross-Validation (CV). For that we need to choose the number of folds of the cross-validation.
 
@@ -148,8 +153,9 @@ fitControl_RCV_ROC_PRED <- trainControl(## 5-fold CV
 
 
 
-The trainControl function is the function that can do it all, from bayesian Models to GAMs, but also regularizations amongst others. Have a look at the help in the caret tutorial book! We will see some other trainControl functions and methods later, such as regularization for example, which will be explained in a later exercise. 
+The trainControl function is the function that can do it all, from bayesian Models to GAMs, but also regularizations amongst others. Have a look at the help in the caret tutorial book! We will see some other trainControl functions and methods, such as regularization for example, which will be explained in a later exercise. 
 
+### Find the best model
 
 Now, to find the best model according to the chosen method with the trainControl, we use the "train" function from the caret package.
 We need to provide the predictor and outcome data objects, as well as the method used. As we want to fit the binomial data and look at the performance, we need to use the option family=binomial(link="logit") and the method glm. We can use the first column as a predictor for this exercise. 
