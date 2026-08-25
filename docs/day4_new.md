@@ -268,6 +268,7 @@ And what changes if you use the "fitControl_RCV_ROC_PRED" ?
     This is so useful as you can assess how many times each sample is classified wrongly or correctly and in which fold, therefore dependent on which samples. This helps in spotting which samples would benefit from another model and also helps creating new hypotheses. 
 
 Now we can plot the ROC curve:
+
 ```{r}
 library(pROC)
 
