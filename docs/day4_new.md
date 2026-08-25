@@ -158,11 +158,13 @@ The trainControl function is the function that can do it all, from bayesian Mode
 ### Find the best model
 
 Now, to find the best model according to the chosen method with the trainControl, we use the "train" function from the caret package.
-We need to provide the predictor and outcome data objects, as well as the method used. As we want to fit the binomial data and look at the performance, we need to use the option family=binomial(link="logit") and the method glm. We can use the first column as a predictor for this exercise. 
+We need to provide the predictor and outcome data objects, as well as the method used.
+
+As we want to fit the binomial data ("Impaired" or "Control", are 2 outcomes therefore binomial data) and look at the performance, we need to use the option family=binomial(link="logit") and the method glm. We can use the first column as a predictor for this exercise. 
 
 By default for classification data it will choose the Accuracy as the method for performance measure. 
 
-We start by using the default.
+We start by using the default on the alzheimerTrain, since we will test serveral predictors and since we are still trying to find the best model.
 
 ```r
 glmFit1 <- train(diagnosis ~ Creatine_Kinase_MB, data = alzheimerTrain, 
