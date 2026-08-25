@@ -1,0 +1,104 @@
+---
+title: "GSE304727-Mouse data"
+output: html_document
+date: "2026-08-17"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+```
+
+## Load GSE304727
+
+```{r,eval=F}
+library(GEOquery)
+getGEOSuppFiles(
+    "GSE304727",
+    baseDir = "/files/Ruhi/GSE304727/data"
+)
+```
+
+```{r}
+library(Seurat)
+library(ggplot2)
+library(SingleR)
+library(SummarizedExperiment)
+r <- readRDS("/files/Ruhi/GSE304727/data/GSE304727/GSE304727_Mouse_KP_kinetic.seurat.rds")
+t <- readRDS("/files/Ruhi/GSE304727/data/GSE304727/GSE304727_Mouse_E0771_kinetic.seurat.rds")
+s <- readRDS("/files/Ruhi/GSE304727/data/GSE304727/GSE304727_Mouse_LLC_OVA_tumors_spleen_LN.seurat.rds")
+```
+
+First strategy take only the "DC" from the original sophia data and annotate with sophia using the 
+Mouse_LLC_OVA_tumors_spleen_LN data 
+
+```{r,eval=F}
+load("/files/Ruhi/Sophia/data/neutro_macro_dc_pittet_without_imm_0826.RData")
+library(Seurat)
+library(ggplot2)
+library(SingleR)
+library(SummarizedExperiment)
+dc <- subset(sub,idents=c("migratory DC","pDC","cDC"))
+
+
+
+## select only the myeloids as Pittet annotates myeloids (did not have monocytes in my object they were among the macro group, but if in your case you have mono just add it to the idents)
+object_matrix <- SummarizedExperiment(assays = list(logcounts=GetAssayData(object = dc, layer = "data")))
+
+## take the genes common in Pittet and your dataset 
+row_names <- intersect(rownames(object_matrix),rownames(s))
+col_interest <- Idents(s)
+s <-  SummarizedExperiment(assays = list(logcounts=GetAssayData(object = s, layer = "data")))
+length(row_names)
+## do the single R with common gene names and labels the column of interest of pittet
+
+
+de <- SingleR(object_matrix[row_names,],s[row_names,],labels=col_interest)
+
+dc$annot_pittet_with_gse <- de$labels
+DimPlot(dc,group.by="annot_pittet_with_gse")
+
+save(dc,file="/files/Ruhi/GSE304727/data/annot_dc_with_gseMouse_LLC_OVA_tumors_spleen_LN.RData")
+```
+
+```{r,eval=F}
+load("/files/Ruhi/Sophia/data/neutro_macro_dc_pittet_without_imm_0826.RData")
+library(Seurat)
+library(ggplot2)
+library(SingleR)
+library(SummarizedExperiment)
+dc <- subset(sub,idents=c("migratory DC","pDC","cDC"))
+## select only the myeloids as Pittet annotates myeloids (did not have monocytes in my object they were among the macro group, but if in your case you have mono just add it to the idents)
+object_matrix <- SummarizedExperiment(assays = list(logcounts=GetAssayData(object = dc, layer = "data")))
+
+## take the genes common in Pittet and your dataset 
+row_names <- intersect(rownames(object_matrix),rownames(t))
+col_interest <- Idents(t)
+t <-  SummarizedExperiment(assays = list(logcounts=GetAssayData(object = t, layer = "data")))
+length(row_names)
+## do the single R with common gene names and labels the column of interest of pittet
+
+
+de <- SingleR(object_matrix[row_names,],t[row_names,],labels=col_interest)
+
+dc$annot_pittet_with_gse_kinetics <- de$labels
+DimPlot(dc,group.by="annot_pittet_with_gse_kinetics")
+
+save(dc,file="/files/Ruhi/GSE304727/data/annot_dc_with_GSE304727_Mouse_E0771_kinetic.seurat.RData")
+```
+
+
+```{r}
+load("/files/Ruhi/GSE304727/data/annot_dc_with_GSE304727_Mouse_E0771_kinetic.seurat.RData")
+
+dc <- FindVariableFeatures(dc)
+dc <- ScaleData(dc)
+dc <- RunPCA(dc)
+dc <- RunUMAP(dc,dims=1:30)
+DimPlot(dc,group.by="annot_pittet_with_gse")
+```
+
+Using the GSE304727_Mouse_E0771_kinetic.seurat
+```{r}
+DimPlot(dc,group.by="annot_pittet_with_gse_kinetics")
+```
+

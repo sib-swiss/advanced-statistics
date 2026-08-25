@@ -241,14 +241,7 @@ You must have gotten a Warning message, why ?
                  )
     ```
 
-Now we can plot the ROC curve:
-```{r}
-library(pROC)
 
-roc_obj <- roc(glmFit4$pred$obs, glmFit4$pred$Impaired)  # assuming "Impaired" is the positive class
-plot(roc_obj, col = "blue", lwd = 2, main = "ROC Curve")
-auc(roc_obj)  # prints the AUC value
-```
 
 Check also the result section
 
@@ -272,7 +265,17 @@ And what changes if you use the "fitControl_RCV_ROC_PRED" ?
     glmFit4$pred             
     
     ```
-    This is so useful as you can assess how many times each sample is classified wrongly or correctly and in which fold, so dependant on which samples. This helps in spotting which samples would benefit from another model and also helps creating new hypotheses. 
+    This is so useful as you can assess how many times each sample is classified wrongly or correctly and in which fold, therefore dependent on which samples. This helps in spotting which samples would benefit from another model and also helps creating new hypotheses. 
+
+Now we can plot the ROC curve:
+```{r}
+library(pROC)
+
+roc_obj <- roc(glmFit4$pred$obs, glmFit4$pred$Impaired)  # assuming "Impaired" is the positive class
+plot(roc_obj, col = "blue", lwd = 2, main = "ROC Curve")
+auc(roc_obj)  # prints the AUC value
+```    
+    
 
 Bonus let us make a loop of all possible predictors in uni-variate analysis and 
 check which one has the best p-value and good ROC.
