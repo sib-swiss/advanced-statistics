@@ -1,0 +1,11 @@
+Description of babies data
+
+bwt: birth weight in onces
+gestation: length of pregnancy in days
+parity: first/not first
+age: mother's age in years
+height: mother's height in inches
+weight: mother's pre-pregnancy weight
+smoke: smoking status (smoker or non-smoker)
+prem: prematurity indicator, ie, gestation shorter than 37 full weeks 
+

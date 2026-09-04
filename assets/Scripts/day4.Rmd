@@ -1,0 +1,371 @@
+---
+title: "exercices_day4"
+output: html_document
+date: "2025-08-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+
+# Change the path here:
+setwd("./data")
+
+# Load the libraries needed for this exercise
+# Here only plotting libraries are needed
+
+library(ggplot2)
+library(car)
+library(caret)
+library(pROC)
+library(ROCR)
+library(AppliedPredictiveModeling)
+data(AlzheimerDisease)
+
+alzheimer <- cbind(predictors,diagnosis)
+summary(alzheimer) ## realize male is not a factor
+alzheimer$male <- as.factor(alzheimer$male)
+```
+
+```{r}
+set.seed(3456)
+trainIndex <- createDataPartition(alzheimer$diagnosis, p = .8, 
+                                  list = FALSE, 
+                                  times = 1)
+dim(trainIndex)
+dim(alzheimer)
+alzheimerTrain <- alzheimer[ trainIndex,]
+alzheimerTest  <- alzheimer[-trainIndex,]
+```
+```{r}
+table(alzheimerTrain$diagnosis)
+
+table(alzheimerTest$diagnosis)
+
+table(alzheimer$diagnosis)
+```
+
+### Cross-validation
+```{r}
+fitControl_CV_accuracy <- trainControl(## 5-fold CV
+                           method = "cv",
+                           number = 5
+                          )
+```
+
+```{r}
+fitControl_RCV_accuracy <- trainControl(
+                           method = "repeatedcv",
+                           number = 5,
+                           repeats= 10
+                          )
+
+```
+
+```{r}
+folds <- createFolds(y = alzheimerTrain$diagnosis, k = 5, returnTrain = TRUE)
+fitControl_CV_folds <- trainControl(## 5-fold CV
+                           method = "cv",
+                           number = 5,
+                           index= folds)
+
+fitControl_CV_ROC <- trainControl(## 5-fold CV
+                           method = "cv",
+                           number = 5,
+                      classProbs = TRUE,    # Needed for ROC
+  summaryFunction = twoClassSummary )
+```
+
+```{r}
+fitControl_RCV_ROC <- trainControl(## 5-fold CV
+                           method = "repeatedcv",
+                           number = 5,
+                           repeats= 10,
+                      classProbs = TRUE,    # Needed for ROC
+  summaryFunction = twoClassSummary )       # Needed for ROC
+```
+
+```{r}
+
+fitControl_RCV_ROC_PRED <- trainControl(## 5-fold CV
+                           method = "repeatedcv",
+                           number = 5,
+                           repeats= 10,
+                          savePredictions = "final",
+                      classProbs = TRUE,   # Needed for ROC
+  summaryFunction = twoClassSummary )   # Needed for ROC
+```
+
+## Test with glm
+```{r}
+glmFit1 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain, 
+                 method = "glm", 
+                 family=binomial(link="logit"),
+                 trControl = fitControl_CV_accuracy
+                 )
+
+```
+
+```{r}
+summary(glmFit1)
+```
+```{r}
+summary(glm(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain, 
+  family=binomial(link="logit")))
+```
+
+
+```{r}
+glmFit1$results
+glmFit1$resample
+mean(glmFit1$resample$Accuracy)
+```
+
+```{r}
+glmFit2 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain, 
+                 method = "glm", 
+                 family=binomial(link="logit"),
+                 trControl = fitControl_RCV_accuracy
+                 )
+```
+
+```{r}
+glmFit2$results
+glmFit2$resample
+# mean(glmFit1$resample$Accuracy)
+```
+
+```{r}
+glmFit3 <- train(diagnosis ~ TRAIL_R3, data = alzheimerTrain, 
+                 method = "glm", 
+                 family=binomial(link="logit"),
+                 trControl = fitControl_RCV_ROC,
+                 metric= "ROC"
+                 )
+glmFit3$results
+```
+
+```{r}
+
+glmFit4 <- train(diagnosis ~ TRAIL_R3, data = alzheimerTrain, 
+             method = "glm", 
+             family=binomial(link="logit"),
+             trControl = fitControl_RCV_ROC_PRED,
+             metric="ROC"
+             )
+
+glmFit4$pred  
+```
+
+```{r}
+library(pROC)
+
+roc_obj <- roc(glmFit4$pred$obs, glmFit4$pred$Impaired)  # assuming "Impaired" is the positive class
+plot(roc_obj, col = "blue", lwd = 2, main = "ROC Curve")
+auc(roc_obj)  # prints the AUC value
+```
+
+```{r}
+col_num <- dim(alzheimer)[2]-1 # we do not use the last column for prediction
+pval <- rep(0,col_num) 
+rocval <- rep(0,col_num)
+alzheimerTrain_temp <- alzheimerTrain ## we create a temp copy of the alzheimer training data
+for(i in 1:col_num){
+colnames(alzheimerTrain_temp)[i] <- "temp" ## create the column name that is temp 
+
+glmFit1 <- train(diagnosis ~ temp , data = alzheimerTrain_temp, 
+             method = "glm", 
+             family="binomial",
+             trControl = fitControl_RCV_ROC,
+             metric="ROC"
+             )
+
+   colnames(alzheimerTrain_temp)[i] <- colnames(alzheimerTrain)[i]  #restore correct name         
+ pval[i] <- summary(glmFit1)$coefficients[,"Pr(>|z|)"][2] ## store pvalue from GLM  
+ rocval[i] <- glmFit1$results$ROC  ## store ROC result
+}
+## careful we need to adjust the pvalues for multiple testing
+
+pval_adj <- p.adjust(pval)
+length(pval_adj[pval_adj<0.05])
+
+data_results <- data.frame(Name= colnames(alzheimerTrain)[-ncol(alzheimerTrain)], pval_adj = pval_adj, ROC= rocval)
+
+data_results[data_results$pval_adj<0.05,]
+
+names_candidates <- data_results[data_results$pval_adj<0.05,"Name"]
+```
+
+# KNN
+```{r}
+alzheimerTrain_NA <- alzheimerTrain
+random_rows <- sample(1:nrow(alzheimerTrain), size = 30, replace = FALSE)
+random_cols <- sample(1:(ncol(alzheimerTrain)-1), size = 30, replace = FALSE)
+for(i in 1:30){
+alzheimerTrain_NA[random_rows[i],random_cols[i]] <- NA
+}
+alzheimerTrain_NA[15,1]<-NA
+summary(alzheimerTrain_NA)
+```
+
+```{r}
+glmFit4 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain_NA, 
+                 method = "glm", 
+                 family=binomial(link="logit"),
+                 trControl = fitControl_RCV_ROC_PRED,
+                 metric="ROC"
+                 )
+```
+
+```{r}
+glmFit4 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = alzheimerTrain_NA, 
+                 method = "glm", 
+                 family=binomial(link="logit"),
+                 trControl = fitControl_RCV_ROC_PRED,
+                 metric="ROC",
+                 na.action = na.omit
+                 )
+
+summary(glmFit4)
+```
+
+
+```{r}
+library("RANN")
+pre_proc <- preProcess(alzheimerTrain_NA[,setdiff(colnames(alzheimerTrain_NA),c("male","Genotype","diagnosis"))], method = c("center", "scale", "knnImpute"))
+
+predictors_imputed <- predict(pre_proc, newdata = alzheimerTrain_NA[,setdiff(colnames(alzheimerTrain_NA),c("male","Genotype","diagnosis"))])
+
+# Combine with untouched outcome
+data_imputed <- cbind(predictors_imputed, diagnosis = alzheimerTrain_NA$diagnosis)
+
+
+glmFit4 <- train(diagnosis ~ ACE_CD143_Angiotensin_Converti, data = data_imputed, 
+                 method = "glm", 
+                 family=binomial(link="logit"),
+                 trControl = fitControl_CV_ROC,
+                 metric="ROC"
+                # ,
+                 # preProcess =  c("center", "scale", "knnImpute") if only numeric data this works best
+                 )
+
+summary(glmFit4) 
+```
+
+
+## LASSO 
+```{r}
+library(glmnet)
+lasso_model <- glmnet(y= alzheimerTrain$diagnosis, x=alzheimerTrain[,names_candidates] , family = "binomial", alpha = 1)  # alpha = 1 is LASSO
+
+# Plot coefficient paths
+plot(lasso_model, xvar = "lambda", label = TRUE)
+
+```
+
+```{r}
+# Cross-validated LASSO
+y_numeric <- ifelse(alzheimerTrain$diagnosis == "Impaired", 1, 0)
+cv_lasso <- cv.glmnet(y=y_numeric , x=as.matrix(alzheimerTrain[,names_candidates]), family = "binomial", alpha = 1, nfolds = 10)
+
+# Plot cross-validation curve
+plot(cv_lasso)
+
+# Best lambda
+best_lambda <- cv_lasso$lambda.min
+```
+
+```{r}
+coefs <- coef(cv_lasso, s = "lambda.min")
+coefs
+```
+
+```{r}
+selected_vars <- rownames(coefs)[which(coefs != 0)][-1]
+alzheimer_selected <- alzheimerTrain[, selected_vars]
+alzheimer_selected$diagnosis = alzheimerTrain$diagnosis
+glm_fit <- glm(diagnosis ~., data= alzheimer_selected,family = "binomial")
+```
+
+```{r}
+lasso_caret <- train(diagnosis ~ Alpha_1_Antitrypsin + B_Lymphocyte_Chemoattractant_BL + FAS + Fibrinogen + GRO_alpha + Gamma_Interferon_induced_Monokin + IL_7 + MIF + MMP10 + MMP7 + NT_proBNP + PAI_1 + Pancreatic_polypeptide + TRAIL_R3 + tau + p_tau + Ab_42, data = alzheimerTrain, 
+                 method = "glmnet", 
+                  family="binomial",
+                  trControl = fitControl_CV_ROC,
+                  metric="ROC",
+                  tuneGrid = expand.grid(
+    alpha = 1,             # LASSO (alpha = 1)
+    lambda = 10^seq(-4, 1, length = 50)  # search over lambda
+  )
+ )  
+```
+
+```{r}
+lasso_caret$bestTune$lambda
+best_lambda
+```
+```{r}
+lasso_model_caret_final <- glmnet(y= alzheimerTrain$diagnosis, x=alzheimerTrain[,names_candidates] , family = "binomial", alpha = 1,lambda=lasso_caret$bestTune$lambda)
+
+coefs <- coef(lasso_model_caret_final)
+selected_vars_caret <- rownames(coefs)[which(coefs != 0)][-1]
+setdiff(selected_vars_caret, selected_vars)
+```
+
+## Ridge regression
+```{r}
+ridge_model <- glmnet(y= alzheimerTrain$diagnosis, x=alzheimerTrain[,names_candidates] , family = "binomial", alpha = 0)  # alpha = 0 is Ridge
+
+# Plot coefficient paths
+plot(ridge_model, xvar = "lambda", label = TRUE)
+```
+
+```{r}
+# Cross-validated Ridge
+y_numeric <- ifelse(alzheimerTrain$diagnosis == "Impaired", 1, 0)
+cv_ridge <- cv.glmnet(y=y_numeric , x=as.matrix(alzheimerTrain[,names_candidates]), family = "binomial", alpha = 0, nfolds = 10)
+
+# Plot cross-validation curve
+plot(cv_ridge)
+
+# Best lambda
+best_lambda <- cv_ridge$lambda.min
+```
+
+```{r}
+coefs <- coef(cv_ridge, s = "lambda.min")
+coefs
+```
+```{r}
+selected_vars <- rownames(coefs)[which(coefs != 0)][-1]
+alzheimer_selected <- as.matrix(alzheimerTrain[, selected_vars])
+glm_fit <- glm(alzheimerTrain$diagnosis ~ alzheimer_selected, family = "binomial")
+```
+
+```{r}
+summary(glm_fit)
+```
+```{r}
+ridge_caret <- train(diagnosis ~ Alpha_1_Antitrypsin + B_Lymphocyte_Chemoattractant_BL + FAS + Fibrinogen + GRO_alpha + Gamma_Interferon_induced_Monokin + IL_7 + MIF + MMP10 + MMP7 + NT_proBNP + PAI_1 + Pancreatic_polypeptide + TRAIL_R3 + tau + p_tau + Ab_42, data = alzheimerTrain, 
+method = "glmnet", 
+family="binomial",
+trControl = fitControl_CV_ROC,
+metric="ROC",
+tuneGrid = expand.grid(
+alpha = 0,             # Ridge (alpha = 0)
+lambda = 10^seq(-4, 1, length = 50)  # search over lambda
+)
+)  
+```
+
+```{r}
+ridge_caret$bestTune$lambda
+best_lambda
+```
+
+
+
+
