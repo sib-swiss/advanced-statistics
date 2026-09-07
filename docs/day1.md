@@ -227,6 +227,17 @@ summary(modellog.2)
 
 Again load the data this time in the SemiPar package called janka, attach the object janka to have an easier access to the variables and have a look at the help of the janka data. 
 
+If you need to install the package SemiPar, it is not available in CRAN anymore so install package alone will not work. Try this instead : 
+
+```r
+install.packages(
+  "https://cran.r-project.org/src/contrib/Archive/SemiPar/SemiPar_1.0-4.tar.gz",
+  repos = NULL,
+  type = "source"
+)
+```
+
+Then load: 
 
 ```r
 library(SemiPar)

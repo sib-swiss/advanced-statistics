@@ -2,7 +2,7 @@
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2025
+# Advanced Statistics: Statistical Modeling; 2026
 
 
 ########################################################
@@ -11,7 +11,7 @@
 
 library(ggplot2)
 
-class <- read.table("/exercises/class.txt")
+class <- read.table("class.txt")
 
 summary(class[,-1])
 
@@ -36,6 +36,8 @@ influencePlot(model, xlab="Hat-Values", ylab="Studentized Residuals")
 new_age <- seq(11, 16, by=0.25)
 
 conf_interval <- predict.lm(model, newdata=data.frame(Age=new_age), interval="confidence", level = 0.95)
+plot(class$Age, class$Height)
+
 lines(new_age, conf_interval[,2], col="blue", lty=2)
 lines(new_age, conf_interval[,3], col="blue", lty=2)
 
@@ -71,6 +73,8 @@ model <- lm(conc ~ diameter, data=hellung)
 summary(model)
 
 abline(model)
+
+
 
 qqnorm(residuals(model))
 qqline(residuals(model))
@@ -111,7 +115,7 @@ influencePlot(modellog.2, xlab="Hat-Values", ylab="Studentized Residuals")
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2023
+# Advanced Statistics: Statistical Modeling; 2026
 # Moving Beyond Linearity
 
 
