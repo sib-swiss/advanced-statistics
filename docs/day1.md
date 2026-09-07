@@ -302,7 +302,7 @@ We will plot the estimated fit. To do so, we need to predict the fit at desired 
 plot(dens,log(hardness), ylab="response", xlab="X")
 
 # fit a quadratic model
-fit.quad <- lm( log(hardness) ~ poly(dens, degree=2,raw=T) ) 
+fit.quad <- lm( log(hardness) ~ poly(dens, degree=2) ) 
 
 # plot the estimated linear fit
 # create a grid
@@ -373,7 +373,7 @@ Now it should be "easy" to fit a polynomial of degree 3 as well as setting a gri
 
     ```r
     # fit a cubic model
-    fit.cubic <- lm( logratio ~ poly(range,3,raw=T) )
+    fit.cubic <- lm( logratio ~ poly(range,3) )
 
     # set up the grid
     range.range <- range(range)
@@ -414,7 +414,7 @@ Plot the data and fit a polynomial of degree 4. Check the prediction and assumpt
     plot(range,logratio, ylab="response", xlab="X")
 
     # fit a quadratic model
-    fit.quad <- lm( logratio ~ poly(range,4,raw=T) )
+    fit.quad <- lm( logratio ~ poly(range,4) )
 
     # set up the grid
     range.range <- range(range)
@@ -449,7 +449,7 @@ What is next ? Plot the data and fit a polynomial of degree 10. Check the predic
     plot(range,logratio, ylab="response", xlab="X")
 
     # fit a polynomial degree 10
-    fit.poly10 <- lm( logratio ~ poly(range,10,raw=T) )
+    fit.poly10 <- lm( logratio ~ poly(range,10) )
 
     # set up the grid
     range.range <- range(range)
@@ -488,7 +488,7 @@ Using the prediction with the polynomial of degree 3 try to calculate the confid
 plot(range,logratio, ylab="response", xlab="X")
 
 # fit the model
-fit.cubic <- lm( logratio ~ poly(range,3,raw=T) )
+fit.cubic <- lm( logratio ~ poly(range,3) )
 
 # set up the grid
 range.range <- range(range)
@@ -586,8 +586,8 @@ abline(v=575, col="blue", lwd=2, lty=2)
 ### Piecewise cubic fits
 
 ```r
-fit.left.cubic.1knot <- lm( logratio ~ poly(range,3,raw=T), subset=(range<575) )
-fit.right.cubic.1knot <- lm( logratio ~ poly(range,3,raw=T), subset=(range>=575) )
+fit.left.cubic.1knot <- lm( logratio ~ poly(range,3), subset=(range<575) )
+fit.right.cubic.1knot <- lm( logratio ~ poly(range,3), subset=(range>=575) )
 
 summary(fit.left.cubic.1knot)
 summary(fit.right.cubic.1knot)
