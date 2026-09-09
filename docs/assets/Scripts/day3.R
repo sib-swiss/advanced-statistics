@@ -2,7 +2,7 @@
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2025
+# Advanced Statistics: Statistical Modeling; 2026
 # Longitudinal Data Analysis
 
 library(lattice)
@@ -18,7 +18,7 @@ library(lattice)
 library(nlme)
 library(splines)
 # load the "tolerance" data set: "tolerance.RData"
-load("/exercises/tolerance.RData")
+load("tolerance.RData")
 
 str(tolerance_untidy)
 str(tolerance_tidy)
@@ -197,6 +197,7 @@ sqrt( var(my.summary["all.intercept",]) ) # 0.2977792
 mean(my.summary["all.slope",]) # 0.1308125
 sqrt( var(my.summary["all.slope",]) ) # 0.172296
 
+
 # bivariate correlation
 cor(my.summary["all.intercept",], my.summary["all.slope",]) # -0.4481135
 
@@ -263,14 +264,17 @@ rm(est.para_highExposure, est.para_lowExposure, t, avg.est)
 rm(median.exposure)
 
 
-
+# test for statistics
+t.test(my.summary["all.slope",as.character(tolerance_untidy$id[
+  tolerance_untidy$exposure>median(tolerance_untidy$exposure)])],
+  my.summary["all.slope",as.character(tolerance_untidy$id[tolerance_untidy$exposure<=median(tolerance_untidy$exposure)])])
 
 
 ########################################################
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2025
+# Advanced Statistics: Statistical Modeling; 2026
 # Mixed models
 
 # The purpose of this TP is to carry out some mixed model analyses using R. 
@@ -318,7 +322,7 @@ mean(ant111b[ant111b$site == "WEAN",]$harvwt)
 mean(ant111b[ant111b$site == "WLAN",]$harvwt)
 
 
-ant111b.lmer <- lmer(harvwt ~ 1 + (1| site), data=ant111b)
+ant111b.lmer <- lmer(harvwt ~ 1+ (1| site), data=ant111b)
 ant111b.lmer
 
 # Our model has one fixed effect parameter (the first 1): the mean harvest weight
@@ -326,7 +330,7 @@ ant111b.lmer
 # There are two sources of random variation: one for site and one for parcel within site.
 # The estimated variance components are:
 #   . ??2site = 1.5392^2 = 2.369
-#   . ??2residual = 0.762 = 0.577
+#   . ??2residual = 0.762^2 = 0.577
 
 mean(ant111b$harvwt)
 sqrt(var(ant111b$harvwt)) 
@@ -433,7 +437,7 @@ shapiro.test(resid(ears.lmer))
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2025
+# Advanced Statistics: Statistical Modeling; 2026
 # Longitudinal Data Analysis
 
 library(lattice)
@@ -456,6 +460,7 @@ library(splines)
 # intercepts to vary
 
 # fit the 1st model
+model <- lm(tolerance~1, data = tolerance_tidy,method="ML")
 fit.01 <- gls(tolerance ~ 1, data=tolerance_tidy, method="ML")
 summary(fit.01)
 
@@ -492,7 +497,7 @@ anova(fit.01,fit.02)
 
 
 # --------------
-# What if instead of random intercepts, we had allowed for random slopes?
+# What if instead of random intercepts, we had allowed for random slopes (yet tocome)?
 # We have no reason to believe that individuals should share a baseline value 
 # (i.e. fixed intercept), but let's try it anyways for the sake of completeness
 
@@ -563,6 +568,12 @@ summary(fit.06)
 fit.06$coefficients
 anova(fit.05,fit.06)
 
+
+fit.06_bis <- lme(tolerance ~ male + time, random = (~ time | id), data=tolerance_tidy, method="ML")
+summary(fit.06_bis)
+fit.06$coefficients
+anova(fit.05,fit.06_bis)
+
 # adding exposure
 fit.07 <- lme(tolerance ~male +exposure + time, random = (~ time | id), data=tolerance_tidy, method="ML")
 summary(fit.07)
@@ -583,7 +594,7 @@ fit.10 <- lme(tolerance ~ male + exposure * time, random = (~ time | id), data=t
 summary(fit.10)
 anova(fit.07,fit.10)
 
-fit.12 <- lme(tolerance ~  exposure + time, random = (~ time | id), data=tolerance_tidy, method="ML")
+fit.12 <- lme(tolerance ~  exposure+time, random = (~ time  | id), data=tolerance_tidy, method="ML")
 
 # this agrees with our observation from exploratory analysis
 
@@ -594,7 +605,7 @@ fit.12 <- lme(tolerance ~  exposure + time, random = (~ time | id), data=toleran
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2025
+# Advanced Statistics: Statistical Modeling; 2026
 # Longitudinal Data Analysis
 
 library(lattice)
@@ -605,7 +616,7 @@ library(splines)
 ########################################################
 
 # load the "BtheB_tidy" data set: "BtheB_tidy.RData"
-load("exercises/BtheB_tidy.RData")
+load("BtheB_tidy.RData")
 
 # examine the data 
 str(BtheB.tidy)
@@ -696,6 +707,12 @@ anova(fit.09,fit.10)
 fit.11 <- lme(bdi ~ pre.bdi + drug + length + treatment + timepoint, random = (~ timepoint | indiv), data=BtheB.tidy, method="ML", na.action=na.omit)
 summary(fit.11)
 anova(fit.10,fit.11)
+
+fit.13 <- gls(bdi ~  drug  + timepoint, data=BtheB.tidy, method="ML", na.action=na.omit)
+
+
+fit.12 <- lme(bdi ~ pre.bdi   + treatment + timepoint, random = (~ 1 | indiv), data=BtheB.tidy, method="ML", na.action=na.omit)
+summary(fit.12)
 
 # let's look at summary of fit.10 one more time
 summary(fit.10)
@@ -788,7 +805,7 @@ anova(fit.02,fit.03)
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; 2025
+# Advanced Statistics: Statistical Modeling; 2026
 # Mixed models
 
 # The purpose of this TP is to carry out some mixed model analyses using R. 
@@ -879,7 +896,7 @@ xyplot(activate ~ region.f|treat, rat.brain, groups = animal, pch=19,
 # and a random effect for animal.
 # As above, you can use extractor functions to view some of the model components.
 
-rat.brain.lmer1 <- lmer(activate ~ region.f*treat + (1|animal), REML=TRUE, data = rat.brain)
+rat.brain.lmer1 <- lmer(activate ~ region.f*treat + (1|animal), REML=T, data = rat.brain)
 summary(rat.brain.lmer1)
 
 # Make sure that you know how to interpret the coefficients (the interpretation will be 
