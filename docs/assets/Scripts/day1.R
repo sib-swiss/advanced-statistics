@@ -483,17 +483,17 @@ summary(fit.cs.1knot)
 
 ## to understand the fitted value we can do the comptation manually for for example the
 ## second value :
-bs(range, knots=575)[2,1]* fit.cs.1knot$coefficients[2]+ 
-  bs(range, knots=575)[2,2]* fit.cs.1knot$coefficients[3]+
-  bs(range, knots=575)[2,3]* fit.cs.1knot$coefficients[4]+
-  bs(range, knots=575)[2,4]* fit.cs.1knot$coefficients[5] + 
+bs(range, knots=575)[4,1]* fit.cs.1knot$coefficients[2]+ 
+  bs(range, knots=575)[4,2]* fit.cs.1knot$coefficients[3]+
+  bs(range, knots=575)[4,3]* fit.cs.1knot$coefficients[4]+
+  bs(range, knots=575)[4,4]* fit.cs.1knot$coefficients[5] + 
   fit.cs.1knot$coefficients[1] ## intercept
 
-fit.cs.1knot$fitted.values[2] ## this gives you the same 
+fit.cs.1knot$fitted.values[4] ## this gives you the same 
 
 
 plot(range,bs(range, knots=575)[,1]) ## this is a 3rd degree function 
-plot(range,bs(range, knots=575)[,2])  ## this as well etc 
+plot(range,bs(range, knots=575)[,3])  ## this as well etc 
 
 
 
@@ -559,7 +559,7 @@ knitr::kable(mse_table, caption = "Mean squared errors for different models", di
 # ------------------------------------------
 # 11. smoothing/natural splines
 
-fit.ss <- smooth.spline(range, logratio)
+fit.ss <- smooth.spline(range, logratio,lambda=0.0000000000000001)
 fit.ss
 
 # plot raw data

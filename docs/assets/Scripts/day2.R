@@ -2,7 +2,7 @@
 ########################################################
 ########################################################
 
-# Advanced Statistics: Statistical Modeling; Sep 2025
+# Advanced Statistics: Statistical Modeling; Sep 2026
 # GLM
 
 
@@ -12,7 +12,7 @@
 ########################################################
 
 # Load and explore the dataset babies.
-load("/exercises/babies.RData")
+load("babies.RData")
 attach(babies)
 
 # The data records the birth weight of 1174 babies along with information on the mother and the pregnancy.
@@ -49,7 +49,7 @@ points(new_bwt, predict.model1, col="blue")
 model2 <- glm(prem ~ bwt, family=binomial)
 summary(model2)
 
-model3 <- glm(prem ~ bwt*parity, family=binomial)
+model3 <- glm(prem ~ bwt+parity, family=binomial)
 summary(model3)
 
 model4 <- glm(prem ~ bwt*smoke+parity, family=binomial)
@@ -151,7 +151,7 @@ residualPlots(poisson.glm)
 # "A Modern Approach to Regression with R" by Simon J Sheather.
 # Download the file and import it into R.
 
-michelin <- read.delim("exercises/MichelinFood.txt", header=TRUE, sep="\t", as.is=TRUE)
+michelin <- read.delim("MichelinFood.txt", header=TRUE, sep="\t", as.is=TRUE)
 michelin
 
 # The Food column represents the ranking of the food. 
@@ -230,12 +230,19 @@ moth$numalive <- 20 - moth$numdead
 
 glm.moth.1 <- glm(cbind(numalive, numdead) ~ sex + dose, data = moth, family = binomial)
 summary(glm.moth.1)
-glm.moth.2 <- glm(cbind(numalive, numdead) ~ sex * dose, data = moth, family = binomial)
+glm.moth.2 <- glm(cbind(numalive, numdead) ~ sex + dose +sex : dose , data = moth, family = binomial)
 summary(glm.moth.2)
 
-glm.moth.3 <- glm(cbind(numalive, numdead) ~ sex : dose + dose, data = moth, family = binomial)
+glm.moth.3 <- glm(cbind(numalive, numdead) ~  sex : dose+ dose, data = moth, family = binomial)
 summary(glm.moth.3)
 
+glm.moth.1.1 <- glm(cbind(numalive, numdead) ~ dose , data = moth, family = binomial)
+summary(glm.moth.1)
+
+
+anova(glm.moth.1.1,glm.moth.1,test="LRT")
+
+anova(glm.moth.1.1,glm.moth.3,test="LRT")
 
 # ------------------------------------------
 # 2. Does the model fit well ? Perform an analysis of deviance
