@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Splines explained: basis functions, knots, and control points</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface-1: #f4f3ef;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --border: #e1e0d9;
+    --border-strong: #c3c2b7;
+    --accent: #378ADD;
+    --accent2: #D85A30;
+    --gray: #B4B2A9;
+    --radius: 8px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a19;
+      --surface-1: #262625;
+      --text-primary: #f0efec;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --border: #383835;
+      --border-strong: #52514e;
+      --accent: #5aa3ea;
+      --accent2: #e88a5f;
+      --gray: #6b6a65;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem 1.5rem 3rem;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  h1 { font-size: 20px; font-weight: 500; margin: 0 0 0.4rem; }
+  p.subtitle { font-size: 14px; color: var(--text-secondary); margin: 0 0 1rem; }
+  .intro {
+    background: var(--surface-1);
+    border-radius: var(--radius);
+    padding: 0.9rem 1.1rem;
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+  .intro code {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 13px;
+  }
+  .row { display: flex; align-items: center; gap: 12px; margin: 0.6rem 0; flex-wrap: wrap; }
+  .row label { font-size: 14px; color: var(--text-secondary); min-width: 190px; }
+  input[type="range"] { flex: 1; min-width: 140px; accent-color: var(--accent2); height: 4px; }
+  .valout { font-size: 13px; font-weight: 500; min-width: 42px; text-align: right; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px;
+    margin: 1.25rem 0 1.5rem;
+  }
+  .stat-card {
+    background: var(--surface-1);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+  }
+  .stat-card p.label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-card p.value { font-size: 20px; font-weight: 500; margin: 0; }
+  svg { width: 100%; height: auto; }
+  .chart-caption { text-align: center; font-size: 13px; color: var(--text-secondary); margin: 4px 0 0; }
+  .coef-panel {
+    background: var(--surface-1);
+    border-radius: var(--radius);
+    padding: 0.9rem 1.1rem;
+    margin-top: 1.25rem;
+  }
+  .coef-panel > p.label { font-size: 13px; color: var(--text-secondary); margin: 0 0 0.6rem; }
+  .coef-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px 16px; }
+  .coef-item { display: flex; flex-direction: column; gap: 2px; }
+  .coef-item .coef-label { font-size: 12px; color: var(--text-secondary); }
+  .coef-item input[type="range"] { accent-color: var(--c, var(--accent)); }
+  button.reset {
+    margin-top: 0.9rem;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+  button.reset:hover { background: var(--surface-1); }
+  .legend { display:flex; gap:14px; justify-content:center; font-size:12px; color:var(--text-secondary); margin-top:6px; flex-wrap: wrap; }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:4px; vertical-align: middle; }
+  .line { display:inline-block; width:10px; height:2px; margin-right:4px; vertical-align:middle; }
+  footer {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Splines explained: basis functions, knots, and control points</h1>
+  <p class="subtitle">A cubic B-spline written as a weighted sum of local basis functions.</p>
+
+  <div class="intro">
+    A spline is a piecewise polynomial joined smoothly at points called <strong>knots</strong>.
+    Rather than writing separate polynomial pieces, it's convenient to represent the whole
+    curve as one formula: <code>f(x) = &Sigma;<sub>i</sub> &beta;<sub>i</sub> B<sub>i</sub>(x)</code>,
+    a weighted sum of fixed <strong>basis functions</strong> B<sub>i</sub>(x). Each B<sub>i</sub>(x)
+    is a cubic polynomial piece that is nonzero over only a <em>small span</em> of x
+    (its "local support") &mdash; that's the key structural difference from a plain
+    polynomial term like x<sup>7</sup>, which is nonzero (and influential) across the
+    <em>entire</em> domain. Drag a single &beta;<sub>i</sub> slider below and watch how
+    only the nearby part of the curve moves.
+  </div>
+
+  <div class="row">
+    <label for="k">Number of basis functions (k)</label>
+    <input type="range" id="k" min="4" max="12" value="8" step="1" />
+    <span class="valout" id="kOut">8</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <p class="label">Basis functions (k)</p>
+      <p class="value" id="statK">8</p>
+    </div>
+    <div class="stat-card">
+      <p class="label">Spline degree</p>
+      <p class="value">3 (cubic)</p>
+    </div>
+    <div class="stat-card">
+      <p class="label">Interior knots</p>
+      <p class="value" id="statKnots">4</p>
+    </div>
+  </div>
+
+  <div>
+    <svg id="basisSvg" viewBox="0 0 700 220" role="img" aria-label="Individual B-spline basis functions, each nonzero over only a small span of x"></svg>
+    <p class="chart-caption">Each colored curve is one basis function B<sub>i</sub>(x). Dashed vertical lines mark the knots. Notice every basis function is zero outside its local span, and at any given x, only a few (degree + 1 = 4) basis functions are nonzero.</p>
+  </div>
+
+  <div style="margin-top:1.25rem;">
+    <svg id="curveSvg" viewBox="0 0 700 260" role="img" aria-label="The resulting spline curve, the weighted sum of the basis functions, with its control polygon"></svg>
+    <div class="legend">
+      <span><span class="line" style="background:var(--accent2);"></span>Spline f(x) = &Sigma; &beta;<sub>i</sub> B<sub>i</sub>(x)</span>
+      <span><span class="line" style="background:var(--gray);"></span>Control polygon (&beta;<sub>i</sub> at each control point)</span>
+      <span><span class="dot" style="background:var(--accent);"></span>Reference data</span>
+    </div>
+  </div>
+
+  <div class="coef-panel">
+    <p class="label">Coefficients &beta;<sub>i</sub> (control point heights) &mdash; drag one and watch the local effect</p>
+    <div class="coef-grid" id="coefGrid"></div>
+    <button class="reset" id="resetBtn">Reset to smooth default</button>
+  </div>
+
+  <footer>
+    Basis: cubic (degree 3) clamped uniform B-splines on x &isin; [0, 10], built via the Cox&ndash;de Boor recursion.
+    Default coefficients are set to the true function evaluated at each basis function's Greville abscissa
+    (a standard "control point location") so the initial curve is already a reasonable smooth approximation &mdash;
+    then it's yours to reshape.
+  </footer>
+</div>
+
+<script>
+(function(){
+  var DOMAIN_MIN = 0, DOMAIN_MAX = 10, DEGREE = 3;
+
+  // Same reference dataset used in the earlier overfitting demo, for visual continuity
+  var xTrain = [0.3,1.1,1.8,2.6,3.4,4.1,4.9,5.7,6.4,7.2,7.9,8.7,9.5];
+  var yTrain = [3.979,3.965,5.586,4.16,-0.864,-1.42,-3.379,0.367,-0.024,0.897,-3.19,-5.808,-11.002];
+
+  function trueFn(x){ return 2 + 0.4*x - 0.15*x*x + 3*Math.sin(1.1*x); }
+
+  function buildKnots(n, p, dmin, dmax){
+    var knots = new Array(n+p+1);
+    for(var i=0;i<=p;i++) knots[i] = dmin;
+    for(var i=n;i<=n+p;i++) knots[i] = dmax;
+    var interior = n - p - 1;
+    for(var j=1;j<=interior;j++){
+      knots[p+j] = dmin + (dmax-dmin) * j/(interior+1);
+    }
+    return knots;
+  }
+
+  function bspline(i, p, x, knots){
+    if(p === 0){
+      return (x >= knots[i] && x < knots[i+1]) ? 1 : 0;
+    }
+    var term1 = 0, term2 = 0;
+    var denom1 = knots[i+p] - knots[i];
+    if(denom1 !== 0) term1 = (x - knots[i]) / denom1 * bspline(i, p-1, x, knots);
+    var denom2 = knots[i+p+1] - knots[i+1];
+    if(denom2 !== 0) term2 = (knots[i+p+1] - x) / denom2 * bspline(i+1, p-1, x, knots);
+    return term1 + term2;
+  }
+
+  function grevilleAbscissae(knots, n, p){
+    var g = new Array(n);
+    for(var i=0;i<n;i++){
+      var s = 0;
+      for(var j=i+1;j<=i+p;j++) s += knots[j];
+      g[i] = s/p;
+    }
+    return g;
+  }
+
+  var W1=700,H1=220,PAD1=36;
+  var W2=700,H2=260,PAD2=36;
+  var XMIN=DOMAIN_MIN, XMAX=DOMAIN_MAX;
+  var YMIN2=-16, YMAX2=14;
+
+  function xPix1(x){ return PAD1 + (x-XMIN)/(XMAX-XMIN)*(W1-2*PAD1); }
+  function yPix1(y){ return H1-PAD1 - y*(H1-2*PAD1-14); }
+
+  function xPix2(x){ return PAD2 + (x-XMIN)/(XMAX-XMIN)*(W2-2*PAD2); }
+  function yPix2(y){
+    var yc = Math.max(YMIN2, Math.min(YMAX2, y));
+    return H2-PAD2 - (yc-YMIN2)/(YMAX2-YMIN2)*(H2-2*PAD2);
+  }
+
+  var mut = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#898781';
+  var bor = getComputedStyle(document.documentElement).getPropertyValue('--border-strong').trim() || '#c3c2b7';
+  var accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#378ADD';
+  var accent2 = getComputedStyle(document.documentElement).getPropertyValue('--accent2').trim() || '#D85A30';
+  var gray = getComputedStyle(document.documentElement).getPropertyValue('--gray').trim() || '#B4B2A9';
+
+  var palette = ['#378ADD','#D85A30','#1D9E75','#8B5CF6','#DB2777','#CA8A04','#0891B2','#65A30D','#DC2626','#7C3AED','#0D9488','#EA580C'];
+
+  function axesSvg(w,h,pad,xlab,ylab){
+    return '<line x1="'+pad+'" y1="'+(h-pad)+'" x2="'+(w-pad)+'" y2="'+(h-pad)+'" stroke="'+bor+'" stroke-width="1"/>' +
+           '<line x1="'+pad+'" y1="'+pad+'" x2="'+pad+'" y2="'+(h-pad)+'" stroke="'+bor+'" stroke-width="1"/>' +
+           '<text x="'+(w/2)+'" y="'+(h-4)+'" text-anchor="middle" font-size="11" fill="'+mut+'">'+xlab+'</text>' +
+           '<text x="12" y="'+(h/2)+'" text-anchor="middle" font-size="11" fill="'+mut+'" transform="rotate(-90 12 '+(h/2)+')">'+ylab+'</text>';
+  }
+
+  var kSlider = document.getElementById('k');
+  var kOut = document.getElementById('kOut');
+  var statK = document.getElementById('statK');
+  var statKnots = document.getElementById('statKnots');
+  var basisSvg = document.getElementById('basisSvg');
+  var curveSvg = document.getElementById('curveSvg');
+  var coefGrid = document.getElementById('coefGrid');
+  var resetBtn = document.getElementById('resetBtn');
+
+  var state = { n: 8, knots: null, greville: null, xs: [], basisMatrix: [], coeffs: [] };
+
+  var N_SAMPLES = 220;
+
+  function rebuild(){
+    var n = parseInt(kSlider.value, 10);
+    state.n = n;
+    kOut.textContent = n;
+    statK.textContent = n;
+    statKnots.textContent = Math.max(0, n - DEGREE - 1);
+
+    var knots = buildKnots(n, DEGREE, DOMAIN_MIN, DOMAIN_MAX);
+    state.knots = knots;
+    state.greville = grevilleAbscissae(knots, n, DEGREE);
+
+    var xs = [];
+    for(var s=0;s<=N_SAMPLES;s++){
+      var x = DOMAIN_MIN + (DOMAIN_MAX-DOMAIN_MIN) * s/N_SAMPLES;
+      xs.push(Math.min(x, DOMAIN_MAX - 1e-9));
+    }
+    xs[xs.length-1] = DOMAIN_MAX - 1e-9;
+    state.xs = xs;
+
+    var basisMatrix = new Array(n);
+    for(var i=0;i<n;i++){
+      basisMatrix[i] = new Array(xs.length);
+      for(var s2=0;s2<xs.length;s2++){
+        basisMatrix[i][s2] = bspline(i, DEGREE, xs[s2], knots);
+      }
+    }
+    state.basisMatrix = basisMatrix;
+
+    state.coeffs = state.greville.map(function(g){ return trueFn(g); });
+
+    buildCoefSliders();
+    drawBasis();
+    drawCurve();
+  }
+
+  function buildCoefSliders(){
+    coefGrid.innerHTML = '';
+    for(var i=0;i<state.n;i++){
+      (function(idx){
+        var wrap = document.createElement('div');
+        wrap.className = 'coef-item';
+        var lab = document.createElement('div');
+        lab.className = 'coef-label';
+        lab.textContent = '\u03B2' + idx + ' = ' + state.coeffs[idx].toFixed(1);
+        var input = document.createElement('input');
+        input.type = 'range';
+        input.min = '-14'; input.max = '12'; input.step = '0.2';
+        input.value = state.coeffs[idx];
+        input.style.setProperty('--c', palette[idx % palette.length]);
+        input.addEventListener('input', function(){
+          state.coeffs[idx] = parseFloat(input.value);
+          lab.textContent = '\u03B2' + idx + ' = ' + state.coeffs[idx].toFixed(1);
+          drawCurve();
+        });
+        wrap.appendChild(lab);
+        wrap.appendChild(input);
+        coefGrid.appendChild(wrap);
+      })(i);
+    }
+  }
+
+  function drawBasis(){
+    var n = state.n, xs = state.xs, bm = state.basisMatrix, knots = state.knots;
+    var svg = axesSvg(W1,H1,PAD1,'x','B\u1D62(x)');
+
+    var uniqueKnots = [];
+    for(var i=0;i<knots.length;i++){
+      if(uniqueKnots.indexOf(knots[i]) === -1) uniqueKnots.push(knots[i]);
+    }
+    uniqueKnots.forEach(function(kx){
+      var px = xPix1(kx);
+      svg += '<line x1="'+px.toFixed(1)+'" y1="'+PAD1+'" x2="'+px.toFixed(1)+'" y2="'+(H1-PAD1)+'" stroke="'+gray+'" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>';
+    });
+
+    for(var i=0;i<n;i++){
+      var d = '';
+      for(var s=0;s<xs.length;s++){
+        var px = xPix1(xs[s]);
+        var py = yPix1(bm[i][s]);
+        d += (s===0?'M':'L') + px.toFixed(1) + ',' + py.toFixed(1) + ' ';
+      }
+      svg += '<path d="'+d+'" fill="none" stroke="'+palette[i%palette.length]+'" stroke-width="1.8" stroke-linejoin="round" opacity="0.9"/>';
+    }
+    basisSvg.innerHTML = svg;
+  }
+
+  function drawCurve(){
+    var n = state.n, xs = state.xs, bm = state.basisMatrix, coeffs = state.coeffs, greville = state.greville;
+    var svg = axesSvg(W2,H2,PAD2,'x','f(x)');
+
+    var trueD = '';
+    for(var s=0;s<xs.length;s++){
+      var px = xPix2(xs[s]);
+      var py = yPix2(trueFn(xs[s]));
+      trueD += (s===0?'M':'L') + px.toFixed(1) + ',' + py.toFixed(1) + ' ';
+    }
+    svg += '<path d="'+trueD+'" fill="none" stroke="'+gray+'" stroke-width="1.3" stroke-dasharray="4,4" opacity="0.7"/>';
+
+    var polyD = '';
+    for(var i=0;i<n;i++){
+      var px = xPix2(greville[i]);
+      var py = yPix2(coeffs[i]);
+      polyD += (i===0?'M':'L') + px.toFixed(1) + ',' + py.toFixed(1) + ' ';
+    }
+    svg += '<path d="'+polyD+'" fill="none" stroke="'+gray+'" stroke-width="1.4" stroke-linejoin="round"/>';
+    for(var i=0;i<n;i++){
+      svg += '<circle cx="'+xPix2(greville[i]).toFixed(1)+'" cy="'+yPix2(coeffs[i]).toFixed(1)+'" r="3.4" fill="'+palette[i%palette.length]+'"/>';
+    }
+
+    var curveD = '';
+    for(var s=0;s<xs.length;s++){
+      var y = 0;
+      for(var i=0;i<n;i++){ y += coeffs[i]*bm[i][s]; }
+      var px = xPix2(xs[s]);
+      var py = yPix2(y);
+      curveD += (s===0?'M':'L') + px.toFixed(1) + ',' + py.toFixed(1) + ' ';
+    }
+    svg += '<path d="'+curveD+'" fill="none" stroke="'+accent2+'" stroke-width="2.4" stroke-linejoin="round"/>';
+
+    for(var i=0;i<xTrain.length;i++){
+      svg += '<circle cx="'+xPix2(xTrain[i]).toFixed(1)+'" cy="'+yPix2(yTrain[i]).toFixed(1)+'" r="3" fill="'+accent+'" opacity="0.55"/>';
+    }
+
+    curveSvg.innerHTML = svg;
+  }
+
+  kSlider.addEventListener('input', rebuild);
+  resetBtn.addEventListener('click', function(){
+    state.coeffs = state.greville.map(function(g){ return trueFn(g); });
+    buildCoefSliders();
+    drawCurve();
+  });
+
+  rebuild();
+})();
+</script>
+</body>
+</html>

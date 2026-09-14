@@ -1,0 +1,1175 @@
+	bwt	gestation	parity	mother_age	mother_height	mother_weight	smoke	prem
+1	120	284	first	27	62	100	non-smoker	0
+2	113	282	first	33	64	135	non-smoker	0
+3	128	279	first	28	64	115	smoker	0
+5	108	282	first	23	67	125	smoker	0
+6	136	286	first	25	62	93	non-smoker	0
+7	138	244	first	33	62	178	non-smoker	1
+8	132	245	first	23	65	140	non-smoker	1
+9	120	289	first	25	62	125	non-smoker	0
+10	143	299	first	30	66	136	smoker	0
+11	140	351	first	27	68	120	non-smoker	0
+12	144	282	first	32	64	124	smoker	0
+13	141	279	first	23	63	128	smoker	0
+14	110	281	first	36	61	99	smoker	0
+15	114	273	first	30	63	154	non-smoker	0
+16	115	285	first	38	63	130	non-smoker	0
+17	92	255	first	25	65	125	smoker	1
+18	115	261	first	33	60	125	smoker	0
+19	144	261	first	33	68	170	non-smoker	0
+20	119	288	first	43	66	142	smoker	0
+21	105	270	first	22	56	93	non-smoker	0
+22	115	274	first	27	67	175	smoker	0
+23	137	287	first	25	66	145	non-smoker	0
+24	122	276	first	30	68	182	non-smoker	0
+25	131	294	first	23	65	122	non-smoker	0
+26	103	261	first	27	65	112	smoker	0
+27	146	280	first	26	58	106	non-smoker	0
+28	114	266	first	20	65	175	smoker	0
+29	125	292	first	32	65	125	non-smoker	0
+30	114	274	first	28	66	132	smoker	0
+31	122	270	first	26	61	105	non-smoker	0
+32	93	278	first	34	61	146	non-smoker	0
+33	130	268	first	30	66	123	non-smoker	0
+34	119	275	first	23	60	105	non-smoker	0
+35	113	281	first	24	65	120	non-smoker	0
+36	134	283	first	22	67	130	non-smoker	0
+37	107	279	first	24	63	115	non-smoker	0
+38	134	288	first	23	63	92	smoker	0
+39	122	267	first	27	65	101	smoker	0
+41	129	293	first	30	61	160	non-smoker	0
+42	110	278	first	23	63	177	non-smoker	0
+44	111	270	first	27	61	119	non-smoker	0
+45	87	248	first	37	65	130	smoker	1
+46	143	274	first	27	63	110	smoker	0
+47	155	294	first	32	66	150	non-smoker	0
+48	110	272	first	25	60	90	non-smoker	0
+49	122	275	first	26	66	147	non-smoker	0
+50	145	291	first	26	63	119	smoker	0
+51	115	258	first	26	62	130	non-smoker	1
+52	108	283	first	31	65	148	smoker	0
+53	102	282	first	28	61	110	non-smoker	0
+54	143	286	first	31	64	126	non-smoker	0
+55	146	267	first	30	67	132	non-smoker	0
+56	124	275	first	22	60	130	non-smoker	0
+57	124	278	first	26	70	145	smoker	0
+58	145	257	first	33	65	140	non-smoker	1
+59	106	273	first	28	60	116	non-smoker	0
+60	75	232	first	33	61	110	non-smoker	1
+61	107	273	first	24	61	96	non-smoker	0
+62	124	288	first	22	67	118	non-smoker	0
+63	122	280	first	23	65	125	smoker	0
+64	101	245	first	23	63	130	smoker	1
+65	128	283	first	28	63	125	smoker	0
+66	104	282	first	36	65	115	smoker	0
+67	97	246	first	37	63	150	non-smoker	1
+68	137	274	first	26	69	137	smoker	0
+69	103	273	first	31	63	170	smoker	0
+70	142	276	first	38	63	170	non-smoker	0
+71	130	289	first	27	66	130	non-smoker	0
+72	156	292	first	26	63	118	non-smoker	0
+73	133	284	first	25	66	125	smoker	0
+74	120	274	first	24	62	120	non-smoker	0
+75	91	270	first	24	60	149	smoker	0
+76	127	274	first	21	62	110	non-smoker	0
+77	153	286	first	26	63	107	smoker	0
+78	121	276	first	39	63	130	non-smoker	0
+79	120	277	first	27	63	126	non-smoker	0
+80	99	272	first	27	62	103	smoker	0
+81	149	293	first	35	65	116	non-smoker	0
+82	129	280	first	23	64	104	non-smoker	0
+83	139	292	first	25	68	135	non-smoker	0
+84	114	274	first	33	67	148	smoker	0
+85	138	287	first	30	66	145	non-smoker	0
+87	138	294	first	32	65	117	non-smoker	0
+88	131	296	first	37	63	143	non-smoker	0
+89	125	305	first	22	70	196	smoker	0
+91	128	281	first	33	59	117	non-smoker	0
+92	134	268	first	28	62	112	non-smoker	0
+93	114	271	first	27	60	104	non-smoker	0
+95	85	278	first	23	61	103	smoker	0
+96	135	282	first	22	64	100	non-smoker	0
+97	87	255	first	28	61	100	smoker	1
+98	125	302	first	37	62	162	non-smoker	0
+100	105	254	first	29	64	137	non-smoker	1
+101	120	279	first	27	60	121	smoker	0
+102	119	274	first	33	64	120	non-smoker	0
+104	107	280	first	36	65	117	smoker	0
+105	119	273	first	24	61	108	smoker	0
+106	133	279	first	37	66	140	non-smoker	0
+107	155	287	first	33	66	143	non-smoker	0
+108	126	273	first	22	65	150	non-smoker	0
+109	129	303	first	27	64	125	non-smoker	0
+110	137	274	first	29	65	154	non-smoker	0
+112	125	302	first	28	65	125	non-smoker	0
+113	91	255	first	19	67	136	smoker	1
+115	95	279	first	22	66	145	smoker	0
+116	118	276	first	29	64	114	non-smoker	0
+117	141	278	first	33	66	109	smoker	0
+118	131	283	first	25	67	215	non-smoker	0
+119	121	264	first	32	66	145	non-smoker	0
+120	100	243	first	39	65	170	smoker	1
+121	131	288	first	24	61	103	non-smoker	0
+122	118	284	first	26	66	133	non-smoker	0
+123	152	288	first	35	67	130	non-smoker	0
+124	121	284	first	34	69	155	non-smoker	0
+125	117	276	first	31	69	150	non-smoker	0
+126	115	283	first	25	61	150	smoker	0
+127	112	277	first	23	65	110	non-smoker	0
+128	94	267	first	30	62	120	smoker	0
+129	109	272	first	35	66	154	non-smoker	0
+130	132	225	first	28	67	148	non-smoker	1
+131	117	278	first	25	62	103	non-smoker	0
+132	101	266	first	20	67	110	smoker	0
+133	112	294	first	25	64	125	smoker	0
+134	128	283	first	24	60	100	non-smoker	0
+135	128	279	first	25	66	147	smoker	0
+136	117	258	first	31	64	120	non-smoker	1
+137	134	278	first	24	69	135	non-smoker	0
+138	127	284	first	28	65	145	non-smoker	0
+139	93	269	first	21	65	104	smoker	0
+140	122	275	first	27	65	165	non-smoker	0
+141	100	265	first	39	62	107	smoker	0
+142	147	293	first	32	65	123	non-smoker	0
+143	120	299	first	25	65	110	non-smoker	0
+144	144	277	first	30	63	127	non-smoker	0
+145	105	268	first	32	61	115	smoker	0
+146	136	276	first	23	66	155	non-smoker	0
+147	102	262	first	24	63	125	non-smoker	0
+148	160	300	first	29	71	175	smoker	0
+149	113	275	first	24	68	140	smoker	0
+150	126	282	first	38	66	250	non-smoker	0
+151	126	271	first	29	68	148	non-smoker	0
+152	115	278	first	29	61	128	non-smoker	0
+154	119	284	first	20	66	132	non-smoker	0
+156	123	318	first	21	64	152	non-smoker	0
+157	118	282	first	22	68	135	smoker	0
+158	133	287	first	24	60	104	smoker	0
+160	134	290	first	22	60	121	non-smoker	0
+161	144	288	first	21	67	111	non-smoker	0
+162	111	273	first	43	62	138	non-smoker	0
+163	125	262	first	36	66	190	non-smoker	0
+164	135	296	first	30	63	123	non-smoker	0
+165	134	289	first	22	63	125	non-smoker	0
+166	116	289	first	22	65	160	smoker	0
+167	129	291	first	29	69	123	non-smoker	0
+168	113	301	first	26	67	105	smoker	0
+169	131	295	first	23	65	123	smoker	0
+171	121	272	first	22	62	109	non-smoker	0
+172	121	271	first	25	68	118	smoker	0
+173	138	287	first	24	65	115	non-smoker	0
+174	136	278	first	23	61	105	non-smoker	0
+175	120	279	first	30	66	131	non-smoker	0
+176	122	278	first	31	72	155	smoker	0
+177	134	267	first	30	66	170	non-smoker	0
+178	101	280	first	25	65	123	smoker	0
+179	112	288	first	32	62	125	non-smoker	0
+180	132	290	first	25	64	120	non-smoker	0
+181	136	285	first	23	62	175	non-smoker	0
+182	113	277	first	23	65	192	smoker	0
+183	96	271	first	23	64	116	non-smoker	0
+184	124	277	first	29	63	220	non-smoker	0
+185	113	306	first	21	62	150	non-smoker	0
+187	137	258	first	25	63	117	non-smoker	1
+188	133	268	first	24	61	93	non-smoker	0
+189	107	244	first	20	58	97	non-smoker	1
+190	96	265	first	28	59	135	smoker	0
+191	142	278	first	35	66	136	smoker	0
+192	136	275	first	22	63	110	non-smoker	0
+193	75	239	first	26	63	124	smoker	1
+195	104	295	first	26	65	155	smoker	0
+196	130	274	first	30	63	150	non-smoker	0
+197	90	290	first	22	63	168	non-smoker	0
+198	118	276	first	22	66	147	smoker	0
+199	123	320	first	22	66	117	non-smoker	0
+200	137	291	first	34	61	110	non-smoker	0
+201	101	268	first	19	63	140	non-smoker	0
+202	142	275	first	25	64	132	non-smoker	0
+203	98	282	first	20	63	97	smoker	0
+204	124	283	first	23	63	112	non-smoker	0
+206	109	281	first	23	61	105	non-smoker	0
+207	150	285	first	22	61	110	smoker	0
+208	119	282	first	26	68	150	smoker	0
+209	131	280	first	38	65	125	non-smoker	0
+210	101	272	first	29	63	150	smoker	0
+211	113	246	first	19	62	138	smoker	1
+212	127	270	first	25	62	150	non-smoker	0
+213	97	260	first	23	61	99	smoker	0
+214	117	282	first	28	64	115	non-smoker	0
+215	150	290	first	21	65	125	non-smoker	0
+216	85	234	first	33	67	130	non-smoker	1
+217	128	288	first	27	70	145	non-smoker	0
+218	105	233	first	34	61	130	non-smoker	1
+220	115	274	first	22	65	130	smoker	0
+221	107	290	first	28	62	135	non-smoker	0
+222	121	275	first	24	63	121	smoker	0
+223	119	286	first	20	64	180	non-smoker	0
+224	117	275	first	20	64	145	smoker	0
+225	134	264	first	26	68	136	non-smoker	0
+226	117	288	first	35	65	142	non-smoker	0
+227	115	268	first	28	66	128	non-smoker	0
+228	110	254	first	23	63	120	smoker	1
+229	130	282	first	21	62	106	smoker	0
+230	140	274	first	23	63	106	smoker	0
+232	93	249	first	33	66	117	non-smoker	1
+233	154	292	first	42	65	116	smoker	0
+234	125	290	first	19	64	127	non-smoker	0
+235	93	318	first	31	66	135	non-smoker	0
+236	122	277	first	33	63	135	smoker	0
+237	129	267	first	22	63	160	non-smoker	0
+238	126	276	first	23	63	120	non-smoker	0
+239	85	274	first	24	68	155	non-smoker	0
+240	173	293	first	30	63	110	non-smoker	0
+241	144	329	first	22	65	190	smoker	0
+242	114	278	first	25	65	140	smoker	0
+244	154	287	first	27	65	125	smoker	0
+245	150	274	first	25	67	117	smoker	0
+246	111	278	first	21	62	125	non-smoker	0
+247	126	277	first	32	66	128	non-smoker	0
+248	122	261	first	28	65	124	non-smoker	0
+249	141	282	first	24	68	169	non-smoker	0
+250	142	274	first	24	63	125	non-smoker	0
+251	99	262	first	38	59	110	smoker	0
+252	113	286	first	23	63	105	non-smoker	0
+253	149	282	first	21	61	110	non-smoker	0
+254	117	328	first	29	65	125	smoker	0
+257	128	290	first	22	64	118	non-smoker	0
+258	125	286	first	21	64	139	non-smoker	0
+259	114	290	first	30	66	160	non-smoker	0
+260	130	285	first	23	63	128	smoker	0
+261	116	148	first	28	66	135	non-smoker	1
+262	81	256	first	30	64	148	smoker	1
+263	124	287	first	27	62	105	smoker	0
+264	125	292	first	22	65	122	non-smoker	0
+265	110	262	first	25	66	140	non-smoker	0
+266	125	279	first	23	63	104	smoker	0
+267	138	294	first	40	64	125	non-smoker	0
+268	142	284	first	39	66	132	non-smoker	0
+269	115	278	first	23	60	102	smoker	0
+270	102	280	first	38	67	140	non-smoker	0
+271	140	294	first	25	61	103	non-smoker	0
+272	133	276	not first	22	63	119	non-smoker	0
+273	127	290	first	35	66	165	non-smoker	0
+274	104	274	not first	20	62	115	smoker	0
+275	119	275	first	42	67	156	smoker	0
+276	152	301	first	29	65	150	non-smoker	0
+277	123	284	not first	20	65	120	smoker	0
+278	143	273	first	19	66	135	non-smoker	0
+279	131	308	first	40	65	160	non-smoker	0
+280	141	319	not first	20	67	140	smoker	0
+281	129	277	first	30	66	142	smoker	0
+282	113	282	not first	36	59	140	non-smoker	0
+283	119	292	first	33	62	118	smoker	0
+284	109	295	not first	23	63	103	smoker	0
+285	104	280	not first	27	68	146	smoker	0
+286	131	282	not first	21	66	126	non-smoker	0
+287	110	293	not first	28	64	135	smoker	0
+288	148	279	first	27	71	189	non-smoker	0
+289	137	283	not first	20	65	157	non-smoker	0
+290	117	283	first	27	63	108	non-smoker	0
+291	115	302	not first	22	67	135	non-smoker	0
+292	98	280	first	35	64	122	smoker	0
+293	136	303	not first	20	68	148	smoker	0
+294	121	276	not first	23	71	152	smoker	0
+295	132	285	not first	25	63	140	non-smoker	0
+296	91	264	first	36	60	100	smoker	0
+297	119	294	first	34	59	105	non-smoker	0
+298	85	273	first	26	60	105	smoker	0
+299	106	271	not first	26	61	110	smoker	0
+300	132	284	first	29	64	122	non-smoker	0
+301	80	266	not first	25	62	125	non-smoker	0
+302	109	286	first	24	64	125	smoker	0
+303	111	306	first	27	61	102	non-smoker	0
+304	143	292	not first	21	65	125	non-smoker	0
+305	136	290	first	26	66	135	non-smoker	0
+306	110	285	not first	19	64	130	non-smoker	0
+307	98	257	first	29	66	130	smoker	1
+308	108	305	not first	24	65	112	non-smoker	0
+309	101	295	first	18	62	145	smoker	0
+310	71	281	first	32	60	117	smoker	0
+311	124	292	first	29	68	176	smoker	0
+313	106	276	first	30	66	130	non-smoker	0
+314	101	278	first	25	62	112	smoker	0
+315	100	277	first	31	62	100	smoker	0
+316	104	269	first	35	63	110	smoker	0
+317	117	270	first	24	67	135	smoker	0
+318	117	267	first	29	65	120	smoker	0
+319	149	279	first	25	67	135	non-smoker	0
+320	135	284	first	25	66	123	non-smoker	0
+321	110	283	not first	21	66	129	non-smoker	0
+322	121	276	first	31	67	130	non-smoker	0
+323	142	285	not first	24	66	136	non-smoker	0
+324	104	260	first	33	64	145	non-smoker	0
+325	138	296	first	34	66	120	non-smoker	0
+326	112	278	not first	21	63	120	non-smoker	0
+327	117	293	first	39	60	120	smoker	0
+328	109	282	first	25	62	106	smoker	0
+329	131	266	not first	28	67	135	non-smoker	0
+330	120	273	first	29	64	130	smoker	0
+331	116	270	first	29	63	132	non-smoker	0
+332	140	290	first	23	65	110	non-smoker	0
+333	103	273	not first	22	64	110	smoker	0
+334	120	279	not first	23	67	135	non-smoker	0
+335	139	260	not first	32	64	127	non-smoker	0
+336	123	254	first	26	62	130	smoker	1
+337	104	280	not first	23	64	107	smoker	0
+339	111	270	first	22	59	103	non-smoker	0
+340	122	277	first	32	63	157	smoker	0
+341	116	271	not first	30	67	144	smoker	0
+342	129	277	first	27	68	130	smoker	0
+343	133	292	first	30	65	112	smoker	0
+344	110	277	first	25	61	130	non-smoker	0
+345	105	276	first	22	67	130	non-smoker	0
+346	93	246	first	37	65	130	non-smoker	1
+347	122	281	first	42	63	103	smoker	0
+348	133	293	first	23	64	110	smoker	0
+349	130	296	not first	22	66	117	smoker	0
+350	104	307	first	24	59	122	non-smoker	0
+351	106	278	first	31	65	110	smoker	0
+352	120	281	first	33	63	113	non-smoker	0
+354	118	276	not first	18	63	128	non-smoker	0
+355	140	290	not first	19	67	132	smoker	0
+356	114	268	first	22	64	104	non-smoker	0
+357	116	280	first	40	62	159	non-smoker	0
+358	129	284	first	24	64	115	non-smoker	0
+359	120	286	first	22	62	115	smoker	0
+360	127	281	first	24	63	112	smoker	0
+362	71	234	first	32	64	110	smoker	1
+363	88	274	first	30	66	130	non-smoker	0
+365	122	286	first	23	64	145	non-smoker	0
+366	106	302	not first	19	66	147	non-smoker	0
+367	135	285	first	30	66	130	non-smoker	0
+368	107	290	first	26	63	112	non-smoker	0
+369	129	294	first	32	62	170	smoker	0
+370	126	274	first	39	62	122	non-smoker	0
+371	116	293	not first	26	64	125	non-smoker	0
+372	124	294	first	26	62	122	non-smoker	0
+373	123	281	first	23	68	136	non-smoker	0
+374	145	315	first	39	67	143	smoker	0
+375	102	278	first	27	67	135	smoker	0
+376	129	293	first	30	65	130	smoker	0
+377	98	276	not first	22	61	121	non-smoker	0
+378	110	272	first	28	60	108	non-smoker	0
+379	135	282	first	24	67	128	smoker	0
+380	101	278	not first	20	62	105	non-smoker	0
+381	96	266	first	26	65	125	non-smoker	0
+382	104	276	not first	18	60	109	smoker	0
+383	100	249	first	24	67	100	non-smoker	1
+384	154	292	first	40	66	145	non-smoker	0
+385	127	293	first	31	67	137	non-smoker	0
+386	126	288	first	31	62	150	non-smoker	0
+387	126	282	not first	23	66	115	smoker	0
+388	127	279	first	26	67	155	smoker	0
+389	98	275	first	25	65	112	smoker	0
+390	127	288	not first	21	66	130	non-smoker	0
+391	129	299	first	22	68	145	non-smoker	0
+392	131	292	not first	22	64	124	smoker	0
+393	132	289	not first	19	66	145	non-smoker	0
+394	127	280	first	27	62	118	non-smoker	0
+395	99	313	not first	34	59	100	smoker	0
+396	115	290	first	30	64	140	smoker	0
+397	145	290	not first	24	67	125	non-smoker	0
+398	102	249	not first	23	67	134	smoker	1
+399	136	299	first	29	64	115	non-smoker	0
+401	121	282	first	22	66	133	non-smoker	0
+402	120	286	first	25	62	105	non-smoker	0
+403	118	261	first	26	60	104	non-smoker	0
+404	127	304	not first	26	62	105	non-smoker	0
+405	132	281	not first	24	63	117	non-smoker	0
+406	102	258	not first	22	65	135	non-smoker	1
+407	143	279	first	39	65	129	smoker	0
+408	118	277	first	25	62	120	non-smoker	0
+409	102	286	not first	22	64	140	non-smoker	0
+410	163	280	first	35	69	139	non-smoker	0
+411	132	294	first	32	64	116	non-smoker	0
+412	116	276	first	33	61	180	non-smoker	0
+413	138	288	not first	19	66	124	non-smoker	0
+414	139	279	first	20	64	143	non-smoker	0
+415	132	298	not first	23	61	137	non-smoker	0
+416	87	282	first	27	63	104	smoker	0
+417	131	297	first	30	67	132	non-smoker	0
+418	130	282	first	26	67	147	smoker	0
+419	123	290	first	28	66	107	smoker	0
+420	115	276	not first	18	63	110	non-smoker	0
+421	116	272	first	27	64	130	smoker	0
+422	119	286	not first	20	67	130	non-smoker	0
+423	125	279	not first	19	67	135	non-smoker	0
+424	144	282	first	33	66	155	smoker	0
+425	123	269	first	26	67	132	non-smoker	0
+426	120	276	first	23	66	114	non-smoker	0
+427	140	251	first	28	63	210	non-smoker	1
+428	120	271	not first	17	64	142	smoker	0
+430	120	289	not first	31	59	102	non-smoker	0
+431	146	280	first	23	61	145	non-smoker	0
+432	112	283	not first	21	62	102	smoker	0
+434	132	278	first	20	64	150	smoker	0
+435	146	263	first	39	53	110	smoker	0
+436	122	275	first	30	68	140	non-smoker	0
+437	128	292	first	32	66	130	non-smoker	0
+438	119	277	first	24	63	120	smoker	0
+439	135	278	first	27	66	148	non-smoker	0
+441	129	235	first	24	66	135	non-smoker	1
+442	116	293	not first	28	62	108	non-smoker	0
+443	100	275	first	27	64	111	smoker	0
+445	138	257	first	38	67	138	non-smoker	1
+446	123	282	first	22	65	130	non-smoker	0
+447	113	288	not first	21	61	120	non-smoker	0
+448	129	280	not first	24	65	140	smoker	0
+449	122	280	first	24	67	127	smoker	0
+450	132	281	not first	21	67	140	non-smoker	0
+451	120	269	not first	40	63	130	non-smoker	0
+452	114	283	not first	20	65	115	non-smoker	0
+453	130	280	first	29	66	135	non-smoker	0
+454	117	286	first	32	66	127	smoker	0
+455	142	285	first	33	63	124	non-smoker	0
+456	144	273	first	27	62	118	smoker	0
+457	127	262	not first	32	64	125	non-smoker	0
+458	115	270	first	25	67	165	smoker	0
+459	85	258	first	41	67	137	non-smoker	1
+460	99	274	first	28	66	118	smoker	0
+461	123	323	not first	17	64	140	non-smoker	0
+462	112	281	not first	23	61	150	non-smoker	0
+463	68	223	first	32	66	149	smoker	1
+464	102	283	not first	19	65	127	smoker	0
+465	109	273	first	37	65	138	smoker	0
+466	102	267	not first	25	60	93	smoker	0
+467	99	275	first	23	61	125	smoker	0
+468	78	256	not first	29	65	123	non-smoker	1
+469	128	284	not first	19	66	111	smoker	0
+470	107	303	not first	25	67	133	non-smoker	0
+471	136	295	first	23	64	147	non-smoker	0
+472	101	278	first	27	61	99	smoker	0
+473	100	275	not first	25	64	125	non-smoker	0
+474	109	272	first	41	66	154	smoker	0
+475	117	281	not first	21	70	141	smoker	0
+476	88	252	not first	21	60	115	smoker	1
+477	95	270	first	35	65	135	smoker	0
+480	127	291	not first	24	66	135	smoker	0
+481	107	293	first	20	65	155	smoker	0
+483	126	262	first	37	66	135	smoker	0
+484	98	278	first	27	63	110	smoker	0
+485	96	241	first	23	64	130	smoker	1
+486	104	282	first	24	63	144	non-smoker	0
+487	133	273	not first	33	63	135	non-smoker	0
+488	93	267	first	25	63	135	smoker	0
+489	101	280	not first	24	65	123	smoker	0
+490	118	277	first	21	64	155	non-smoker	0
+491	130	289	first	21	61	130	smoker	0
+492	125	288	first	22	63	128	smoker	0
+493	140	291	not first	19	65	122	non-smoker	0
+494	115	290	not first	19	65	118	non-smoker	0
+495	130	293	first	26	63	123	non-smoker	0
+496	114	277	not first	31	64	125	non-smoker	0
+497	105	278	first	21	64	120	non-smoker	0
+498	101	289	not first	31	60	125	non-smoker	0
+499	132	286	first	26	67	122	smoker	0
+500	112	252	first	37	64	162	non-smoker	1
+501	69	232	first	31	59	103	smoker	1
+502	114	264	first	26	63	110	smoker	0
+503	123	267	first	29	63	111	smoker	0
+504	129	284	not first	20	66	130	smoker	0
+505	114	283	not first	15	64	117	smoker	0
+506	115	290	first	31	62	95	non-smoker	0
+507	98	272	not first	35	64	129	non-smoker	0
+508	128	283	first	27	67	126	non-smoker	0
+510	119	271	first	28	64	175	smoker	0
+511	154	288	first	25	65	147	non-smoker	0
+512	127	247	not first	21	63	140	non-smoker	1
+513	131	263	first	29	64	180	smoker	0
+514	129	288	first	28	59	102	non-smoker	0
+515	114	286	not first	22	64	116	smoker	0
+516	110	280	first	29	62	110	smoker	0
+517	103	268	first	31	64	150	smoker	0
+518	117	287	first	20	65	115	smoker	0
+519	138	282	first	25	64	120	non-smoker	0
+520	126	280	first	24	66	147	smoker	0
+521	124	271	first	23	66	145	non-smoker	0
+522	111	284	first	34	62	110	non-smoker	0
+523	132	282	first	28	67	200	smoker	0
+524	103	240	first	26	65	140	non-smoker	1
+525	158	285	first	28	62	130	non-smoker	0
+527	101	286	not first	21	64	117	smoker	0
+528	132	290	first	26	66	125	non-smoker	0
+529	114	293	not first	20	66	180	smoker	0
+530	71	277	first	40	69	135	non-smoker	0
+531	116	282	first	19	64	120	non-smoker	0
+532	108	271	first	19	60	109	smoker	0
+533	123	298	first	25	64	113	smoker	0
+534	129	289	first	37	63	132	non-smoker	0
+535	134	282	first	24	62	110	non-smoker	0
+536	113	298	first	30	60	124	smoker	0
+537	123	277	not first	20	65	160	non-smoker	0
+538	147	277	first	30	68	160	non-smoker	0
+539	121	270	not first	20	62	103	non-smoker	0
+540	125	284	not first	19	67	130	non-smoker	0
+541	115	277	not first	25	66	128	non-smoker	0
+542	101	289	first	27	59	96	non-smoker	0
+543	93	271	first	30	65	127	smoker	0
+544	109	275	first	33	66	120	non-smoker	0
+545	115	276	not first	23	60	106	non-smoker	0
+546	130	293	not first	23	65	122	smoker	0
+547	123	278	first	21	61	89	non-smoker	0
+548	111	300	first	20	64	108	smoker	0
+549	97	279	not first	24	64	138	smoker	0
+550	122	292	not first	25	65	125	non-smoker	0
+551	124	300	first	28	63	95	non-smoker	0
+552	129	276	first	26	66	145	non-smoker	0
+553	124	290	first	26	59	140	non-smoker	0
+554	107	280	first	20	60	107	smoker	0
+555	142	273	not first	22	62	125	non-smoker	0
+556	129	287	not first	29	66	135	non-smoker	0
+557	174	281	first	37	67	155	non-smoker	0
+558	105	264	first	30	65	105	smoker	0
+559	103	291	not first	26	63	102	non-smoker	0
+560	124	285	not first	27	63	114	non-smoker	0
+561	105	265	first	43	65	124	non-smoker	0
+562	133	275	first	36	65	137	smoker	0
+563	161	302	not first	22	70	170	smoker	0
+564	105	260	first	23	64	197	non-smoker	0
+565	108	281	first	41	66	171	non-smoker	0
+566	153	297	first	27	66	145	non-smoker	0
+567	133	280	not first	25	61	130	non-smoker	0
+568	115	269	first	41	63	165	smoker	0
+569	127	254	first	27	67	146	smoker	1
+570	128	271	first	41	65	135	smoker	0
+571	117	265	first	40	68	134	smoker	0
+572	123	274	first	23	66	135	non-smoker	0
+573	119	288	not first	22	64	132	smoker	0
+574	141	284	not first	17	64	105	non-smoker	0
+575	91	260	first	26	62	110	smoker	0
+576	116	291	first	29	65	133	smoker	0
+577	116	255	first	24	65	132	non-smoker	1
+578	121	273	first	32	64	112	non-smoker	0
+579	111	274	first	36	67	159	non-smoker	0
+580	102	257	first	25	66	135	non-smoker	1
+581	118	283	first	24	65	150	non-smoker	0
+582	126	294	not first	22	65	125	smoker	0
+583	98	286	first	31	62	105	smoker	0
+584	131	288	not first	28	65	125	non-smoker	0
+585	115	278	first	21	60	113	non-smoker	0
+586	103	281	not first	22	59	98	smoker	0
+587	147	301	first	26	65	130	non-smoker	0
+588	123	308	not first	19	65	135	non-smoker	0
+589	125	283	first	22	65	119	non-smoker	0
+590	117	270	first	30	67	130	smoker	0
+591	99	268	first	29	71	150	non-smoker	0
+592	115	283	first	31	66	127	smoker	0
+593	116	265	first	36	63	120	non-smoker	0
+594	118	297	first	35	68	140	smoker	0
+595	170	303	not first	21	64	129	non-smoker	0
+596	104	270	first	25	61	110	non-smoker	0
+597	108	269	not first	20	62	114	non-smoker	0
+598	144	289	not first	17	69	130	smoker	0
+599	99	250	not first	26	66	115	non-smoker	1
+600	97	263	not first	25	63	107	non-smoker	0
+602	85	270	not first	19	63	118	smoker	0
+603	130	285	not first	24	66	126	smoker	0
+604	117	275	first	22	62	115	smoker	0
+605	109	302	first	24	64	110	non-smoker	0
+606	147	285	first	24	64	137	non-smoker	0
+607	105	281	not first	23	64	115	non-smoker	0
+608	135	278	not first	27	68	139	smoker	0
+609	115	273	not first	23	67	215	smoker	0
+610	123	280	first	23	65	140	smoker	0
+611	105	274	not first	26	61	100	non-smoker	0
+612	154	271	first	36	69	160	smoker	0
+613	110	276	first	25	63	107	smoker	0
+614	119	285	not first	26	62	108	non-smoker	0
+615	103	292	not first	28	62	132	non-smoker	0
+616	117	272	first	25	64	116	non-smoker	0
+617	120	289	first	23	69	165	non-smoker	0
+618	145	278	first	24	62	109	non-smoker	0
+619	104	271	first	20	62	98	smoker	0
+620	123	268	not first	18	62	110	smoker	0
+621	124	272	first	27	62	110	non-smoker	0
+622	129	275	first	26	64	115	smoker	0
+623	91	248	first	33	63	202	non-smoker	1
+624	109	295	first	32	61	135	non-smoker	0
+625	108	268	first	22	58	112	smoker	0
+626	79	268	first	36	61	108	non-smoker	0
+627	133	301	first	23	62	108	non-smoker	0
+628	114	309	not first	27	62	118	non-smoker	0
+629	128	273	first	34	61	125	non-smoker	0
+630	129	280	not first	24	65	126	non-smoker	0
+631	97	234	not first	26	65	112	non-smoker	1
+632	103	276	not first	21	62	130	smoker	0
+633	176	293	not first	19	68	180	non-smoker	0
+634	143	294	first	44	65	145	non-smoker	0
+635	127	292	not first	21	68	130	smoker	0
+636	107	256	first	28	59	90	smoker	1
+637	113	268	first	31	62	100	non-smoker	0
+638	106	279	not first	21	62	118	smoker	0
+639	152	285	first	24	61	120	smoker	0
+640	150	275	first	29	65	145	non-smoker	0
+641	136	278	first	35	64	118	smoker	0
+643	124	279	first	35	66	129	non-smoker	0
+644	123	284	not first	18	64	112	smoker	0
+645	119	288	first	37	62	128	non-smoker	0
+646	122	291	first	40	64	155	non-smoker	0
+647	112	250	first	34	67	124	non-smoker	1
+648	93	270	first	25	64	125	smoker	0
+650	136	274	not first	20	63	165	non-smoker	0
+652	150	292	first	26	64	124	non-smoker	0
+653	94	264	not first	26	64	135	non-smoker	0
+655	146	306	first	38	63	112	non-smoker	0
+656	129	274	first	19	65	101	smoker	0
+657	125	292	first	27	65	117	smoker	0
+658	124	273	first	21	63	115	non-smoker	0
+659	141	282	first	27	63	115	non-smoker	0
+660	96	266	first	33	67	135	smoker	0
+661	138	297	first	30	66	133	smoker	0
+662	127	282	first	28	67	134	non-smoker	0
+663	114	251	first	26	64	119	smoker	1
+664	103	297	first	31	64	125	non-smoker	0
+665	127	288	not first	20	65	115	smoker	0
+667	113	274	first	23	63	108	smoker	0
+668	99	249	not first	31	57	98	smoker	1
+669	97	279	first	33	61	105	smoker	0
+670	116	275	not first	20	68	145	non-smoker	0
+671	126	297	first	26	66	120	smoker	0
+673	119	277	first	28	66	130	smoker	0
+674	123	283	first	27	62	110	non-smoker	0
+675	129	287	first	24	60	107	non-smoker	0
+676	117	256	first	37	65	132	smoker	1
+677	100	275	first	26	60	115	non-smoker	0
+678	131	274	first	28	64	118	smoker	0
+679	146	279	first	27	64	124	non-smoker	0
+680	84	267	first	29	60	95	non-smoker	0
+681	115	302	first	28	64	116	non-smoker	0
+682	115	281	first	25	60	94	non-smoker	0
+683	118	284	first	28	70	145	smoker	0
+684	91	292	not first	19	61	125	non-smoker	0
+685	112	255	first	39	60	115	non-smoker	1
+686	115	316	not first	29	64	110	non-smoker	0
+687	110	269	first	38	61	102	non-smoker	0
+688	117	277	first	34	66	140	non-smoker	0
+689	109	268	not first	29	65	120	smoker	0
+690	99	267	first	22	62	94	non-smoker	0
+691	131	274	first	27	62	160	smoker	0
+692	136	291	not first	25	61	105	non-smoker	0
+693	130	298	first	20	62	120	non-smoker	0
+694	134	296	first	35	60	117	smoker	0
+695	128	271	first	29	65	126	smoker	0
+696	150	286	first	38	67	175	non-smoker	0
+697	86	284	first	39	65	174	smoker	0
+698	115	278	first	26	63	112	smoker	0
+700	78	237	not first	23	63	144	non-smoker	1
+701	100	295	not first	21	68	125	smoker	0
+702	116	270	first	25	68	169	non-smoker	0
+703	110	271	not first	26	66	135	non-smoker	0
+704	109	283	first	34	64	120	non-smoker	0
+705	113	259	first	38	64	128	non-smoker	0
+706	136	297	not first	23	66	135	non-smoker	0
+708	121	273	not first	34	61	125	non-smoker	0
+709	117	288	not first	28	63	140	non-smoker	0
+710	166	299	first	26	68	140	non-smoker	0
+711	87	229	first	27	62	138	non-smoker	1
+712	120	294	not first	23	66	128	smoker	0
+713	95	286	first	26	66	118	smoker	0
+714	132	273	first	28	62	113	non-smoker	0
+715	90	286	first	32	63	105	smoker	0
+716	131	308	first	30	58	150	smoker	0
+717	103	279	not first	22	65	145	smoker	0
+718	144	287	not first	33	71	153	smoker	0
+719	137	299	first	24	62	115	non-smoker	0
+720	124	270	first	20	64	122	non-smoker	0
+721	136	281	not first	27	64	127	non-smoker	0
+722	117	298	not first	22	64	160	non-smoker	0
+723	121	269	first	23	62	130	non-smoker	0
+724	116	280	first	34	68	198	non-smoker	0
+725	139	275	first	33	62	118	non-smoker	0
+726	110	280	first	39	67	125	non-smoker	0
+727	86	242	first	20	64	110	smoker	1
+728	133	287	first	20	65	165	non-smoker	0
+729	81	254	first	23	62	157	non-smoker	1
+730	133	281	first	33	63	120	non-smoker	0
+731	132	284	not first	20	66	140	non-smoker	0
+732	132	287	first	29	64	148	non-smoker	0
+733	137	274	first	27	64	126	non-smoker	0
+734	84	279	first	34	63	190	non-smoker	0
+735	136	279	first	30	69	130	smoker	0
+736	92	270	first	34	62	100	smoker	0
+737	114	298	not first	28	67	114	non-smoker	0
+738	129	274	first	33	69	136	smoker	0
+739	167	288	not first	19	63	117	non-smoker	0
+741	124	282	not first	22	65	118	non-smoker	0
+742	105	269	first	27	62	100	smoker	0
+743	155	283	not first	19	70	137	non-smoker	0
+744	125	279	not first	21	66	126	non-smoker	0
+745	125	266	first	21	62	120	smoker	0
+746	125	283	not first	22	59	96	non-smoker	0
+747	115	315	not first	22	62	110	non-smoker	0
+748	174	288	first	25	61	182	non-smoker	0
+749	127	290	first	35	66	122	non-smoker	0
+750	113	262	first	24	60	105	non-smoker	0
+751	115	273	first	22	66	130	smoker	0
+752	139	277	first	35	63	140	non-smoker	0
+753	127	275	first	26	62	125	non-smoker	0
+755	112	272	first	26	60	98	non-smoker	0
+756	143	285	first	30	64	135	smoker	0
+757	116	286	not first	22	58	105	smoker	0
+758	155	279	first	33	61	125	non-smoker	0
+759	121	290	first	31	64	127	non-smoker	0
+760	110	282	not first	21	66	125	smoker	0
+761	87	277	first	31	62	120	smoker	0
+762	132	330	first	34	64	130	smoker	0
+764	129	277	first	24	68	142	non-smoker	0
+765	123	280	first	20	62	105	smoker	0
+766	91	279	not first	27	62	118	non-smoker	0
+767	147	286	first	30	68	147	non-smoker	0
+768	144	289	first	20	62	106	non-smoker	0
+769	128	292	first	30	64	127	non-smoker	0
+770	137	318	not first	19	64	110	non-smoker	0
+771	104	289	first	24	60	104	smoker	0
+772	120	271	first	32	63	130	non-smoker	0
+773	112	277	not first	23	64	118	non-smoker	0
+774	138	286	first	26	63	111	non-smoker	0
+775	96	280	first	27	63	105	smoker	0
+776	134	285	first	35	62	134	non-smoker	0
+777	126	285	first	24	64	140	non-smoker	0
+778	112	300	first	29	62	121	non-smoker	0
+779	138	313	not first	27	65	111	non-smoker	0
+780	110	275	first	25	63	120	non-smoker	0
+781	83	253	first	29	63	110	smoker	1
+782	112	288	not first	20	62	110	non-smoker	0
+783	148	286	first	38	68	160	non-smoker	0
+784	119	300	not first	34	63	124	non-smoker	0
+785	86	246	first	25	64	113	smoker	1
+786	110	269	first	38	63	145	smoker	0
+787	126	282	first	23	61	120	non-smoker	0
+788	125	272	first	30	60	96	non-smoker	0
+789	136	252	first	27	63	130	non-smoker	1
+790	127	283	not first	29	64	119	non-smoker	0
+791	84	272	first	25	64	150	smoker	0
+792	131	278	first	22	66	124	non-smoker	0
+793	123	286	not first	21	67	130	smoker	0
+794	96	282	not first	30	68	127	smoker	0
+795	110	286	first	26	62	100	non-smoker	0
+796	123	282	first	29	68	164	non-smoker	0
+797	152	286	not first	19	67	135	non-smoker	0
+798	127	288	first	28	65	155	non-smoker	0
+799	117	269	not first	21	64	149	smoker	0
+800	125	277	first	29	66	139	smoker	0
+801	139	273	first	29	68	130	non-smoker	0
+802	114	280	first	31	66	134	smoker	0
+803	96	280	not first	34	62	127	smoker	0
+804	124	289	first	29	63	110	non-smoker	0
+805	107	272	first	30	64	140	smoker	0
+806	113	277	first	38	64	108	non-smoker	0
+807	98	292	not first	20	65	124	smoker	0
+808	119	285	not first	28	65	127	non-smoker	0
+809	107	268	first	37	58	112	smoker	0
+810	117	255	first	26	61	120	non-smoker	1
+811	117	305	first	24	64	155	non-smoker	0
+812	144	276	first	23	67	129	smoker	0
+813	136	268	first	30	63	132	smoker	0
+814	121	278	first	28	69	132	non-smoker	0
+815	165	282	first	29	66	145	non-smoker	0
+816	120	279	first	38	64	124	non-smoker	0
+817	125	280	first	30	65	130	smoker	0
+818	137	285	first	29	65	110	non-smoker	0
+819	100	288	not first	28	61	108	smoker	0
+820	134	284	first	28	62	112	non-smoker	0
+821	88	262	first	20	65	118	smoker	0
+822	108	291	first	39	65	135	non-smoker	0
+823	123	271	first	41	64	162	non-smoker	0
+824	141	277	first	38	66	162	non-smoker	0
+825	130	270	not first	19	66	130	non-smoker	0
+826	139	299	not first	20	67	112	non-smoker	0
+827	130	283	first	32	65	118	non-smoker	0
+828	113	289	not first	26	59	91	non-smoker	0
+829	77	238	not first	23	63	103	smoker	1
+830	62	228	first	24	61	107	non-smoker	1
+831	93	245	first	33	61	100	smoker	1
+832	109	275	not first	37	63	112	smoker	0
+833	145	283	first	27	65	125	smoker	0
+834	92	224	first	19	63	134	smoker	1
+835	120	281	first	26	61	115	non-smoker	0
+836	135	284	first	39	67	141	non-smoker	0
+837	113	287	first	36	63	118	non-smoker	0
+838	126	251	not first	28	64	123	non-smoker	1
+839	143	270	not first	27	70	148	non-smoker	0
+840	128	282	not first	25	64	125	non-smoker	0
+841	98	262	first	22	67	120	non-smoker	0
+842	110	306	not first	32	61	122	non-smoker	0
+843	162	284	first	27	64	126	non-smoker	0
+844	116	292	not first	20	65	118	non-smoker	0
+845	128	284	first	23	62	110	non-smoker	0
+846	111	275	not first	18	61	108	smoker	0
+847	137	280	first	34	60	107	non-smoker	0
+849	100	264	first	29	64	120	smoker	0
+850	160	271	first	32	67	215	non-smoker	0
+851	112	267	not first	22	62	138	non-smoker	0
+852	134	297	first	27	67	170	smoker	0
+853	145	308	first	35	64	110	smoker	0
+854	116	295	first	32	65	120	non-smoker	0
+855	126	278	first	26	64	150	smoker	0
+856	111	285	first	29	65	130	non-smoker	0
+857	126	282	first	33	62	117	non-smoker	0
+858	109	291	first	39	64	107	non-smoker	0
+859	136	291	first	41	66	191	non-smoker	0
+860	119	286	first	22	63	185	smoker	0
+861	103	267	not first	21	66	150	smoker	0
+862	124	284	not first	17	62	112	non-smoker	0
+863	155	286	first	31	66	127	non-smoker	0
+864	122	282	not first	21	66	110	non-smoker	0
+865	113	285	first	26	66	140	non-smoker	0
+866	122	273	first	26	66	210	non-smoker	0
+867	126	293	not first	27	62	111	non-smoker	0
+868	116	277	first	41	64	124	smoker	0
+869	102	294	first	21	65	130	smoker	0
+870	110	181	first	27	64	133	non-smoker	1
+871	133	285	not first	30	64	160	non-smoker	0
+872	125	283	first	29	65	125	non-smoker	0
+873	164	286	not first	32	66	143	non-smoker	0
+874	133	297	first	36	61	125	non-smoker	0
+876	124	293	not first	19	65	150	non-smoker	0
+877	122	306	not first	22	62	100	non-smoker	0
+878	121	271	not first	34	63	129	smoker	0
+879	100	272	first	30	64	150	smoker	0
+881	90	266	not first	26	67	135	non-smoker	0
+882	128	272	not first	18	67	109	non-smoker	0
+884	86	276	not first	23	65	125	smoker	0
+885	123	282	first	30	63	118	non-smoker	0
+886	87	275	first	28	63	110	smoker	0
+887	128	291	not first	27	63	132	non-smoker	0
+888	120	288	first	28	63	125	non-smoker	0
+889	125	301	not first	35	68	181	non-smoker	0
+890	118	265	first	27	61	123	non-smoker	0
+891	116	284	not first	24	66	117	non-smoker	0
+892	131	262	first	22	67	135	non-smoker	0
+893	151	286	not first	22	66	130	non-smoker	0
+894	88	273	first	20	66	110	smoker	0
+895	137	284	first	30	67	110	non-smoker	0
+896	127	289	first	23	67	140	non-smoker	0
+897	96	278	not first	18	60	120	smoker	0
+898	129	281	first	31	67	155	non-smoker	0
+899	128	288	not first	26	65	114	non-smoker	0
+900	85	255	first	24	68	159	non-smoker	1
+901	111	281	not first	27	64	112	non-smoker	0
+902	124	275	first	28	61	116	non-smoker	0
+903	112	292	not first	28	62	110	smoker	0
+904	115	281	first	28	61	128	smoker	0
+905	72	271	first	39	61	136	non-smoker	0
+906	122	281	not first	24	65	137	smoker	0
+907	116	291	first	26	66	153	non-smoker	0
+908	127	272	first	20	64	130	smoker	0
+909	90	266	first	23	61	99	smoker	0
+910	99	273	not first	27	59	115	non-smoker	0
+911	144	307	not first	26	66	125	non-smoker	0
+912	138	280	not first	30	65	175	non-smoker	0
+913	58	245	first	34	64	156	smoker	1
+914	109	265	not first	24	63	107	smoker	0
+915	110	277	not first	19	62	160	non-smoker	0
+916	129	278	first	27	63	128	non-smoker	0
+917	150	284	first	40	67	130	non-smoker	0
+918	128	279	first	27	66	135	non-smoker	0
+919	142	284	not first	31	66	137	smoker	0
+920	115	268	not first	31	64	125	non-smoker	0
+922	108	283	first	35	62	108	non-smoker	0
+923	139	281	first	27	63	137	non-smoker	0
+924	115	275	first	25	61	155	smoker	0
+925	136	288	first	23	62	217	non-smoker	0
+926	163	289	not first	25	64	126	smoker	0
+927	131	285	first	26	64	130	non-smoker	0
+928	77	238	first	38	67	135	smoker	1
+929	124	283	not first	33	67	156	smoker	0
+930	104	270	not first	26	62	115	non-smoker	0
+931	102	267	not first	24	61	109	smoker	0
+932	94	268	first	30	62	105	smoker	0
+933	158	295	not first	37	70	137	non-smoker	0
+934	112	275	not first	21	68	143	smoker	0
+935	119	286	first	26	64	123	smoker	0
+936	97	279	first	29	68	178	smoker	0
+937	99	252	first	21	64	120	non-smoker	1
+938	115	264	not first	23	67	134	smoker	0
+939	139	284	first	37	61	121	non-smoker	0
+940	144	304	not first	27	58	102	smoker	0
+941	99	270	first	22	63	115	smoker	0
+942	105	280	not first	22	63	116	non-smoker	0
+943	89	275	first	34	66	170	non-smoker	0
+944	129	270	first	43	67	160	non-smoker	0
+945	119	270	not first	20	64	109	non-smoker	0
+946	114	291	first	35	60	112	non-smoker	0
+947	106	289	first	28	67	120	smoker	0
+948	122	292	not first	34	65	133	non-smoker	0
+949	136	261	first	24	65	110	non-smoker	0
+950	121	286	not first	22	69	130	smoker	0
+951	112	282	first	26	65	122	non-smoker	0
+952	112	266	first	26	64	122	non-smoker	0
+953	123	314	first	22	61	121	smoker	0
+954	139	286	first	33	65	125	smoker	0
+955	125	290	first	36	59	105	non-smoker	0
+956	105	295	not first	20	64	112	smoker	0
+957	130	276	first	41	68	130	non-smoker	0
+958	146	294	first	22	66	145	smoker	0
+959	133	290	first	21	64	145	non-smoker	0
+960	147	296	not first	19	67	124	non-smoker	0
+961	109	269	first	23	63	113	non-smoker	0
+962	122	286	first	23	64	120	smoker	0
+963	135	260	first	43	65	135	non-smoker	0
+965	117	272	first	32	66	118	non-smoker	0
+966	138	284	first	30	66	133	smoker	0
+967	120	283	first	28	64	122	smoker	0
+968	119	273	first	35	65	125	smoker	0
+969	118	278	not first	19	62	126	non-smoker	0
+970	105	330	first	23	64	112	smoker	0
+971	113	306	not first	21	65	137	non-smoker	0
+973	148	291	not first	21	63	115	non-smoker	0
+974	140	281	not first	22	69	135	non-smoker	0
+975	134	287	not first	33	67	131	non-smoker	0
+976	120	280	first	31	61	111	non-smoker	0
+977	123	296	not first	26	64	110	smoker	0
+978	102	275	first	43	64	160	non-smoker	0
+979	55	204	first	35	65	140	non-smoker	1
+980	103	276	not first	19	63	149	smoker	0
+981	123	283	first	21	65	110	non-smoker	0
+982	105	270	not first	27	65	134	smoker	0
+983	138	289	first	33	65	155	non-smoker	0
+984	128	281	first	28	63	150	non-smoker	0
+985	139	285	first	30	65	129	smoker	0
+986	104	288	not first	27	61	122	smoker	0
+987	159	296	not first	27	64	112	non-smoker	0
+988	118	276	first	29	62	130	smoker	0
+989	99	285	first	25	69	128	smoker	0
+990	144	281	first	20	63	120	non-smoker	0
+991	121	270	first	25	62	108	smoker	0
+992	117	265	not first	24	66	98	non-smoker	0
+993	119	293	not first	23	65	127	non-smoker	0
+994	105	281	not first	19	61	130	non-smoker	0
+995	125	283	first	37	63	145	smoker	0
+996	119	259	first	37	62	130	non-smoker	0
+997	101	273	first	39	60	113	non-smoker	0
+998	105	277	not first	25	64	156	non-smoker	0
+999	110	281	first	27	60	110	non-smoker	0
+1000	100	270	not first	21	65	132	smoker	0
+1001	98	284	first	29	68	140	non-smoker	0
+1002	127	276	first	37	64	159	non-smoker	0
+1003	117	324	first	22	62	164	smoker	0
+1004	122	278	first	37	68	114	non-smoker	0
+1005	122	273	not first	23	64	130	smoker	0
+1006	118	281	not first	36	66	140	smoker	0
+1007	137	303	not first	23	66	127	smoker	0
+1008	120	275	first	32	63	115	smoker	0
+1009	143	285	first	27	68	185	non-smoker	0
+1010	108	270	first	29	67	124	smoker	0
+1011	131	284	not first	19	61	114	smoker	0
+1012	110	277	first	36	61	116	non-smoker	0
+1013	105	276	first	20	62	112	smoker	0
+1015	125	255	first	23	63	133	non-smoker	1
+1016	78	258	not first	24	66	115	smoker	1
+1017	114	289	first	36	60	115	non-smoker	0
+1018	111	278	first	29	65	145	smoker	0
+1019	103	250	first	40	59	140	non-smoker	1
+1020	114	276	first	26	62	127	non-smoker	0
+1021	75	247	first	36	64	120	smoker	1
+1022	169	296	first	33	67	185	non-smoker	0
+1023	94	271	first	36	61	130	smoker	0
+1024	150	287	first	36	62	135	non-smoker	0
+1025	144	248	first	30	70	145	non-smoker	1
+1026	144	291	first	28	67	130	non-smoker	0
+1027	143	313	first	20	68	150	non-smoker	0
+1028	145	304	not first	25	63	109	smoker	0
+1029	121	285	first	34	64	110	non-smoker	0
+1030	105	256	first	31	66	142	non-smoker	1
+1031	134	286	first	25	64	125	non-smoker	0
+1032	129	294	not first	21	65	132	non-smoker	0
+1033	114	276	first	24	63	110	non-smoker	0
+1034	97	265	first	30	61	110	non-smoker	0
+1035	160	292	first	28	64	120	non-smoker	0
+1036	65	237	first	31	67	130	non-smoker	1
+1037	145	288	first	28	64	116	non-smoker	0
+1038	95	273	first	23	60	90	non-smoker	0
+1039	139	293	not first	21	69	130	non-smoker	0
+1040	123	288	first	27	63	125	non-smoker	0
+1041	109	283	first	23	65	112	smoker	0
+1042	110	268	first	34	64	127	non-smoker	0
+1043	122	296	not first	24	65	132	non-smoker	0
+1044	115	307	first	34	65	128	smoker	0
+1046	108	279	not first	19	64	115	non-smoker	0
+1047	120	287	first	23	67	116	smoker	0
+1048	131	269	first	36	68	145	non-smoker	0
+1049	136	283	not first	24	63	119	non-smoker	0
+1050	125	290	first	32	63	135	non-smoker	0
+1051	96	285	not first	20	66	117	smoker	0
+1052	102	282	not first	29	65	125	smoker	0
+1053	102	288	not first	18	65	117	non-smoker	0
+1054	112	277	not first	22	67	120	non-smoker	0
+1055	135	272	first	30	65	130	non-smoker	0
+1056	91	266	first	23	60	120	smoker	0
+1057	129	276	first	31	63	125	non-smoker	0
+1058	155	290	first	26	66	129	smoker	0
+1059	109	274	first	33	69	144	smoker	0
+1060	80	262	not first	31	61	100	smoker	0
+1061	125	273	first	30	64	145	non-smoker	0
+1062	94	284	first	24	63	104	smoker	0
+1063	148	281	first	27	63	110	smoker	0
+1064	73	277	first	29	65	145	non-smoker	0
+1065	123	267	not first	19	66	132	smoker	0
+1066	65	232	first	24	66	125	smoker	1
+1067	118	279	not first	21	64	108	non-smoker	0
+1068	102	283	first	39	60	119	non-smoker	0
+1069	120	280	first	24	61	118	non-smoker	0
+1070	108	270	not first	21	65	130	smoker	0
+1071	122	280	not first	45	62	128	non-smoker	0
+1072	103	268	first	32	62	97	smoker	0
+1073	105	312	first	41	61	115	smoker	0
+1074	126	273	not first	25	68	135	non-smoker	0
+1075	145	316	first	22	67	142	non-smoker	0
+1076	139	293	first	34	66	131	non-smoker	0
+1077	124	290	first	26	65	165	non-smoker	0
+1078	121	282	first	30	65	122	non-smoker	0
+1079	126	299	not first	21	60	114	non-smoker	0
+1080	119	286	not first	33	67	137	non-smoker	0
+1081	114	277	not first	19	63	107	non-smoker	0
+1082	118	272	first	23	64	113	non-smoker	0
+1083	127	295	first	36	65	145	non-smoker	0
+1084	117	290	not first	22	67	110	non-smoker	0
+1085	137	277	first	41	65	126	non-smoker	0
+1086	133	292	first	29	65	135	non-smoker	0
+1087	100	264	first	28	60	111	smoker	0
+1088	107	273	not first	26	65	135	non-smoker	0
+1089	115	276	not first	20	62	105	smoker	0
+1090	91	292	not first	26	61	113	smoker	0
+1091	112	287	first	27	64	110	smoker	0
+1092	125	289	not first	31	61	120	non-smoker	0
+1093	157	291	first	33	65	121	non-smoker	0
+1094	108	256	not first	26	67	130	non-smoker	1
+1095	130	279	first	31	62	122	non-smoker	0
+1096	135	289	first	25	64	127	non-smoker	0
+1097	123	277	first	24	66	122	non-smoker	0
+1098	100	281	first	24	61	115	non-smoker	0
+1099	124	277	not first	23	64	104	non-smoker	0
+1100	174	284	first	39	65	163	non-smoker	0
+1101	129	278	first	26	67	146	non-smoker	0
+1102	119	275	first	27	59	113	smoker	0
+1103	126	272	not first	35	61	120	smoker	0
+1104	128	267	first	37	61	142	non-smoker	0
+1105	116	282	not first	19	64	124	non-smoker	0
+1106	100	285	first	18	68	127	smoker	0
+1107	96	285	first	37	66	135	smoker	0
+1108	131	279	not first	20	68	122	smoker	0
+1109	110	292	first	35	62	127	non-smoker	0
+1110	108	278	first	28	63	125	smoker	0
+1111	129	275	first	24	65	135	non-smoker	0
+1112	141	285	first	23	67	150	non-smoker	0
+1113	110	276	first	31	70	155	non-smoker	0
+1114	118	273	first	21	63	120	non-smoker	0
+1115	111	267	not first	24	60	115	non-smoker	0
+1116	160	297	first	20	68	136	non-smoker	0
+1117	120	280	first	30	60	115	non-smoker	0
+1118	121	281	first	29	63	108	non-smoker	0
+1119	113	282	first	30	64	118	smoker	0
+1120	117	270	first	23	58	115	non-smoker	0
+1121	158	267	first	35	64	125	non-smoker	0
+1122	128	277	first	39	61	120	non-smoker	0
+1123	158	289	first	30	66	140	non-smoker	0
+1124	133	289	first	22	65	123	smoker	0
+1125	163	298	first	37	61	98	non-smoker	0
+1126	128	282	not first	19	66	118	non-smoker	0
+1127	126	271	not first	21	60	105	non-smoker	0
+1128	127	283	first	42	62	154	smoker	0
+1129	134	287	first	40	63	118	non-smoker	0
+1130	140	274	first	41	63	122	non-smoker	0
+1131	102	285	first	29	63	117	smoker	0
+1132	100	252	first	24	61	150	non-smoker	1
+1133	120	295	first	29	59	100	smoker	0
+1134	98	279	not first	18	65	115	smoker	0
+1135	130	246	first	19	62	118	non-smoker	1
+1136	104	280	first	41	63	118	smoker	0
+1137	122	285	first	31	62	102	smoker	0
+1138	137	276	not first	25	64	127	non-smoker	0
+1139	114	285	not first	20	61	104	non-smoker	0
+1140	63	236	not first	24	58	99	non-smoker	1
+1141	98	318	first	23	63	107	non-smoker	0
+1142	99	268	first	32	63	124	smoker	0
+1143	89	238	not first	26	64	136	non-smoker	1
+1144	117	283	first	22	65	142	smoker	0
+1145	143	281	first	29	67	132	non-smoker	0
+1146	106	279	first	29	63	125	smoker	0
+1147	99	246	first	35	62	106	non-smoker	1
+1148	156	300	first	27	65	120	smoker	0
+1149	72	266	not first	25	66	200	smoker	0
+1150	75	266	first	37	61	113	smoker	0
+1151	97	285	first	35	61	112	smoker	0
+1152	106	264	first	41	64	114	non-smoker	0
+1153	91	225	first	18	68	117	smoker	1
+1154	117	269	not first	28	61	99	non-smoker	0
+1155	117	284	first	25	66	177	smoker	0
+1156	112	291	first	23	66	145	non-smoker	0
+1157	112	270	first	29	61	124	non-smoker	0
+1158	141	293	first	28	61	125	non-smoker	0
+1159	131	259	first	19	63	134	non-smoker	0
+1160	130	290	first	19	65	123	smoker	0
+1161	132	270	first	26	67	140	non-smoker	0
+1162	114	265	first	23	67	130	smoker	0
+1163	160	291	first	34	64	110	smoker	0
+1164	106	283	first	24	63	119	non-smoker	0
+1165	84	260	not first	20	64	104	smoker	0
+1166	112	268	not first	25	59	103	non-smoker	0
+1167	139	311	first	37	66	135	non-smoker	0
+1168	104	267	first	30	63	180	non-smoker	0
+1169	130	294	first	32	63	110	smoker	0
+1170	71	254	first	19	61	145	smoker	1
+1171	82	270	first	21	65	150	smoker	0
+1172	119	280	not first	21	64	128	non-smoker	0
+1173	123	353	first	26	63	115	non-smoker	0
+1174	115	278	first	27	59	95	non-smoker	0
+1175	124	289	not first	21	67	145	smoker	0
+1176	138	292	first	25	65	130	smoker	0
+1177	88	276	first	25	63	103	smoker	0
+1179	128	241	not first	17	64	126	non-smoker	1
+1180	82	274	first	31	64	101	smoker	0
+1181	100	274	first	24	63	113	non-smoker	0
+1182	114	271	first	32	61	130	non-smoker	0
+1183	97	269	first	20	65	137	smoker	0
+1184	126	298	first	24	61	112	non-smoker	0
+1185	122	275	not first	20	65	127	non-smoker	0
+1186	152	295	first	39	62	140	non-smoker	0
+1187	116	274	first	21	62	110	smoker	0
+1188	132	302	first	36	63	145	smoker	0
+1189	84	260	not first	37	66	140	non-smoker	0
+1190	119	277	not first	18	61	89	smoker	0
+1192	106	312	first	24	62	135	smoker	0
+1194	139	291	first	24	65	160	non-smoker	0
+1195	103	273	first	36	65	158	smoker	0
+1196	112	299	first	24	67	145	smoker	0
+1197	96	276	first	33	64	127	smoker	0
+1198	102	281	not first	19	67	135	smoker	0
+1199	120	300	first	34	63	150	smoker	0
+1200	102	338	first	19	64	170	non-smoker	0
+1201	97	255	not first	22	63	107	smoker	1
+1202	113	285	first	22	70	145	non-smoker	0
+1203	130	297	first	32	58	130	non-smoker	0
+1204	97	260	not first	25	63	115	smoker	0
+1205	116	273	first	31	61	120	non-smoker	0
+1206	114	266	first	29	64	113	non-smoker	0
+1207	127	242	first	17	61	135	smoker	1
+1208	87	247	not first	18	66	125	smoker	1
+1209	141	281	first	29	54	156	smoker	0
+1210	144	283	not first	25	66	140	non-smoker	0
+1211	116	273	first	33	66	130	smoker	0
+1212	75	265	first	21	65	103	smoker	0
+1213	138	286	not first	28	68	120	non-smoker	0
+1214	99	271	first	39	69	151	non-smoker	0
+1215	118	293	first	21	63	103	non-smoker	0
+1217	97	266	first	24	62	109	non-smoker	0
+1218	146	319	first	28	66	145	non-smoker	0
+1219	81	285	first	19	63	150	smoker	0
+1220	110	321	first	28	66	180	non-smoker	0
+1221	135	284	not first	19	60	95	non-smoker	0
+1222	114	290	not first	21	65	120	smoker	0
+1223	124	288	not first	21	64	116	smoker	0
+1224	115	262	not first	23	64	136	smoker	0
+1225	143	281	first	28	65	135	smoker	0
+1226	113	287	not first	29	70	145	smoker	0
+1227	109	244	not first	21	63	102	smoker	1
+1228	103	278	first	30	60	87	smoker	0
+1229	118	276	first	34	64	116	non-smoker	0
+1230	127	290	first	27	65	121	non-smoker	0
+1231	132	270	first	27	65	126	non-smoker	0
+1232	113	275	not first	27	60	100	non-smoker	0
+1233	128	265	first	24	67	120	non-smoker	0
+1234	130	291	first	30	65	150	smoker	0
+1235	125	281	not first	21	65	110	non-smoker	0
+1236	117	297	first	38	65	129	non-smoker	0

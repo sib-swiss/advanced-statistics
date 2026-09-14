@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prevalence, ROC and Precision-Recall explorer</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface-1: #f4f3ef;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --border: #e1e0d9;
+    --border-strong: #c3c2b7;
+    --accent: #378ADD;
+    --accent2: #D85A30;
+    --gray: #B4B2A9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a19;
+      --surface-1: #262625;
+      --text-primary: #f0efec;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --border: #383835;
+      --border-strong: #52514e;
+      --accent: #5aa3ea;
+      --accent2: #e88a5f;
+      --gray: #6b6a65;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem 1.5rem 3rem;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 20px; font-weight: 500; margin: 0 0 0.25rem; }
+  p.subtitle { font-size: 14px; color: var(--text-secondary); margin: 0 0 1.75rem; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .slider-row { display: flex; align-items: center; gap: 12px; margin: 0 0 0.5rem; }
+  .slider-row label { font-size: 14px; color: var(--text-secondary); min-width: 170px; }
+  input[type="range"] { flex: 1; accent-color: var(--accent2); height: 4px; }
+  #prevOut { font-size: 14px; font-weight: 500; min-width: 44px; text-align: right; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px;
+    margin: 1rem 0 1.75rem;
+  }
+  .stat-card {
+    background: var(--surface-1);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+  }
+  .stat-card p.label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-card p.value { font-size: 22px; font-weight: 500; margin: 0; }
+  .stat-card p.note { font-size: 12px; color: var(--text-muted); margin: 4px 0 0; }
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 560px) {
+    .charts { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr; }
+  }
+  .chart-caption { text-align: center; font-size: 13px; color: var(--text-secondary); margin: 4px 0 0; }
+  svg { width: 100%; height: auto; }
+  footer {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Prevalence, ROC and precision-recall explorer</h1>
+  <p class="subtitle">Same classifier throughout &mdash; only the class balance (prevalence) changes. Watch which curve moves.</p>
+  <h2 class="sr-only">Interactive explorer showing how changing prevalence reshapes the precision-recall curve while the ROC curve stays fixed</h2>
+
+  <div class="slider-row">
+    <label for="prev">Prevalence (P / (P+N))</label>
+    <input type="range" id="prev" min="2" max="60" value="20" step="1" />
+    <span id="prevOut">20%</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <p class="label">ROC-AUC</p>
+      <p class="value" id="rocAucOut">--</p>
+      <p class="note">fixed, ignores prevalence</p>
+    </div>
+    <div class="stat-card">
+      <p class="label">PR-AUC</p>
+      <p class="value" id="prAucOut">--</p>
+      <p class="note">recomputed live</p>
+    </div>
+    <div class="stat-card">
+      <p class="label">PR baseline</p>
+      <p class="value" id="baseOut">--</p>
+      <p class="note">equals prevalence</p>
+    </div>
+  </div>
+
+  <div class="charts">
+    <div>
+      <svg id="rocSvg" viewBox="0 0 300 300" role="img" aria-label="ROC curve, fixed regardless of prevalence"></svg>
+      <p class="chart-caption">ROC curve (unchanged)</p>
+    </div>
+    <div>
+      <svg id="prSvg" viewBox="0 0 300 300" role="img" aria-label="Precision-recall curve, updates as prevalence changes"></svg>
+      <p class="chart-caption">Precision-recall curve (shifts with prevalence)</p>
+    </div>
+  </div>
+
+  <footer>
+    ROC curve generated from two Normal score distributions (positives &sim; N(0.62, 0.16), negatives &sim; N(0.38, 0.16)).
+    Precision at each point is recomputed from TPR, FPR and prevalence via Bayes' rule:
+    Precision = (TPR&middot;prevalence) / (TPR&middot;prevalence + FPR&middot;(1&minus;prevalence)).
+  </footer>
+</div>
+
+<script>
+(function(){
+  function erf(x){
+    var s = x<0?-1:1; x=Math.abs(x);
+    var a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;
+    var t=1/(1+p*x);
+    var y=1-(((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+    return s*y;
+  }
+  function normalCdf(x, mean, sd){ return 0.5*(1+erf((x-mean)/(sd*Math.sqrt(2)))); }
+
+  var muPos=0.62, muNeg=0.38, sd=0.16;
+  var N=140;
+  var roc=[];
+  for(var i=0;i<=N;i++){
+    var t = 1 - i/N;
+    var tpr = 1 - normalCdf(t, muPos, sd);
+    var fpr = 1 - normalCdf(t, muNeg, sd);
+    roc.push({fpr:fpr, tpr:tpr});
+  }
+  roc.sort(function(a,b){ return a.fpr-b.fpr || a.tpr-b.tpr; });
+
+  function trapArea(pts, xk, yk){
+    var s=0;
+    for(var i=1;i<pts.length;i++){
+      var dx = pts[i][xk]-pts[i-1][xk];
+      s += dx*(pts[i][yk]+pts[i-1][yk])/2;
+    }
+    return s;
+  }
+
+  var rocAuc = trapArea(roc, 'fpr', 'tpr');
+
+  function toPath(pts, xk, yk, w, h, pad){
+    var d='';
+    for(var i=0;i<pts.length;i++){
+      var x = pad + pts[i][xk]*(w-2*pad);
+      var y = h-pad - pts[i][yk]*(h-2*pad);
+      d += (i===0?'M':'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    }
+    return d;
+  }
+
+  var mutedColor = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#898781';
+  var borderColor = getComputedStyle(document.documentElement).getPropertyValue('--border-strong').trim() || '#c3c2b7';
+  var accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#378ADD';
+  var accent2 = getComputedStyle(document.documentElement).getPropertyValue('--accent2').trim() || '#D85A30';
+  var gray = getComputedStyle(document.documentElement).getPropertyValue('--gray').trim() || '#B4B2A9';
+
+  function axesSvg(w,h,pad,xlab,ylab){
+    return '<line x1="'+pad+'" y1="'+(h-pad)+'" x2="'+(w-pad)+'" y2="'+(h-pad)+'" stroke="'+borderColor+'" stroke-width="1"/>' +
+           '<line x1="'+pad+'" y1="'+pad+'" x2="'+pad+'" y2="'+(h-pad)+'" stroke="'+borderColor+'" stroke-width="1"/>' +
+           '<text x="'+(w/2)+'" y="'+(h-4)+'" text-anchor="middle" font-size="11" fill="'+mutedColor+'">'+xlab+'</text>' +
+           '<text x="10" y="'+(h/2)+'" text-anchor="middle" font-size="11" fill="'+mutedColor+'" transform="rotate(-90 10 '+(h/2)+')">'+ylab+'</text>';
+  }
+
+  var W=300,H=300,PAD=32;
+  var rocSvg = document.getElementById('rocSvg');
+
+  function drawDiagonal(w,h,pad){
+    var x1=pad, y1=h-pad, x2=w-pad, y2=pad;
+    return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+gray+'" stroke-width="1.5" stroke-dasharray="4,4"/>';
+  }
+
+  rocSvg.innerHTML = axesSvg(W,H,PAD,'False positive rate','True positive rate') +
+    drawDiagonal(W,H,PAD) +
+    '<path d="'+toPath(roc,'fpr','tpr',W,H,PAD)+'" fill="none" stroke="'+accent+'" stroke-width="2.2" stroke-linejoin="round"/>';
+
+  var prSvg = document.getElementById('prSvg');
+  var slider = document.getElementById('prev');
+  var prevOut = document.getElementById('prevOut');
+  var rocAucOut = document.getElementById('rocAucOut');
+  var prAucOut = document.getElementById('prAucOut');
+  var baseOut = document.getElementById('baseOut');
+
+  rocAucOut.textContent = rocAuc.toFixed(2);
+
+  function update(){
+    var prevalence = parseInt(slider.value,10)/100;
+    prevOut.textContent = Math.round(prevalence*100) + '%';
+    baseOut.textContent = Math.round(prevalence*100) + '%';
+
+    var pr = roc.map(function(pt){
+      var num = pt.tpr*prevalence;
+      var den = num + pt.fpr*(1-prevalence);
+      var precision = den>0 ? num/den : 1;
+      return {recall: pt.tpr, precision: precision};
+    });
+    pr.sort(function(a,b){ return a.recall-b.recall; });
+
+    var prAuc = trapArea(pr, 'recall', 'precision');
+    prAucOut.textContent = prAuc.toFixed(2);
+
+    var baseY = H-PAD - prevalence*(H-2*PAD);
+    prSvg.innerHTML = axesSvg(W,H,PAD,'Recall','Precision') +
+      '<line x1="'+PAD+'" y1="'+baseY.toFixed(1)+'" x2="'+(W-PAD)+'" y2="'+baseY.toFixed(1)+'" stroke="'+gray+'" stroke-width="1.5" stroke-dasharray="4,4"/>' +
+      '<path d="'+toPath(pr,'recall','precision',W,H,PAD)+'" fill="none" stroke="'+accent2+'" stroke-width="2.2" stroke-linejoin="round"/>';
+  }
+
+  slider.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>
