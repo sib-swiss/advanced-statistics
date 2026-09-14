@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Overfitting explorer: polynomial degree vs. train/test error</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface-1: #f4f3ef;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --border: #e1e0d9;
+    --border-strong: #c3c2b7;
+    --accent: #378ADD;
+    --accent2: #D85A30;
+    --gray: #B4B2A9;
+    --good: #1D9E75;
+    --radius: 8px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a19;
+      --surface-1: #262625;
+      --text-primary: #f0efec;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --border: #383835;
+      --border-strong: #52514e;
+      --accent: #5aa3ea;
+      --accent2: #e88a5f;
+      --gray: #6b6a65;
+      --good: #3ecf9a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem 1.5rem 3rem;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; }
+  h1 { font-size: 20px; font-weight: 500; margin: 0 0 0.25rem; }
+  p.subtitle { font-size: 14px; color: var(--text-secondary); margin: 0 0 1.75rem; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .slider-row { display: flex; align-items: center; gap: 12px; margin: 0 0 0.5rem; }
+  .slider-row label { font-size: 14px; color: var(--text-secondary); min-width: 170px; }
+  input[type="range"] { flex: 1; accent-color: var(--accent2); height: 4px; }
+  #degOut { font-size: 14px; font-weight: 500; min-width: 30px; text-align: right; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px;
+    margin: 1rem 0 1.75rem;
+  }
+  .stat-card {
+    background: var(--surface-1);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+  }
+  .stat-card p.label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-card p.value { font-size: 22px; font-weight: 500; margin: 0; }
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 620px) {
+    .charts { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr; }
+  }
+  .legend { display:flex; gap:14px; justify-content:center; font-size:12px; color:var(--text-secondary); margin-top:4px; flex-wrap: wrap; }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:4px; vertical-align: middle; }
+  .ring { display:inline-block; width:8px; height:8px; border-radius:50%; border:1.5px solid var(--accent2); margin-right:4px; vertical-align: middle; }
+  .line { display:inline-block; width:10px; height:2px; margin-right:4px; vertical-align:middle; }
+  svg { width: 100%; height: auto; }
+  footer {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Overfitting explorer: polynomial degree vs. train / test error</h1>
+  <p class="subtitle">Same 13 noisy training points and 24 held-out test points throughout. Only the polynomial degree (model complexity) changes.</p>
+  <h2 class="sr-only">Interactive explorer showing overfitting: as polynomial degree increases, training error keeps falling while test error eventually rises</h2>
+
+  <div class="slider-row">
+    <label for="deg">Model complexity (degree)</label>
+    <input type="range" id="deg" min="1" max="12" value="1" step="1" />
+    <span id="degOut">1</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <p class="label">Train error (MSE)</p>
+      <p class="value" id="trainOut">--</p>
+    </div>
+    <div class="stat-card">
+      <p class="label">Test error (MSE)</p>
+      <p class="value" id="testOut">--</p>
+    </div>
+    <div class="stat-card">
+      <p class="label">Regime</p>
+      <p class="value" id="statusOut" style="font-size:16px;">--</p>
+    </div>
+  </div>
+
+  <div class="charts">
+    <div>
+      <svg id="fitSvg" viewBox="0 0 320 300" role="img" aria-label="Training and test points with the fitted polynomial curve"></svg>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--accent);"></span>Train points</span>
+        <span><span class="ring"></span>Test points</span>
+        <span><span class="line" style="background:var(--gray);"></span>True function</span>
+      </div>
+    </div>
+    <div>
+      <svg id="errSvg" viewBox="0 0 320 300" role="img" aria-label="Training and test error as a function of polynomial degree"></svg>
+      <div class="legend">
+        <span><span class="line" style="background:var(--accent);"></span>Train MSE</span>
+        <span><span class="line" style="background:var(--accent2);"></span>Test MSE</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Training points and test points are both noisy samples of the same underlying function. Polynomials of degree 1&ndash;12 are fit by least squares on the training points only; test MSE is evaluated on the held-out test points and is the generalization signal to watch.
+  </footer>
+</div>
+
+<script>
+(function(){
+  var xTrain = [0.3,1.1,1.8,2.6,3.4,4.1,4.9,5.7,6.4,7.2,7.9,8.7,9.5];
+  var yTrain = [3.979,3.965,5.586,4.16,-0.864,-1.42,-3.379,0.367,-0.024,0.897,-3.19,-5.808,-11.002];
+  var xTest = [0.2,0.609,1.017,1.426,1.835,2.243,2.652,3.061,3.47,3.878,4.287,4.696,5.104,5.513,5.922,6.33,6.739,7.148,7.557,7.965,8.374,8.783,9.191,9.6];
+  var yTest = [3.029,3.85,5.351,4.965,5.134,3.614,2.973,0.949,0.058,-1.661,-1.842,-2.427,-1.476,-1.355,0.095,0.208,0.996,-0.105,-0.652,-2.734,-4.233,-6.959,-8.645,-11.004];
+  var trueCurve = [2.0,2.185,2.37,2.552,2.732,2.91,3.084,3.254,3.42,3.582,3.738,3.889,4.034,4.172,4.304,4.428,4.545,4.654,4.755,4.848,4.932,5.006,5.072,5.128,5.175,5.212,5.24,5.257,5.265,5.263,5.251,5.229,5.197,5.155,5.104,5.043,4.973,4.894,4.806,4.709,4.604,4.491,4.369,4.241,4.105,3.963,3.814,3.66,3.5,3.334,3.165,2.991,2.813,2.632,2.449,2.263,2.076,1.888,1.698,1.509,1.32,1.132,0.945,0.76,0.577,0.398,0.221,0.048,-0.121,-0.285,-0.445,-0.599,-0.747,-0.889,-1.025,-1.154,-1.276,-1.391,-1.499,-1.599,-1.691,-1.775,-1.85,-1.918,-1.977,-2.028,-2.07,-2.104,-2.13,-2.147,-2.156,-2.157,-2.15,-2.136,-2.113,-2.084,-2.047,-2.003,-1.953,-1.897,-1.835,-1.767,-1.694,-1.616,-1.534,-1.449,-1.359,-1.267,-1.172,-1.075,-0.976,-0.877,-0.776,-0.676,-0.576,-0.477,-0.38,-0.284,-0.191,-0.101,-0.014,0.069,0.148,0.222,0.29,0.353,0.409,0.459,0.503,0.539,0.567,0.587,0.599,0.603,0.597,0.583,0.56,0.527,0.484,0.432,0.37,0.298,0.217,0.125,0.023,-0.088,-0.209,-0.34,-0.481,-0.631,-0.79,-0.958,-1.135,-1.321,-1.515,-1.717,-1.927,-2.144,-2.368,-2.598,-2.835,-3.078,-3.326,-3.579,-3.836,-4.097,-4.362,-4.63,-4.9,-5.172,-5.446,-5.721,-5.996,-6.272,-6.547,-6.821,-7.093,-7.363,-7.631,-7.896,-8.158,-8.416,-8.669,-8.918,-9.162,-9.4,-9.632,-9.859,-10.079,-10.292,-10.497,-10.696,-10.887,-11.071,-11.246,-11.413,-11.572,-11.723,-11.866,-12.0];
+
+  var COEFFS = {"1":[-1.297945,5.83205],"2":[-0.107549,-0.245965,4.137928],"3":[-0.063886,0.832349,-3.920927,7.08146],"4":[-0.034849,0.6196,-3.47161,5.422767,2.572032],"5":[0.006326,-0.189552,1.965432,-8.417699,12.369373,0.278436],"6":[0.003556,-0.098136,0.975814,-4.1634,6.812874,-3.021885,4.15545],"7":[-0.001409,0.051958,-0.759394,5.542867,-20.893301,37.825669,-27.71032,9.422148],"8":[-0.00012,0.003311,-0.024116,-0.110069,2.390687,-12.213744,25.124103,-19.322883,7.818827],"9":[-9.5e-05,0.004063,-0.074248,0.763896,-4.886957,20.01611,-50.884017,72.061123,-46.181292,12.577331],"10":[-7e-05,0.003312,-0.067432,0.769534,-5.386249,23.727847,-64.811672,104.137091,-89.983411,36.683038,-1.267676],"11":[-1.6e-05,0.000801,-0.017133,0.208211,-1.586733,7.922521,-26.469543,60.014153,-92.858402,92.852034,-48.874644,12.365504],"12":[-0.000186,0.010896,-0.282933,4.291064,-42.153855,281.100797,-1296.194537,4128.851234,-8913.210429,12508.784797,-10560.262437,4603.37247,-701.296654]};
+  var TRAIN_MSE = {"1":5.98363,"2":5.37356,"3":4.05623,"4":1.80983,"5":1.41306,"6":0.82771,"7":0.41619,"8":0.40533,"9":0.38372,"10":0.35219,"11":0.3495,"12":0.0};
+  var TEST_MSE = {"1":4.61241,"2":4.10234,"3":2.94696,"4":0.98639,"5":0.43387,"6":0.29321,"7":0.71362,"8":0.65469,"9":1.21984,"10":2.25142,"11":4.87914,"12":1922.93949};
+
+  function polyval(coeffs, x){
+    var r = 0;
+    for(var i=0;i<coeffs.length;i++){ r = r*x + coeffs[i]; }
+    return r;
+  }
+
+  var W=320,H=300,PAD=34;
+  var YMIN=-16, YMAX=16, XMIN=0, XMAX=10;
+
+  function xPix(x){ return PAD + (x-XMIN)/(XMAX-XMIN)*(W-2*PAD); }
+  function yPix(y){
+    var yc = Math.max(YMIN, Math.min(YMAX, y));
+    return H-PAD - (yc-YMIN)/(YMAX-YMIN)*(H-2*PAD);
+  }
+
+  var mut = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#898781';
+  var bor = getComputedStyle(document.documentElement).getPropertyValue('--border-strong').trim() || '#c3c2b7';
+  var accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#378ADD';
+  var accent2 = getComputedStyle(document.documentElement).getPropertyValue('--accent2').trim() || '#D85A30';
+  var gray = getComputedStyle(document.documentElement).getPropertyValue('--gray').trim() || '#B4B2A9';
+  var good = getComputedStyle(document.documentElement).getPropertyValue('--good').trim() || '#1D9E75';
+
+  function axesSvg(xlab, ylab){
+    return '<line x1="'+PAD+'" y1="'+(H-PAD)+'" x2="'+(W-PAD)+'" y2="'+(H-PAD)+'" stroke="'+bor+'" stroke-width="1"/>' +
+           '<line x1="'+PAD+'" y1="'+PAD+'" x2="'+PAD+'" y2="'+(H-PAD)+'" stroke="'+bor+'" stroke-width="1"/>' +
+           '<text x="'+(W/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="11" fill="'+mut+'">'+xlab+'</text>' +
+           '<text x="12" y="'+(H/2)+'" text-anchor="middle" font-size="11" fill="'+mut+'" transform="rotate(-90 12 '+(H/2)+')">'+ylab+'</text>';
+  }
+
+  var fitSvg = document.getElementById('fitSvg');
+  var errSvg = document.getElementById('errSvg');
+  var slider = document.getElementById('deg');
+  var degOut = document.getElementById('degOut');
+  var trainOut = document.getElementById('trainOut');
+  var testOut = document.getElementById('testOut');
+  var statusOut = document.getElementById('statusOut');
+
+  var trueD = '';
+  for(var i=0;i<trueCurve.length;i++){
+    var x = i/(trueCurve.length-1)*10;
+    trueD += (i===0?'M':'L') + xPix(x).toFixed(1) + ',' + yPix(trueCurve[i]).toFixed(1) + ' ';
+  }
+
+  var trainDots = '';
+  for(var i=0;i<xTrain.length;i++){
+    trainDots += '<circle cx="'+xPix(xTrain[i]).toFixed(1)+'" cy="'+yPix(yTrain[i]).toFixed(1)+'" r="4" fill="'+accent+'"/>';
+  }
+  var testDots = '';
+  for(var i=0;i<xTest.length;i++){
+    testDots += '<circle cx="'+xPix(xTest[i]).toFixed(1)+'" cy="'+yPix(yTest[i]).toFixed(1)+'" r="3.2" fill="none" stroke="'+accent2+'" stroke-width="1.5"/>';
+  }
+
+  var degrees = [1,2,3,4,5,6,7,8,9,10,11,12];
+  var maxErr = 6.5;
+  function eyPix(v){
+    var vc = Math.min(v, maxErr);
+    return H-PAD - vc/maxErr*(H-2*PAD);
+  }
+  function exPix(d){ return PAD + (d-1)/(12-1)*(W-2*PAD); }
+
+  var trainPath = '', testPath = '';
+  for(var i=0;i<degrees.length;i++){
+    var d = degrees[i];
+    trainPath += (i===0?'M':'L') + exPix(d).toFixed(1) + ',' + eyPix(TRAIN_MSE[d]).toFixed(1) + ' ';
+    testPath += (i===0?'M':'L') + exPix(d).toFixed(1) + ',' + eyPix(TEST_MSE[d]).toFixed(1) + ' ';
+  }
+
+  errSvg.innerHTML = axesSvg('Polynomial degree', 'Mean squared error') +
+    '<path d="'+trainPath+'" fill="none" stroke="'+accent+'" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="'+testPath+'" fill="none" stroke="'+accent2+'" stroke-width="2" stroke-linejoin="round"/>' +
+    '<g id="errMarker"></g>';
+
+  function update(){
+    var d = parseInt(slider.value,10);
+    degOut.textContent = d;
+    var coeffs = COEFFS[d];
+
+    var fitD = '';
+    for(var i=0;i<=100;i++){
+      var x = i/100*10;
+      var y = polyval(coeffs, x);
+      fitD += (i===0?'M':'L') + xPix(x).toFixed(1) + ',' + yPix(y).toFixed(1) + ' ';
+    }
+
+    fitSvg.innerHTML = axesSvg('x', 'y') +
+      '<path d="'+trueD+'" fill="none" stroke="'+gray+'" stroke-width="1.5" stroke-dasharray="4,4"/>' +
+      '<path d="'+fitD+'" fill="none" stroke="'+accent2+'" stroke-width="2.2" stroke-linejoin="round"/>' +
+      trainDots + testDots;
+
+    var trainMse = TRAIN_MSE[d];
+    var testMse = TEST_MSE[d];
+    trainOut.textContent = trainMse.toFixed(2);
+    testOut.textContent = testMse > 999 ? testMse.toExponential(1) : testMse.toFixed(2);
+
+    var gap = testMse - trainMse;
+    var status = 'Good fit';
+    var statusColor = 'var(--text-primary)';
+    if(d <= 2){ status = 'Underfitting'; statusColor = accent2; }
+    else if(gap > 1.5){ status = 'Overfitting'; statusColor = accent2; }
+    else if(testMse <= 0.35){ status = 'Good fit'; statusColor = good; }
+    statusOut.textContent = status;
+    statusOut.style.color = statusColor;
+
+    var marker = document.getElementById('errMarker');
+    if(marker){
+      marker.innerHTML =
+        '<line x1="'+exPix(d).toFixed(1)+'" y1="'+PAD+'" x2="'+exPix(d).toFixed(1)+'" y2="'+(H-PAD)+'" stroke="'+gray+'" stroke-width="1" stroke-dasharray="3,3"/>' +
+        '<circle cx="'+exPix(d).toFixed(1)+'" cy="'+eyPix(trainMse).toFixed(1)+'" r="4.5" fill="'+accent+'"/>' +
+        '<circle cx="'+exPix(d).toFixed(1)+'" cy="'+eyPix(testMse).toFixed(1)+'" r="4.5" fill="'+accent2+'"/>';
+    }
+  }
+
+  slider.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>

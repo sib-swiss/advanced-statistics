@@ -274,6 +274,22 @@ lines(xnew$dose[which(xnew$sex == "female")], pred.prop[which(xnew$sex == "femal
       col = "red", lwd = 2)
 
 
+## with glm.moth.3
+
+xnew <- data.frame(sex = rep(c("male", "female"), each = 30), 
+                   dose = rep(seq(from = 0, to = 5, length.out = 30), 2))
+pred.prop <- predict(glm.moth.3, newdata = xnew, type = "response")
+moth$proportion <- moth$numalive/(moth$numdead + moth$numalive)
+color <- moth$sex
+color[color == "male"] <- "blue"
+color[color == "female"] <- "red"
+plot(moth$proportion ~ moth$dose, col = as.character(color))
+lines(xnew$dose[which(xnew$sex == "male")], pred.prop[which(xnew$sex == "male")],
+      col = "blue", lwd = 2)
+lines(xnew$dose[which(xnew$sex == "female")], pred.prop[which(xnew$sex == "female")],
+      col = "red", lwd = 2)
+
+
 
 ########################################################
 # Exercise 3: beetle
@@ -367,17 +383,21 @@ boxplot(pima$age ~ pima$test)
 
 glm.pima.full <- glm(test ~ ., pima, family = binomial)
 summary(glm.pima.full)
+#glm.pima.full <- glm(test ~ age, pima, family = binomial)
 
 library(car)
 residualPlots(glm.pima.full)
+residualPlots(glm.pima.full2)
 
 library(statmod)
 qqnorm(qresiduals(glm.pima.full))
 qqline(qresiduals(glm.pima.full))
 qres <- qresiduals(glm.pima.full)
-plot(qres ~ predict(glm.pima.full, type = "link"))
 acf(qres)
 
+
+
+glm.pima.full2 <- glm(test ~ . + I(age^2), pima, family = binomial)
 # The fit is quite good. The residuals are good and the uniform residuals pass all the checks.
 # There are many non-significant variables so we can remove them to have a better fit.
 
@@ -392,7 +412,6 @@ residualPlots(glm.pima)
 qqnorm(qresiduals(glm.pima))
 qqline(qresiduals(glm.pima))
 qres <- qresiduals(glm.pima)
-plot(qres ~ predict(glm.pima, type = "link"))
 acf(qres)
 
 influenceIndexPlot(glm.pima, vars = c("Cook", "Studentized", "hat"))
